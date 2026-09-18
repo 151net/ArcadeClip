@@ -4,7 +4,7 @@
 
 maimai 플레이를 길게 녹화한 영상에서 곡을 찾아, 곡별 MP4 파일로 분할 저장하는 Windows 앱입니다.
 
-[사용 설명서 · 한국어 / English](docs/manual/manual.html)
+[소개 페이지](https://151net.github.io/ArcadeClip/) · [사용 설명서 · 한국어 / English](https://151net.github.io/ArcadeClip/manual.html)
 
   &nbsp;
 
@@ -53,6 +53,7 @@ maimai 플레이를 길게 녹화한 영상에서 곡을 찾아, 곡별 MP4 파�
 
 ## 설명서 보기
 
+- **웹에서:** [https://151net.github.io/ArcadeClip/manual.html](https://151net.github.io/ArcadeClip/manual.html)
 - **앱에서:** **도움말** 또는 **F1**을 누르면 기본 브라우저로 열립니다. 한국어와 English를 모두 볼 수 있습니다.
 - **오프라인:** [설명서 폴더](docs/manual)를 통째로 내려받아 `manual.html`을 브라우저에서 여세요. 인터넷 연결이 없어도 읽을 수 있습니다.
 
