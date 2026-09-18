@@ -1,0 +1,2544 @@
+# English UI translations, written for ArcadeClip screen context.
+msgid ""
+msgstr ""
+"Project-Id-Version: ArcadeClip 0.1.0\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/advanced_settings.py
+msgid "Language"
+msgstr "언어"
+
+#: src/advanced_settings.py
+msgid "언어 변경은 앱을 다시 실행하면 적용됩니다."
+msgstr "Language changes take effect the next time you open the app."
+
+#: src/app.py:991
+#, python-brace-format
+msgid "\n라이브 00:00:00 기준: {origin}"
+msgstr "\nLive time 00:00:00 corresponds to: {origin}"
+
+#: src/timeline.py:33
+msgid "\n윗줄: 자동 클립 / 아랫줄(보라색): 수동 추가 · 우클릭: 제거/추가"
+msgstr "\nTop: detected clips / Bottom (purple): manual clips · Right-click: remove/add"
+
+#: src/app.py:406
+#, python-brace-format
+msgid "\n필터로 숨긴 클립 {count}개 포함"
+msgstr "\nIncludes {count} hidden by filters"
+
+#: src/export_settings.py:133
+#, python-brace-format
+msgid "\n현재 {long_count}개 클립이 140초를 넘습니다. 클립 확인에서 구간을 줄여 주세요."
+msgstr "\nClips over 140 seconds: {long_count}. Shorten them in Review clips."
+
+#: src/app.py:840
+#, python-brace-format
+msgid " · {offset_skipped}개는 오프셋 적용 시 길이가 없어 원래 구간을 유지했습니다."
+msgstr " · Original bounds kept for {offset_skipped} clips that would have no duration after the offset."
+
+#: src/app.py:846
+msgid " · 고급 로그의 안내 확인"
+msgstr " · See the diagnostic log in Settings"
+
+#: src/profile_panel.py:58
+msgid " · 선택 사항"
+msgstr " · Optional"
+
+#: src/export_settings.py:168
+msgid " · 소리 제외"
+msgstr " · No audio"
+
+#: src/export_settings.py:168
+msgid " · 소리 포함"
+msgstr " · With audio"
+
+#: src/app.py:370
+#, python-brace-format
+msgid " · 숨긴 항목 {hidden_checked}개 포함"
+msgstr " · Includes {hidden_checked} hidden items"
+
+#: src/jacket_recognition.py:200
+msgid " · 이미지 메모리 상한 적용"
+msgstr " · Image memory limit applied"
+
+#: src/profile_panel.py:58
+msgid " · 필수"
+msgstr " · Required"
+
+#: src/workspace_ui.py:260
+msgid " 초"
+msgstr " s"
+
+#: src/profile_panel.py:221
+msgid " 픽셀"
+msgstr " px"
+
+#: src/sources.py:167
+msgid "%Y-%m-%d %H시"
+msgstr "%Y-%m-%d %H:00"
+
+#: src/export_settings.py:62
+msgid "0: 원래 음량 · 음수: 작게 · 양수: 크게. 너무 높이면 소리가 찌그러질 수 있습니다."
+msgstr "0: original volume · Negative: quieter · Positive: louder. High values may cause distortion."
+
+#: src/workspace_ui.py:411
+msgid "1 데이터"
+msgstr "1 Data"
+
+#: src/preview.py:13 src/profiles.py:10 src/workspace_ui.py:284
+msgid "1P 달성률"
+msgstr "1P achievement"
+
+#: src/preview.py:14 src/profiles.py:10 src/workspace_ui.py:283
+msgid "1P 이름"
+msgstr "1P name"
+
+#: src/app.py:1375
+msgid "1초 이동"
+msgstr "Seek 1 second"
+
+#: src/workspace_ui.py:411
+msgid "2 위치 보정"
+msgstr "2 Alignment"
+
+#: src/preview.py:15 src/profiles.py:10 src/workspace_ui.py:284
+msgid "2P 달성률"
+msgstr "2P achievement"
+
+#: src/preview.py:14 src/profiles.py:10 src/workspace_ui.py:283
+msgid "2P 이름"
+msgstr "2P name"
+
+#: src/workspace_ui.py:411
+msgid "3 곡 판독"
+msgstr "3 Song matching"
+
+#: src/workspace_ui.py:411
+msgid "4 경계 확인"
+msgstr "4 Boundaries"
+
+#: src/workspace_ui.py:411
+msgid "5 문자·정리"
+msgstr "5 Text & cleanup"
+
+#: src/app.py:1376
+msgid "5초 이동"
+msgstr "Seek 5 seconds"
+
+#: src/app.py:1385
+msgid "Alt + 드래그"
+msgstr "Alt + drag"
+
+#: src/app.py:1192 src/app.py:1200
+msgid "ArcadeClip 편집 작업 (*.json)"
+msgstr "ArcadeClip sessions (*.json)"
+
+#: src/setup_dialog.py:46
+msgid "ArcadeClip에 오신 것을 환영합니다"
+msgstr "Welcome to ArcadeClip"
+
+#: src/jacket_recognition.py:314
+msgid "CPU 작업자 수를 확인해 주세요."
+msgstr "Check the CPU worker count."
+
+#: src/app.py:1384
+msgid "Ctrl + 구간 드래그"
+msgstr "Ctrl + drag selection"
+
+#: src/app.py:1395
+msgid "Ctrl + 드래그"
+msgstr "Ctrl + drag"
+
+#: src/preview.py:42
+msgid "Ctrl + 드래그: 영상 화면 이동\nCtrl + 휠, Ctrl + +, Ctrl + −: 확대·축소\nCtrl + 휠 버튼 클릭, Ctrl + 0: 영상 맞춤"
+msgstr "Ctrl + drag: pan video\nCtrl + wheel, Ctrl + +, Ctrl + −: zoom\nCtrl + middle-click, Ctrl + 0: fit video"
+
+#: src/app.py:1392
+msgid "Ctrl + 휠"
+msgstr "Ctrl + wheel"
+
+#: src/app.py:1396
+msgid "Ctrl + 휠 / Ctrl + + / Ctrl + −"
+msgstr "Ctrl + wheel / Ctrl + + / Ctrl + −"
+
+#: src/app.py:1397
+msgid "Ctrl + 휠 버튼 클릭 / Ctrl + 0"
+msgstr "Ctrl + middle-click / Ctrl + 0"
+
+#: src/advanced_settings.py:50
+msgid "FFmpeg·다운로드 도구 확인"
+msgstr "Check FFmpeg and download tools"
+
+#: src/video_sampling.py:70
+#, python-brace-format
+msgid "GPU 디코딩을 사용할 수 없어 CPU로 계속합니다: {error}"
+msgstr "GPU decoding is unavailable. Continuing on CPU: {error}"
+
+#: src/export_settings.py:172
+msgid "GPU 압축"
+msgstr "GPU encoding"
+
+#: src/export.py:61
+#, python-brace-format
+msgid "GPU 저장 · {encoder}"
+msgstr "GPU export · {encoder}"
+
+#: src/export.py:155
+msgid "GPU 저장에 실패해 이 클립부터 CPU로 다시 저장합니다."
+msgstr "GPU export failed. Retrying this clip and the remaining clips on CPU."
+
+#: src/export_settings.py:38
+msgid "GPU로 영상 압축"
+msgstr "Encode video on GPU"
+
+#: src/live.py:19
+msgid "HTTPS 라이브 조각만 지원합니다."
+msgstr "Live stream segments must use HTTPS."
+
+#: src/jackets.py:35
+msgid "HTTPS 응답이 아닙니다."
+msgstr "The response is not HTTPS."
+
+#: src/export_settings.py:41
+msgid "MP4·MKV·MOV에서 사용 가능한 NVIDIA·Intel·AMD 인코더를 자동 선택합니다. 실패하면 CPU로 저장합니다."
+msgstr "Automatically selects an available NVIDIA, Intel, or AMD encoder for MP4, MKV, or MOV. Falls back to CPU if encoding fails."
+
+#: src/export_settings.py:90
+msgid "MP4로 원본을 복사합니다. 시작·끝 위치가 조금 달라질 수 있습니다. 영상·음량 변환 설정은 정확한 구간 자르기에서 사용할 수 있습니다."
+msgstr "Copies the source to MP4. Start and end times may shift slightly. Choose Frame-accurate trim to adjust video and volume settings."
+
+#: src/text_recognition.py:34
+msgid "OCR 모델 검증에 실패했습니다. 다시 시도해 주세요."
+msgstr "OCR model verification failed. Try again."
+
+#: src/text_recognition.py:30
+msgid "OCR 모델을 준비하고 있습니다…"
+msgstr "Preparing OCR models…"
+
+#: src/profiles.py:53
+msgid "OCR 언어를 확인해 주세요."
+msgstr "Check the OCR language."
+
+#: src/text_recognition.py:95
+msgid "OCR 작업자 수는 0~32로 지정해 주세요."
+msgstr "Set the OCR worker count to a value from 0 to 32."
+
+#: src/text_recognition.py:109
+msgid "OCR 준비 실패 · 원본 구간 보존"
+msgstr "OCR setup failed · Original clip bounds preserved"
+
+#: src/text_recognition.py:108
+#, python-brace-format
+msgid "OCR 준비 실패: {error}"
+msgstr "OCR setup failed: {error}"
+
+#: src/sources.py:195
+msgid "STEP 1/4 · 영상 정보와 선택 구간 확인"
+msgstr "STEP 1/4 · Checking video details and selected range"
+
+#: src/live.py:124
+#, python-brace-format
+msgid "STEP 2/4 · 라이브 구간 다운로드 {value1:,} / {value2:,}"
+msgstr "STEP 2/4 · Downloading live segments {value1:,} / {value2:,}"
+
+#: src/sources.py:214
+#, python-brace-format
+msgid "STEP 2/4 · 선택 구간 다운로드 및 변환 · {start:g}–{end:g}초"
+msgstr "STEP 2/4 · Downloading and converting selection · {start:g}–{end:g} s"
+
+#: src/sources.py:225
+msgid "STEP 3/4 · 다운로드 파일과 영상 길이 검증"
+msgstr "STEP 3/4 · Verifying downloaded file and duration"
+
+#: src/live.py:135
+msgid "STEP 3/4 · 라이브 구간 변환 및 길이 검증"
+msgstr "STEP 3/4 · Converting live selection and verifying duration"
+
+#: src/live.py:161
+#, python-brace-format
+msgid "STEP 4/4 · 라이브 다운로드 완료 · {value1}"
+msgstr "STEP 4/4 · Live download complete · {value1}"
+
+#: src/sources.py:246
+#, python-brace-format
+msgid "STEP 4/4 · 완료 · {value1}"
+msgstr "STEP 4/4 · Complete · {value1}"
+
+#: src/app.py:749
+msgid "Shift 또는 Ctrl을 누르고 합칠 클립을 두 개 이상 선택해 주세요."
+msgstr "Hold Shift or Ctrl to select at least two clips to merge."
+
+#: src/workspace_ui.py:114
+msgid "Shift: 연속 선택 · Ctrl: 개별 선택 · 체크박스: 저장 대상"
+msgstr "Shift: select a range · Ctrl: select individual clips · Checkboxes: include in export"
+
+#: src/export.py:97
+msgid "WebM은 CPU로 저장합니다. GPU 저장은 MP4·MKV·MOV에서 지원합니다."
+msgstr "WebM exports use the CPU. GPU export supports MP4, MKV, and MOV."
+
+#: src/export_settings.py:132
+msgid "X 일반 계정: 140초·512MB 이하. 저장 후 파일 크기를 확인해 주세요."
+msgstr "X standard accounts: up to 140 seconds and 512 MB. Check the file size after export."
+
+#: src/export_settings.py:104
+msgid "X(트위터) · 720p 60fps"
+msgstr "X (Twitter) · 720p 60fps"
+
+#: src/app.py:164
+msgid "YouTube · 다운로드할 구간을 선택하세요. 완료하면 영상 선택으로 돌아갑니다."
+msgstr "YouTube · Select a range to download. You will return to Select video when it finishes."
+
+#: src/workspace_ui.py:377
+msgid "YouTube · 선택 구간 다운로드"
+msgstr "YouTube · Download selection"
+
+#: src/workspace_ui.py:62
+msgid "YouTube 다운로드"
+msgstr "YouTube download"
+
+#: src/app.py:127
+msgid "YouTube 다운로드로 →"
+msgstr "YouTube download →"
+
+#: src/workspace_ui.py:203
+msgid "YouTube 링크"
+msgstr "YouTube link"
+
+#: src/app.py:995
+msgid "YouTube 링크의 정보를 먼저 확인해 주세요."
+msgstr "Check the YouTube video details first."
+
+#: src/workspace_ui.py:202
+msgid "YouTube 영상 가져오기"
+msgstr "Import from YouTube"
+
+#: src/sources.py:46
+msgid "YouTube 영상 링크를 입력해 주세요."
+msgstr "Enter a YouTube video link."
+
+#: src/app.py:944
+msgid "YouTube 영상 링크를 확인하세요."
+msgstr "Check the YouTube video link."
+
+#: src/app.py:1160
+#, python-brace-format
+msgid "{count:,}개"
+msgid_plural "{count:,}개"
+msgstr[0] "{count:,} jacket"
+msgstr[1] "{count:,} jackets"
+
+#: src/app.py:1156
+#, python-brace-format
+msgid "{count:,}곡"
+msgid_plural "{count:,}곡"
+msgstr[0] "{count:,} song"
+msgstr[1] "{count:,} songs"
+
+#: src/app.py:971
+#, python-brace-format
+msgid "{kind} · {title}\n{value3} · {value4}\n길이 {value5}\n{value6}\n저장 위치: {value7}"
+msgstr "{kind} · {title}\n{value3} · {value4}\nDuration {value5}\n{value6}\nSave to: {value7}"
+
+#: src/app.py:506
+#, python-brace-format
+msgid "{name} · 이 영상의 클립 {value2}개"
+msgstr "{name} · Clips in this video: {value2}"
+
+#: src/profile_panel.py:253
+#, python-brace-format
+msgid "{name} · 저장 전"
+msgstr "{name} · Unsaved"
+
+#: src/sources.py:62
+#, python-brace-format
+msgid "{name} 실행 파일을 찾을 수 없습니다."
+msgstr "Could not find the {name} executable."
+
+#: src/app.py:910
+#, python-brace-format
+msgid "{prefix} · 성공 {value2:,}개 · 실패 {value3:,}개"
+msgstr "{prefix} · Succeeded: {value2:,} · Failed: {value3:,}"
+
+#: src/profile_panel.py:213
+#, python-brace-format
+msgid "{region} 영역 좌표"
+msgstr "{region} region coordinates"
+
+#: src/app.py:219
+#, python-brace-format
+msgid "{value1} · 디코더 {decoder_threads}스레드 · 디코딩 {decode_s:.2f}s · 이미지 변환 {convert_s:.2f}s · 판독 누적 {match_s:.2f}s · 디코딩 {decoded_frames:,}장 / 샘플 {sample_frames:,}장"
+msgstr "{value1} · Decoder: {decoder_threads} threads · Decode {decode_s:.2f}s · Convert {convert_s:.2f}s · Cumulative matching {match_s:.2f}s · Decoded {decoded_frames:,} frames / Sampled {sample_frames:,}"
+
+#: src/profile_panel.py:131
+#, python-brace-format
+msgid "{value1} 지정 예시"
+msgstr "{value1} region example"
+
+#: src/app.py:765
+#, python-brace-format
+msgid "{value1}개 클립을 하나로 합쳤습니다. 되돌리기로 복구할 수 있습니다."
+msgstr "Merged {value1} clips into one. Use Undo to restore them."
+
+#: src/profile_panel.py:94
+msgid "가이드 재생 오류: "
+msgstr "Guide playback error: "
+
+#: src/app.py:753
+msgid "같은 영상의 클립만 합칠 수 있습니다."
+msgstr "Only clips from the same video can be merged."
+
+#: src/clips.py:31
+msgid "같은 영상의 클립을 두 개 이상 선택해 주세요."
+msgstr "Select at least two clips from the same video."
+
+#: src/app.py:1387
+msgid "개별 / 연속 클립 선택"
+msgstr "Select individual clips / a range of clips"
+
+#: src/sources.py:160
+msgid "개별 영상 링크를 선택해 주세요."
+msgstr "Choose a link to a single video."
+
+#: src/live.py:34
+msgid "개별 화질의 라이브 재생 목록이 필요합니다."
+msgstr "A live playlist for a single quality level is required."
+
+#: src/app.py:375
+msgid "검색 조건에 맞는 클립이 없습니다. 검색어와 필터를 확인하세요."
+msgstr "No clips match. Check your search and filters."
+
+#: src/workspace_ui.py:290
+msgid "검수 완료로 표시"
+msgstr "Mark as reviewed"
+
+#: src/jacket_recognition.py:364 src/jacket_recognition.py:374
+msgid "곡 경계 정밀 확인"
+msgstr "Refining song boundaries"
+
+#: src/jacket_recognition.py:375
+msgid "곡 경계 확인 완료"
+msgstr "Song boundaries checked"
+
+#: src/text_recognition.py:153
+msgid "곡 끝 OCR · CPU 작업자 1개"
+msgstr "End-of-song OCR · 1 CPU worker"
+
+#: src/text_recognition.py:170
+#, python-brace-format
+msgid "곡 끝 OCR · CPU 작업자 {count}개"
+msgstr "End-of-song OCR · CPU workers: {count}"
+
+#: src/text_recognition.py:148
+#, python-brace-format
+msgid "곡 끝 OCR · CPU 작업자 {count}개 (각 2스레드)"
+msgstr "End-of-song OCR · CPU workers: {count} (2 threads each)"
+
+#: src/text_recognition.py:136
+#, python-brace-format
+msgid "곡 끝 OCR 실패: {error}"
+msgstr "End-of-song OCR failed: {error}"
+
+#: src/profile_panel.py:436
+msgid "곡 끝 글자 확인 범위 (초)"
+msgstr "Text scan window at song end (s)"
+
+#: src/recognition.py:37
+msgid "곡 끝 문자 판독 준비"
+msgstr "Preparing end-of-song text recognition"
+
+#: src/workspace_ui.py:38
+msgid "곡 데이터"
+msgstr "Song data"
+
+#: src/workspace_ui.py:52
+msgid "곡 데이터 업데이트"
+msgstr "Update song data"
+
+#: src/app.py:1137
+msgid "곡 데이터 업데이트 완료"
+msgstr "Song data update finished"
+
+#: src/setup_dialog.py:81
+msgid "곡 데이터를 확인하고 있습니다."
+msgstr "Checking song data."
+
+#: src/app.py:275 src/app.py:864 src/clips.py:99 src/timeline.py:90
+msgid "곡 미확인"
+msgstr "Unknown song"
+
+#: src/workspace_ui.py:104
+msgid "곡 미확인 구간 표시"
+msgstr "Show unidentified song sections"
+
+#: src/profile_panel.py:433
+msgid "곡 변경 확인 시간 (초)"
+msgstr "Song change confirmation (s)"
+
+#: src/clips.py:62
+msgid "곡 식별자를 확인해 주세요."
+msgstr "Check the song ID."
+
+#: src/jackets.py:66
+msgid "곡 정보가 올바르지 않습니다."
+msgstr "Invalid song information."
+
+#: src/jackets.py:72
+msgid "곡 제목 형식이 올바르지 않습니다."
+msgstr "Invalid song title format."
+
+#: src/app.py:804
+msgid "곡 찾기를 시작할 수 없습니다"
+msgstr "Cannot start song detection"
+
+#: src/workspace_ui.py:343
+msgid "곡 탐색 영상 디코딩만 GPU 사용. 지원하지 않으면 CPU로 복귀합니다. OCR은 CPU 병렬 처리합니다."
+msgstr "Uses the GPU to decode video during song scanning, with CPU fallback. OCR runs in parallel on the CPU."
+
+#: src/jacket_recognition.py:247
+#, python-brace-format
+msgid "곡 판독 · 요청 {requested} / 최대 {workers} · 처리 확인 {value3}프로세스 · 미수집 {value4}묶음"
+msgstr "Song matching · Requested {requested} / Max {workers} · Active processes so far: {value3} · Pending batches: {value4}"
+
+#: src/jacket_recognition.py:201
+#, python-brace-format
+msgid "곡 판독 · 요청 {requested} / 최대 {workers}작업자 · 묶음 {batch_size}장{reason}"
+msgstr "Song matching · Requested {requested} / Max {workers} workers · {batch_size} frames per batch{reason}"
+
+#: src/jacket_recognition.py:211 src/jacket_recognition.py:214
+msgid "곡 판독 · 판독 작업자 1개"
+msgstr "Song matching · 1 worker"
+
+#: src/jacket_recognition.py:359
+msgid "곡 판독 완료"
+msgstr "Song matching complete"
+
+#: src/profile_panel.py:432
+msgid "곡 확인 간격 (초)"
+msgstr "Song scan interval (s)"
+
+#: src/profile_panel.py:453
+msgid "곡 확인 간격이 짧을수록 더 자주 확인합니다.\n자켓 차이 허용값을 높이면 더 느슨하게 인식합니다.\n두 후보의 최소 점수 차이를 높이면 비슷한 자켓을 더 엄격하게 구분합니다."
+msgstr "A shorter scan interval checks frames more often.\nA higher jacket difference threshold allows looser matches.\nA larger minimum score gap distinguishes similar jackets more strictly."
+
+#: src/workspace_ui.py:43
+msgid "곡·자켓 용량"
+msgstr "Data size"
+
+#: src/workspace_ui.py:283
+msgid "곡명"
+msgstr "Song title"
+
+#: src/clips.py:60
+msgid "곡명과 플레이어 이름을 확인해 주세요."
+msgstr "Check the song title and player names."
+
+#: src/app.py:160
+msgid "곡을 찾을 분석 구간의 시작과 끝을 지정하세요."
+msgstr "Set the start and end of the range to scan for songs."
+
+#: src/jackets.py:138
+msgid "공식 곡 목록을 확인하고 있습니다…"
+msgstr "Checking the official song list…"
+
+#: src/jackets.py:63
+msgid "공식 곡 목록이 비어 있거나 올바르지 않습니다."
+msgstr "The official song list is empty or invalid."
+
+#: src/export_settings.py:125
+msgid "공유용 프리셋 · 선택 후 적용 버튼을 누르세요"
+msgstr "Sharing presets · Choose a preset, then click Apply preset"
+
+#: src/app.py:1381
+msgid "구간 시작 / 끝으로 이동"
+msgstr "Jump to selection start / end"
+
+#: src/app.py:1383
+msgid "구간 양끝 드래그"
+msgstr "Drag either edge of the selection"
+
+#: src/app.py:1379
+msgid "구간 조정 · 시간 선택 및 클립 확인"
+msgstr "Trimming · Select range and Review clips"
+
+#: src/app.py:838
+#, python-brace-format
+msgid "구간 후보 {value1:,}개를 추가했습니다. 미리보기에서 확인해 주세요."
+msgstr "Added {value1:,} candidate clips. Check them in the preview."
+
+#: src/export_settings.py:30
+msgid "균형 있게 · 일반적인 공유용"
+msgstr "Balanced · For general sharing"
+
+#: src/profile_panel.py:426
+msgid "글자 영역 · 이름 및 달성률"
+msgstr "Text regions · Names and achievement"
+
+#: src/advanced_settings.py:26
+msgid "글자 인식 작업자 (각 2 CPU 스레드)"
+msgstr "OCR workers (2 CPU threads each)"
+
+#: src/workspace_ui.py:105
+msgid "기본값은 숨김입니다. 보이는 클립 저장에는 표시된 구간만 포함됩니다."
+msgstr "Hidden by default. Export visible clips includes only the sections shown."
+
+#: src/app.py:773
+msgid "기존 클립에 추가"
+msgstr "Keep existing clips and add results"
+
+#: src/app.py:769
+msgid "기존 클립을 어떻게 할까요?"
+msgstr "What should happen to the existing clips?"
+
+#: src/profiles.py:28
+msgid "기준 영상 크기를 확인해 주세요."
+msgstr "Check the reference video dimensions."
+
+#: src/app.py:1384
+msgid "길이를 유지하며 구간 이동"
+msgstr "Move selection without changing its duration"
+
+#: src/workspace_ui.py:385 src/workspace_ui.py:222 src/workspace_ui.py:284
+msgid "끝"
+msgstr "End"
+
+#: src/workspace_ui.py:298
+msgid "끝 부분 재생"
+msgstr "Preview end"
+
+#: src/app.py:538
+msgid "끝 시각을 시작보다 뒤로 지정해 주세요."
+msgstr "Set the end time after the start time."
+
+#: src/workspace_ui.py:256
+msgid "끝 오프셋"
+msgstr "End offset"
+
+#: src/app.py:1020 src/app.py:975 src/app.py:450 src/sources.py:170
+msgid "날짜 미제공"
+msgstr "Date unavailable"
+
+#: src/workspace_ui.py:359
+msgid "날짜와 시간으로 새 폴더 만들기"
+msgstr "Create a folder with the date and time"
+
+#: src/profile_panel.py:445
+msgid "높을수록 느슨하게 판독합니다. 비슷한 자켓이 잘못 인식될 수 있습니다."
+msgstr "Higher values allow looser matches and may confuse similar jackets."
+
+#: src/app.py:1385
+msgid "다른 경계에 자동으로 맞추지 않고 조정"
+msgstr "Adjust without snapping to other boundaries"
+
+#: src/app.py:1137
+msgid "다시 받을 곡 데이터가 있습니다."
+msgstr "Some song data needs to be downloaded again."
+
+#: src/sources.py:234
+msgid "다운로드 결과 파일을 확인할 수 없습니다."
+msgstr "Could not verify the downloaded file."
+
+#: src/app.py:969 src/workspace_ui.py:392
+msgid "다운로드 대기"
+msgstr "Ready to download"
+
+#: src/app.py:1057
+msgid "다운로드 실패 · 아래 로그 확인"
+msgstr "Download failed · See log below"
+
+#: src/app.py:1026
+msgid "다운로드 완료"
+msgstr "Download complete"
+
+#: src/app.py:1006
+msgid "다운로드 준비 중"
+msgstr "Preparing download"
+
+#: src/app.py:1057
+msgid "다운로드 취소"
+msgstr "Download cancelled"
+
+#: src/jackets.py:44
+msgid "다운로드 파일이 허용 크기를 초과했습니다."
+msgstr "The download exceeds the size limit."
+
+#: src/jackets.py:177
+msgid "다운로드를 멈췄습니다."
+msgstr "Download stopped."
+
+#: src/jackets.py:57
+msgid "다운로드를 완료하지 못했습니다."
+msgstr "Could not complete the download."
+
+#: src/live.py:110 src/live.py:146
+msgid "다운로드를 취소했습니다."
+msgstr "Download cancelled."
+
+#: src/app.py:1064
+msgid "다운로드를 취소했습니다. 구간을 다시 선택할 수 있습니다."
+msgstr "Download cancelled. You can select a new range."
+
+#: src/sources.py:228
+msgid "다운로드한 구간 정보를 확인할 수 없습니다."
+msgstr "Could not verify the downloaded range information."
+
+#: src/sources.py:231
+msgid "다운로드한 구간이 선택한 시각과 일치하지 않습니다."
+msgstr "The downloaded range does not match the selected times."
+
+#: src/sources.py:237
+msgid "다운로드한 영상 길이가 선택한 구간과 다릅니다."
+msgstr "The downloaded video duration does not match the selected range."
+
+#: src/sources.py:184
+msgid "다운로드한 영상의 길이를 확인할 수 없습니다."
+msgstr "Could not determine the downloaded video duration."
+
+#: src/app.py:1000
+msgid "다운로드할 시작·끝을 영상 길이 안에서 지정해 주세요."
+msgstr "Set the download start and end within the video's duration."
+
+#: src/advanced_settings.py:57 src/app.py:1406 src/license_dialog.py:50 src/setup_dialog.py:91 src/setup_dialog.py:39
+msgid "닫기"
+msgstr "Close"
+
+#: src/clips.py:66
+msgid "달성률을 확인해 주세요."
+msgstr "Check the achievement values."
+
+#: src/app.py:771
+msgid "덮어쓰면 이 영상의 자동 인식 클립과 그 편집 내용을 새 결과로 교체합니다. 직접 추가한 클립은 유지합니다."
+msgstr "Replacing will overwrite detected clips and their edits for this video with the new results. Manually added clips will be kept."
+
+#: src/advanced_settings.py:38 src/setup_dialog.py:46
+msgid "데이터 저장 위치"
+msgstr "Data location"
+
+#: src/setup_dialog.py:24 src/setup_dialog.py:55
+msgid "데이터 저장 폴더"
+msgstr "Data folder"
+
+#: src/setup_dialog.py:98
+msgid "데이터 준비"
+msgstr "Preparing data"
+
+#: src/setup_dialog.py:17
+msgid "데이터 폴더"
+msgstr "Data folder"
+
+#: src/advanced_settings.py:44
+msgid "데이터 폴더 변경…"
+msgstr "Change data folder…"
+
+#: src/setup_dialog.py:30
+msgid "데이터를 저장할 폴더를 선택하세요."
+msgstr "Choose a folder for app data."
+
+#: src/setup_dialog.py:96
+msgid "데이터를 준비하지 못했습니다. 폴더와 연결을 확인해 주세요."
+msgstr "Could not prepare the data. Check the folder and your connection."
+
+#: src/workspace_ui.py:368
+msgid "동일한 파일명에는 번호를 붙입니다."
+msgstr "Duplicate filenames get a number suffix."
+
+#: src/workspace_ui.py:294
+msgid "되돌리기"
+msgstr "Undo"
+
+#: src/profile_panel.py:435
+msgid "두 후보의 최소 점수 차이"
+msgstr "Minimum score gap between candidates"
+
+#: src/app.py:1377
+msgid "뒤로 탐색 / 앞으로 재생 · 여러 번 누르면 속도 증가"
+msgstr "Seek backward / play forward · Press repeatedly to speed up"
+
+#: src/app.py:1394
+msgid "드래그"
+msgstr "Drag"
+
+#: src/preview.py:45
+msgid "드래그: 영역 지정   Ctrl + 드래그: 영상 화면 이동\nCtrl + 휠: 확대·축소   Ctrl + 휠 버튼 클릭: 영상 맞춤"
+msgstr "Drag: draw region   Ctrl + drag: pan video\nCtrl + wheel: zoom   Ctrl + middle-click: fit video"
+
+#: src/workspace_ui.py:43
+msgid "등록된 곡"
+msgstr "Songs"
+
+#: src/jacket_recognition.py:319
+msgid "디코더 스레드 수는 0~64로 지정해 주세요."
+msgstr "Set the decoder thread count to a value from 0 to 64."
+
+#: src/app.py:990
+#, python-brace-format
+msgid "라이브 · 00:00:00 기준: {origin} · 접근 가능 {value2}"
+msgstr "Live · Time 00:00:00 corresponds to: {origin} · Available: {value2}"
+
+#: src/live.py:129
+#, python-brace-format
+msgid "라이브 다운로드 {value1} / {value2} 조각"
+msgstr "Downloading live segments {value1} / {value2}"
+
+#: src/live.py:44
+msgid "라이브 시각의 시간대를 확인할 수 없습니다."
+msgstr "Could not determine the live stream time zone."
+
+#: src/live.py:26
+msgid "라이브 재생 목록을 확인할 수 없습니다."
+msgstr "Could not read the live playlist."
+
+#: src/live.py:72
+msgid "라이브 재생 목록의 마지막 조각이 불완전합니다."
+msgstr "The last segment in the live playlist is incomplete."
+
+#: src/live.py:59
+msgid "라이브 조각 길이가 올바르지 않습니다."
+msgstr "Invalid live segment duration."
+
+#: src/live.py:62
+msgid "라이브 조각의 시각을 확인할 수 없습니다."
+msgstr "Could not determine the live segment timestamp."
+
+#: src/live.py:54
+msgid "라이브 초기화 조각을 확인할 수 없습니다."
+msgstr "Could not read the live initialization segment."
+
+#: src/license_dialog.py:14
+msgid "라이브러리, 실행 도구 또는 모델을 선택하면 버전과 라이선스 정보를 볼 수 있습니다."
+msgstr "Select a library, tool, or model to view its version and license information."
+
+#: src/license_dialog.py:21
+msgid "라이선스 및 고지문"
+msgstr "Licenses and notices"
+
+#: src/license_dialog.py:30
+msgid "라이선스 정보를 불러올 수 없습니다. 앱 설치 파일을 확인해 주세요."
+msgstr "Could not load license information. Check the app installation."
+
+#: src/license_dialog.py:37
+#, python-brace-format
+msgid "라이선스: {name}"
+msgstr "License: {name}"
+
+#: src/app.py:1392
+msgid "마우스 위치를 중심으로 시간축 확대·축소"
+msgstr "Zoom timeline around the pointer"
+
+#: src/app.py:389
+msgid "먼저 대상 폴더를 선택해 주세요."
+msgstr "Choose a destination folder first."
+
+#: src/app.py:115
+msgid "먼저 영상을 열고 작업할 구간을 준비해 주세요."
+msgstr "Open a video and select a range first."
+
+#: src/export_settings.py:64
+msgid "모노"
+msgstr "Mono"
+
+#: src/workspace_ui.py:265
+msgid "모든 클립에 일괄 적용"
+msgstr "Apply to all clips"
+
+#: src/workspace_ui.py:127
+msgid "목록에서 제거"
+msgstr "Remove from list"
+
+#: src/app.py:269
+msgid "목록에서 확인할 클립을 선택하세요."
+msgstr "Select a clip in the list to review."
+
+#: src/export_settings.py:84
+msgid "목표 크기는 클립마다 적용되며 실제 파일 크기는 달라질 수 있습니다."
+msgstr "The target size applies to each clip. Actual file sizes may vary."
+
+#: src/text_recognition.py:97
+msgid "문자 영역 없음 · 클립 정리 완료"
+msgstr "No text regions · Clip cleanup complete"
+
+#: src/app.py:1404
+msgid "문자 입력 중에는 입력란의 편집 단축키가 우선합니다."
+msgstr "Text fields keep their normal editing shortcuts while you type."
+
+#: src/app.py:379 src/workspace_ui.py:154
+msgid "미리보기"
+msgstr "Preview"
+
+#: src/clips.py:86
+msgid "미확인"
+msgstr "Unknown"
+
+#: src/live.py:106
+msgid "방송 단절 경계를 포함한 구간입니다. 경계 앞뒤로 나눠 선택해 주세요."
+msgstr "The selection crosses a stream interruption. Download the sections on either side separately."
+
+#: src/sources.py:203
+msgid "방송 종료 후 처리된 영상 또는 로컬 녹화를 선택해 주세요."
+msgstr "Choose the processed video after the broadcast ends, or use a local recording."
+
+#: src/preview.py:259
+msgid "배속"
+msgstr "Speed"
+
+#: src/export.py:83
+msgid "변환 설정은 정확하게 자르기에서 사용할 수 있습니다."
+msgstr "Conversion settings are available with Frame-accurate trim."
+
+#: src/app.py:275
+#, python-brace-format
+msgid "보고 있는 클립 {value1} · {value2}"
+msgstr "Viewing clip {value1} · {value2}"
+
+#: src/workspace_ui.py:43
+msgid "보유 자켓"
+msgstr "Jackets"
+
+#: src/app.py:371
+#, python-brace-format
+msgid "보이는 클립 {count}개 저장 설정 →"
+msgid_plural "보이는 클립 {count}개 저장 설정 →"
+msgstr[0] "Export {count} visible clip →"
+msgstr[1] "Export {count} visible clips →"
+
+#: src/app.py:362
+#, python-brace-format
+msgid "보이는 클립 {value1}개 / 전체 {value2}개 · 숨김 {hidden}개\n저장할 클립 {value4}개 · 총 {value5}"
+msgstr "Visible: {value1} / Total: {value2} · Hidden: {hidden}\nTo export: {value4} · Duration: {value5}"
+
+#: src/workspace_ui.py:109
+msgid "보이는 클립 체크"
+msgstr "Check visible clips"
+
+#: src/jacket_recognition.py:338
+#, python-brace-format
+msgid "보정 캐시 저장 실패: {error}"
+msgstr "Could not save alignment cache: {error}"
+
+#: src/preview.py:164
+msgid "보정된 자켓"
+msgstr "Aligned jacket"
+
+#: src/app.py:705
+msgid "복원"
+msgstr "Restore"
+
+#: src/app.py:167
+#, python-brace-format
+msgid "분석 구간: {start} – {end}"
+msgstr "Scan range: {start} – {end}"
+
+#: src/advanced_settings.py:20
+msgid "분석 성능"
+msgstr "Analysis performance"
+
+#: src/advanced_settings.py:15
+msgid "분석 성능 설정은 다음 분석부터 적용됩니다."
+msgstr "Performance settings take effect on the next analysis."
+
+#: src/app.py:1075
+msgid "분석 실패 · 상세 로그 확인"
+msgstr "Analysis failed · See diagnostic log"
+
+#: src/app.py:1078
+msgid "분석 완료 · 클립을 확인해 주세요."
+msgstr "Analysis complete · Review your clips."
+
+#: src/app.py:1075
+msgid "분석 중지"
+msgstr "Analysis stopped"
+
+#: src/recognition.py:24
+msgid "분석할 구간의 시작과 끝을 확인해 주세요."
+msgstr "Check the start and end of the analysis range."
+
+#: src/video_sampling.py:24
+msgid "분석할 끝 시각이 영상 길이를 넘습니다."
+msgstr "The analysis end time exceeds the video duration."
+
+#: src/app.py:783
+msgid "분석할 영상을 먼저 열어 주세요."
+msgstr "Open a video to analyze first."
+
+#: src/export_settings.py:32
+msgid "빠르게 처리"
+msgstr "Fast"
+
+#: src/workspace_ui.py:323
+msgid "빠른 저장 · 경계 차이 가능"
+msgstr "Fast export · Boundaries may shift"
+
+#: src/export.py:170
+#, python-brace-format
+msgid "빠른 저장 · 실제 길이 {value1} · 키프레임에 따라 경계 차이 가능"
+msgstr "Fast export · Actual duration {value1} · Boundaries may shift to keyframes"
+
+#: src/export.py:65
+msgid "사용 가능한 GPU 인코더가 없어 CPU로 저장합니다."
+msgstr "No GPU encoder is available. Exporting on CPU."
+
+#: src/jacket_recognition.py:60
+msgid "사용 가능한 자켓이 없습니다."
+msgstr "No usable jackets found."
+
+#: src/jacket_recognition.py:51
+msgid "사용 가능한 자켓이 없습니다. 곡 데이터를 먼저 받아 주세요."
+msgstr "No usable jackets found. Download song data first."
+
+#: src/profile_panel.py:294
+msgid "새 프로필"
+msgstr "New profile"
+
+#: src/profile_panel.py:363
+msgid "새 프로필 저장"
+msgstr "Save new profile"
+
+#: src/profile_panel.py:264
+msgid "새 프로필…"
+msgstr "New profile…"
+
+#: src/profile_panel.py:375 src/profile_panel.py:381
+msgid "새 프로필로 저장"
+msgstr "Save as new profile"
+
+#: src/export_settings.py:30
+msgid "선명하게 · 용량 큼"
+msgstr "High quality · Larger files"
+
+#: src/workspace_ui.py:387
+msgid "선택 구간 다운로드"
+msgstr "Download selection"
+
+#: src/workspace_ui.py:233
+msgid "선택 구간 재생"
+msgstr "Play selection"
+
+#: src/app.py:730
+msgid "선택 구간으로 클립 추가"
+msgstr "Add selection as clip"
+
+#: src/workspace_ui.py:143
+msgid "선택 저장 (0)"
+msgstr "Export checked (0)"
+
+#: src/workspace_ui.py:172
+msgid "선택 주변 확대"
+msgstr "Selection detail"
+
+#: src/jacket_recognition.py:126
+msgid "선택한 구간에서 영상 프레임을 찾을 수 없습니다."
+msgstr "No video frames found in the selected range."
+
+#: src/export.py:109 src/sources.py:208
+msgid "선택한 끝 시각이 영상 길이를 넘습니다."
+msgstr "The selected end time exceeds the video duration."
+
+#: src/live.py:96
+msgid "선택한 라이브 조각이 만료됐거나 연결이 끊겼습니다. 정보를 다시 조회해 주세요."
+msgstr "The selected live segments have expired or the connection was lost. Refresh the video details."
+
+#: src/export_settings.py:89
+msgid "선택한 시작·끝에 맞춰 영상을 변환합니다."
+msgstr "Re-encodes the video to match the selected start and end times."
+
+#: src/profile_panel.py:102
+msgid "선택한 인식 영역 확대"
+msgstr "Enlarged view of the selected recognition region"
+
+#: src/app.py:725 src/workspace_ui.py:130
+msgid "선택한 클립 합치기"
+msgstr "Merge selected clips"
+
+#: src/workspace_ui.py:365
+msgid "선택한 폴더 열기"
+msgstr "Open selected folder"
+
+#: src/profile_panel.py:376
+msgid "선택한 프로필 덮어쓰기"
+msgstr "Overwrite selected profile"
+
+#: src/advanced_settings.py:12 src/workspace_ui.py:36
+msgid "Settings"
+msgstr "Settings"
+
+#: src/export_settings.py:34
+msgid "소리 포함"
+msgstr "Include audio"
+
+#: src/jacket_recognition.py:53
+#, python-brace-format
+msgid "손상되거나 누락된 자켓 {damaged:,}개를 제외했습니다."
+msgstr "Excluded damaged or missing jackets: {damaged:,}."
+
+#: src/app.py:656
+msgid "수동 조정 초기화"
+msgstr "Reset manual adjustments"
+
+#: src/app.py:653
+msgid "수동 조정된 클립"
+msgstr "Manually trimmed clips"
+
+#: src/app.py:657
+msgid "수동 조정은 제외하고 재설정"
+msgstr "Keep manual adjustments"
+
+#: src/app.py:654
+msgid "수동으로 시작·끝을 조정한 클립이 있습니다."
+msgstr "Some clips have manually adjusted start or end times."
+
+#: src/workspace_ui.py:293
+msgid "수정 적용"
+msgstr "Apply edits"
+
+#: src/profile_panel.py:336
+msgid "수정 중인 내용을 버리고 가져온 프로필을 선택할까요?"
+msgstr "Discard your changes and switch to the imported profile?"
+
+#: src/profile_panel.py:288
+msgid "수정 중인 내용을 버리고 다른 프로필을 선택할까요?"
+msgstr "Discard your changes and switch to another profile?"
+
+#: src/profile_panel.py:373
+msgid "수정한 프로필"
+msgstr "Modified profile"
+
+#: src/export_settings.py:64
+msgid "스테레오"
+msgstr "Stereo"
+
+#: src/timeline.py:34
+msgid "시간 범위: 양 끝 핸들을 드래그해 조절"
+msgstr "Time range: drag the handles at either end to adjust"
+
+#: src/app.py:128 src/workspace_ui.py:217 src/workspace_ui.py:56
+msgid "시간 선택"
+msgstr "Select range"
+
+#: src/app.py:127 src/workspace_ui.py:215
+msgid "시간 선택으로 →"
+msgstr "Select range →"
+
+#: src/export_settings.py:32
+msgid "시간과 압축률 균형"
+msgstr "Balanced speed and compression"
+
+#: src/media.py:13
+msgid "시간을 HH:MM:SS 형식으로 입력해 주세요."
+msgstr "Enter a time in HH:MM:SS format."
+
+#: src/media.py:17
+msgid "시간을 확인해 주세요."
+msgstr "Check the time value."
+
+#: src/app.py:1391
+msgid "시간축 가로 이동 / 빠르게 이동"
+msgstr "Scroll timeline / scroll faster"
+
+#: src/app.py:1382
+msgid "시간축 클릭·드래그"
+msgstr "Click or drag on timeline"
+
+#: src/workspace_ui.py:384 src/workspace_ui.py:222 src/workspace_ui.py:284
+msgid "시작"
+msgstr "Start"
+
+#: src/workspace_ui.py:297
+msgid "시작 부분 재생"
+msgstr "Preview start"
+
+#: src/workspace_ui.py:256
+msgid "시작 오프셋"
+msgstr "Start offset"
+
+#: src/app.py:1383
+msgid "시작·끝 조정"
+msgstr "Adjust start and end"
+
+#: src/sources.py:193
+msgid "시작과 끝 시각을 확인해 주세요."
+msgstr "Check the start and end times."
+
+#: src/setup_dialog.py:34
+msgid "시작하기 →"
+msgstr "Get started →"
+
+#: src/workspace_ui.py:342
+msgid "실험용 GPU 영상 디코딩 (D3D11VA)"
+msgstr "Experimental GPU video decoding (D3D11VA)"
+
+#: src/profile_panel.py:218
+msgid "아래"
+msgstr "Bottom"
+
+#: src/app.py:728
+msgid "아래 클립과 합치기"
+msgstr "Merge with next clip"
+
+#: src/profiles.py:114
+msgid "안전하지 않은 경로 또는 암호화된 파일이 있습니다."
+msgstr "The archive contains an unsafe path or an encrypted file."
+
+#: src/preview.py:284
+msgid "알 수 없는 인식 영역입니다."
+msgstr "Unknown recognition region."
+
+#: src/live.py:36
+msgid "암호화된 라이브 조각은 지원하지 않습니다."
+msgstr "Encrypted live segments are not supported."
+
+#: src/profiles.py:118
+msgid "압축 안의 프로필 파일이 너무 큽니다."
+msgstr "A profile in the archive exceeds the size limit."
+
+#: src/profiles.py:121
+msgid "압축 파일에 유효한 프로필 JSON이 없습니다."
+msgstr "No valid profile JSON found in the archive."
+
+#: src/profiles.py:108
+msgid "압축 파일의 크기 또는 파일 수가 너무 큽니다."
+msgstr "The archive is too large or contains too many files."
+
+#: src/profile_panel.py:449
+msgid "영문"
+msgstr "English"
+
+#: src/app.py:30
+msgid "영상 (*.mp4 *.mkv *.mov *.webm *.avi *.m4v *.ts);;모든 파일 (*)"
+msgstr "Videos (*.mp4 *.mkv *.mov *.webm *.avi *.m4v *.ts);;All files (*)"
+
+#: src/export_settings.py:19
+msgid "영상 · 파일 형식과 용량"
+msgstr "Video · Format and size"
+
+#: src/app.py:541
+msgid "영상 길이 안에서 구간을 선택해 주세요."
+msgstr "Select a range within the video's duration."
+
+#: src/app.py:304
+msgid "영상 길이 안에서 구간을 지정해 주세요."
+msgstr "Set a range within the video's duration."
+
+#: src/app.py:668
+msgid "영상 길이를 확인한 후 적용해 주세요."
+msgstr "Wait for the video duration to load before applying."
+
+#: src/export.py:26
+msgid "영상 길이를 확인할 수 없습니다."
+msgstr "Could not determine the video duration."
+
+#: src/sources.py:206
+msgid "영상 길이를 확인할 수 없습니다. 영상 정보를 다시 확인해 주세요."
+msgstr "Could not determine the video duration. Refresh the video details."
+
+#: src/advanced_settings.py:22
+msgid "영상 디코더 스레드"
+msgstr "Video decoder threads"
+
+#: src/app.py:1397
+msgid "영상 맞춤"
+msgstr "Fit video"
+
+#: src/app.py:1225
+msgid "영상 메타데이터를 확인해 주세요."
+msgstr "Check the video metadata."
+
+#: src/workspace_ui.py:83
+msgid "영상 목록"
+msgstr "Video list"
+
+#: src/preview.py:44
+msgid "영상 미리보기 및 인식 영역"
+msgstr "Video preview and recognition regions"
+
+#: src/app.py:128 src/workspace_ui.py:56
+msgid "영상 선택"
+msgstr "Select video"
+
+#: src/app.py:157
+msgid "영상 선택 → 구간 지정 → 곡 확인 → 파일 저장"
+msgstr "Select video → Choose range → Identify songs → Export clips"
+
+#: src/export.py:20 src/media.py:50 src/video_sampling.py:16
+msgid "영상 스트림을 찾을 수 없습니다."
+msgstr "No video stream found."
+
+#: src/preview.py:234
+msgid "영상 재생 위치"
+msgstr "Video playback position"
+
+#: src/workspace_ui.py:213
+msgid "영상 정보 확인 →"
+msgstr "Check video details →"
+
+#: src/sources.py:156
+msgid "영상 정보를 확인하고 있습니다."
+msgstr "Checking video details."
+
+#: src/app.py:1370
+msgid "영상 조작 도움말"
+msgstr "Playback and editing controls"
+
+#: src/sources.py:141
+#, python-brace-format
+msgid "영상 처리 {percent}% · {elapsed:.1f} / {seconds:.1f}초"
+msgstr "Processing video {percent}% · {elapsed:.1f} / {seconds:.1f} s"
+
+#: src/sources.py:125
+msgid "영상 처리 작업이 실패했습니다."
+msgstr "Video processing failed."
+
+#: src/app.py:1378
+msgid "영상 처음 / 끝으로 이동"
+msgstr "Jump to video start / end"
+
+#: src/app.py:430
+msgid "영상 추가"
+msgstr "Add videos"
+
+#: src/app.py:434
+msgid "영상 폴더"
+msgstr "Video folder"
+
+#: src/live.py:108
+msgid "영상 형식이 바뀐 구간입니다. 앞뒤로 나눠 선택해 주세요."
+msgstr "The video format changes within this selection. Download the sections on either side separately."
+
+#: src/app.py:1395
+msgid "영상 화면 이동"
+msgstr "Pan video"
+
+#: src/app.py:1396
+msgid "영상 확대·축소"
+msgstr "Zoom video"
+
+#: src/recognition.py:62
+msgid "영상과 프로파일의 화면 비율이 다릅니다."
+msgstr "The video and profile have different aspect ratios."
+
+#: src/jacket_recognition.py:275 src/jacket_recognition.py:352
+msgid "영상과 프로파일의 화면 비율이 다릅니다. 영역을 다시 지정해 주세요."
+msgstr "The video and profile have different aspect ratios. Define the regions again."
+
+#: src/profile_panel.py:95
+msgid "영상에서 드래그해 영역을 지정하세요."
+msgstr "Drag on the video to define a region."
+
+#: src/preview.py:130
+msgid "영상을 선택하세요"
+msgstr "Select a video"
+
+#: src/app.py:521
+msgid "영상을 열 수 없습니다. 파일을 다시 선택해 주세요."
+msgstr "Could not open the video. Select the file again."
+
+#: src/workspace_ui.py:427
+msgid "영상을 추가해 주세요."
+msgstr "Add a video to continue."
+
+#: src/profile_panel.py:56
+msgid "영역 선택"
+msgstr "Choose region"
+
+#: src/profile_panel.py:104
+msgid "영역 지우기"
+msgstr "Clear region"
+
+#: src/app.py:1394
+msgid "영역 지정"
+msgstr "Draw region"
+
+#: src/profile_panel.py:125
+msgid "영역 지정 예시"
+msgstr "Region selection example"
+
+#: src/advanced_settings.py:16
+msgid "영역별 인식"
+msgstr "Region recognition"
+
+#: src/profile_panel.py:85 src/profile_panel.py:121 src/profile_panel.py:144
+msgid "예시 일시정지"
+msgstr "Pause example"
+
+#: src/profile_panel.py:141
+msgid "예시 재생"
+msgstr "Play example"
+
+#: src/export_settings.py:77
+msgid "오디오"
+msgstr "Audio"
+
+#: src/export_settings.py:81
+msgid "오디오 품질"
+msgstr "Audio quality"
+
+#: src/profile_panel.py:37
+msgid "오락실 프로필"
+msgstr "Arcade profile"
+
+#: src/profile_panel.py:40
+msgid "오락실 프로필 선택"
+msgstr "Select arcade profile"
+
+#: src/app.py:1093
+#, python-brace-format
+msgid "오류 · {error}"
+msgstr "Error · {error}"
+
+#: src/profile_panel.py:218
+msgid "오른쪽"
+msgstr "Right"
+
+#: src/clips.py:94
+msgid "오프셋 적용 후 길이가 0 이하인 클립이 있습니다."
+msgstr "The offsets would leave one or more clips with no duration."
+
+#: src/license_dialog.py:19
+msgid "오픈소스 구성 요소 목록"
+msgstr "Open-source components"
+
+#: src/advanced_settings.py:55 src/license_dialog.py:11
+msgid "오픈소스 라이선스"
+msgstr "Open-source licenses"
+
+#: src/jackets.py:80
+msgid "올바른 자켓 PNG 파일이 아닙니다."
+msgstr "Invalid jacket PNG file."
+
+#: src/profile_panel.py:218
+msgid "왼쪽"
+msgstr "Left"
+
+#: src/export.py:81
+msgid "용량 또는 오디오 설정을 확인해 주세요."
+msgstr "Check the file size and audio settings."
+
+#: src/export_settings.py:166 src/export_settings.py:29
+msgid "원본 빠른 복사"
+msgstr "Fast source copy"
+
+#: src/workspace_ui.py:328
+msgid "원본 빠른 복사 · 소리 포함"
+msgstr "Fast source copy · With audio"
+
+#: src/export.py:105
+msgid "원본 영상 파일을 찾을 수 없습니다."
+msgstr "Could not find the source video file."
+
+#: src/workspace_ui.py:134
+msgid "원본 영상은 유지됩니다. 현재 클립의 되돌리기로 복구할 수 있습니다."
+msgstr "The source video is kept. Use Undo for the current clip to restore it."
+
+#: src/export_settings.py:64 src/export_settings.py:44 src/export_settings.py:50
+msgid "원본 유지"
+msgstr "Same as source"
+
+#: src/profile_panel.py:218
+msgid "위"
+msgstr "Top"
+
+#: src/profile_panel.py:74
+msgid "위 목록에서\n지정할 영역을 선택하세요."
+msgstr "Choose a region\nfrom the list above."
+
+#: src/workspace_ui.py:177
+msgid "위: 자동 인식 클립    아래: 직접 추가한 클립"
+msgstr "Top: detected clips    Bottom: manually added clips"
+
+#: src/jacket_recognition.py:290
+#, python-brace-format
+msgid "위치 확정 · 거리 {distance} / 후보 차이 {margin} · 나머지 보정 생략"
+msgstr "Position locked · Distance {distance} / Score gap {margin} · Remaining alignment checks skipped"
+
+#: src/preview.py:256 src/preview.py:262
+msgid "음량"
+msgstr "Volume"
+
+#: src/export_settings.py:176
+#, python-brace-format
+msgid "음량 {value1:+g} dB · {value2} · {value3}"
+msgstr "Volume {value1:+g} dB · {value2} · {value3}"
+
+#: src/export_settings.py:80
+msgid "음량 조절"
+msgstr "Volume adjustment"
+
+#: src/workspace_ui.py:300
+msgid "이 구간 반복"
+msgstr "Loop selection"
+
+#: src/workspace_ui.py:251
+msgid "이 구간에서 곡 찾기 →"
+msgstr "Find songs in range →"
+
+#: src/live.py:38
+msgid "이 라이브 조각의 범위 형식은 지원하지 않습니다."
+msgstr "This live segment byte-range format is not supported."
+
+#: src/live.py:84
+msgid "이 라이브에서 접근 가능한 과거 구간을 확인할 수 없습니다."
+msgstr "Could not determine the available history for this live stream."
+
+#: src/app.py:770
+msgid "이 영상에 기존 클립이 있습니다. 자동 인식 결과를 어떻게 저장할까요?"
+msgstr "This video already has clips. How should the new detection results be added?"
+
+#: src/media.py:37
+msgid "이 영상의 화면 변환을 처리할 수 없습니다. 회전과 반전을 영상에 적용한 파일을 사용해 주세요."
+msgstr "This video's display transform is not supported. Use a file with rotation and mirroring baked into the video."
+
+#: src/media.py:40
+msgid "이 영상의 회전 각도를 처리할 수 없습니다."
+msgstr "This video's rotation angle is not supported."
+
+#: src/app.py:729
+msgid "이 클립을 목록에서 제거"
+msgstr "Remove this clip from list"
+
+#: src/license_dialog.py:43
+msgid "이 패키지에는 라이선스 원문이 포함되어 있지 않습니다. 프로젝트에서 제공하는 라이선스를 확인하세요."
+msgstr "This package does not include the license text. Refer to the license provided by its project."
+
+#: src/profile_panel.py:294 src/profile_panel.py:381
+msgid "이름"
+msgstr "Name"
+
+#: src/clips.py:100
+msgid "이름 미확인"
+msgstr "Unknown player"
+
+#: src/workspace_ui.py:100
+msgid "이름 미확인도 표시"
+msgstr "Include unknown players"
+
+#: src/profile_panel.py:452
+msgid "이름 인식 언어"
+msgstr "Player name OCR language"
+
+#: src/recognition.py:46
+msgid "인식 결과의 구간 순서와 범위를 확인해 주세요."
+msgstr "Check the order and bounds of the detected ranges."
+
+#: src/profile_panel.py:421
+msgid "인식 설정"
+msgstr "Recognition settings"
+
+#: src/profiles.py:51
+msgid "인식 설정 범위를 확인해 주세요."
+msgstr "Check the recognition setting values."
+
+#: src/profiles.py:47
+msgid "인식 설정 형식을 확인해 주세요."
+msgstr "Check the recognition settings format."
+
+#: src/app.py:128 src/app.py:1393 src/workspace_ui.py:56
+msgid "인식 영역"
+msgstr "Recognition regions"
+
+#: src/profile_panel.py:55
+msgid "인식 영역 종류"
+msgstr "Recognition region type"
+
+#: src/profiles.py:37
+msgid "인식 영역 좌표를 확인해 주세요."
+msgstr "Check the recognition region coordinates."
+
+#: src/profiles.py:34
+msgid "인식 영역 형식을 확인해 주세요."
+msgstr "Check the recognition region format."
+
+#: src/preview.py:115
+msgid "인식 영역 형식이 올바르지 않습니다."
+msgstr "Invalid recognition region format."
+
+#: src/workspace_ui.py:235
+msgid "인식 영역으로 →"
+msgstr "Recognition regions →"
+
+#: src/preview.py:119
+msgid "인식 영역은 영상 안의 사각형이어야 합니다."
+msgstr "Recognition regions must be rectangles within the video."
+
+#: src/profiles.py:39
+msgid "인식 영역을 조금 더 크게 선택해 주세요."
+msgstr "Select a slightly larger recognition region."
+
+#: src/app.py:970 src/app.py:1021 src/app.py:449
+msgid "일반 동영상"
+msgstr "Video"
+
+#: src/profile_panel.py:449
+msgid "일본어·중국어·영문"
+msgstr "Japanese, Chinese & English"
+
+#: src/setup_dialog.py:107
+msgid "일부 곡 데이터를 다시 받아야 합니다. 시작하기를 눌러 주세요."
+msgstr "Some song data needs to be downloaded again. Click Get started."
+
+#: src/jackets.py:174
+msgid "일부 자켓을 다시 받아 주세요."
+msgstr "Download the missing or damaged jackets again."
+
+#: src/preview.py:360
+msgid "일시정지"
+msgstr "Pause"
+
+#: src/workspace_ui.py:340
+msgid "자동 · CPU 수에 맞춤"
+msgstr "Auto · Based on CPU count"
+
+#: src/workspace_ui.py:336
+msgid "자동 · CPU와 분석량에 맞춤"
+msgstr "Auto · Based on CPU and workload"
+
+#: src/workspace_ui.py:332
+msgid "자동 · 최대 32스레드"
+msgstr "Auto · Up to 32 threads"
+
+#: src/app.py:702 src/workspace_ui.py:271
+msgid "자동 인식 결과로 복원"
+msgstr "Restore detection results"
+
+#: src/app.py:1215
+msgid "자동 인식 원본 식별자를 확인해 주세요."
+msgstr "Check the original detected clip IDs."
+
+#: src/app.py:1212
+msgid "자동 인식 원본 형식을 확인해 주세요."
+msgstr "Check the original detection data format."
+
+#: src/app.py:717
+msgid "자동 인식 원본으로 복원했습니다. 직접 추가한 클립은 유지됩니다."
+msgstr "Restored the original detection results. Manually added clips were kept."
+
+#: src/app.py:686
+#, python-brace-format
+msgid "자동 인식 원본을 기준으로 {count}개 클립에 오프셋을 적용했습니다."
+msgstr "Applied offsets to {count} clips using their original detected bounds."
+
+#: src/app.py:655
+msgid "자동 인식 원본을 기준으로 전역 오프셋을 적용합니다. 직접 추가한 클립은 유지됩니다."
+msgstr "Applies offsets relative to the original detected bounds. Manually added clips are kept."
+
+#: src/app.py:772
+msgid "자동 인식 클립 교체"
+msgstr "Replace detected clips"
+
+#: src/export_settings.py:65
+msgid "자르는 방식"
+msgstr "Trim method"
+
+#: src/preview.py:13 src/profiles.py:10
+msgid "자켓"
+msgstr "Jacket"
+
+#: src/advanced_settings.py:18
+msgid "자켓 · 글자 인식 설정…"
+msgstr "Jacket and text recognition…"
+
+#: src/jackets.py:161
+#, python-brace-format
+msgid "자켓 다운로드 {index:,} / {value2:,}"
+msgstr "Downloading jackets {index:,} / {value2:,}"
+
+#: src/jackets.py:164
+#, python-brace-format
+msgid "자켓 다운로드 {index:,} / {value2:,} · 재시도 필요 {value3:,}"
+msgstr "Downloading jackets {index:,} / {value2:,} · Retry needed: {value3:,}"
+
+#: src/jacket_recognition.py:311 src/jacket_recognition.py:38
+msgid "자켓 목록 준비"
+msgstr "Preparing jacket list"
+
+#: src/profiles.py:64
+msgid "자켓 보정 캐시 좌표·점수를 확인해 주세요."
+msgstr "Check the jacket alignment cache coordinates and scores."
+
+#: src/profiles.py:58
+msgid "자켓 보정 캐시 형식을 확인해 주세요."
+msgstr "Check the jacket alignment cache format."
+
+#: src/profile_panel.py:423
+msgid "자켓 영역 · 곡 판독"
+msgstr "Jacket region · Song matching"
+
+#: src/profiles.py:31
+msgid "자켓 영역을 선택해 주세요."
+msgstr "Select the jacket region."
+
+#: src/jacket_recognition.py:299
+msgid "자켓 위치 보정"
+msgstr "Aligning jacket position"
+
+#: src/jacket_recognition.py:271
+#, python-brace-format
+msgid "자켓 위치 보정 · {value1:.1f}초 지점"
+msgstr "Aligning jacket position · At {value1:.1f} s"
+
+#: src/profile_panel.py:431
+msgid "자켓 위치 보정 간격 (초)"
+msgstr "Jacket alignment interval (s)"
+
+#: src/jacket_recognition.py:340
+msgid "자켓 위치 보정에 실패했습니다. 영역과 테스트 인식을 확인해 주세요."
+msgstr "Could not align the jacket. Check the region and test recognition on the current frame."
+
+#: src/jackets.py:83
+msgid "자켓 이미지가 손상되었습니다."
+msgstr "The jacket image is corrupted."
+
+#: src/jackets.py:174
+msgid "자켓 준비가 완료되었습니다."
+msgstr "Jackets are ready."
+
+#: src/profile_panel.py:434
+msgid "자켓 차이 허용값"
+msgstr "Jacket difference threshold"
+
+#: src/clips.py:69
+msgid "자켓 파일명을 확인해 주세요."
+msgstr "Check the jacket filename."
+
+#: src/jackets.py:69
+msgid "자켓 파일명이 올바르지 않습니다."
+msgstr "Invalid jacket filename."
+
+#: src/advanced_settings.py:24
+msgid "자켓 판독 프로세스"
+msgstr "Jacket matching processes"
+
+#: src/jackets.py:153
+#, python-brace-format
+msgid "자켓 확인 {index:,} / {value2:,}"
+msgstr "Checking jackets {index:,} / {value2:,}"
+
+#: src/workspace_ui.py:237
+msgid "자켓과 글자 위치"
+msgstr "Jacket and text regions"
+
+#: src/export_settings.py:31
+msgid "작게 · 화질보다 용량 우선"
+msgstr "Small files · Lower quality"
+
+#: src/app.py:1398
+msgid "작업"
+msgstr "Session"
+
+#: src/app.py:1271
+#, python-brace-format
+msgid "작업 구간 {value1:,}개를 불러왔습니다."
+msgstr "Loaded {value1:,} clips from the session."
+
+#: src/workspace_ui.py:33
+msgid "작업 열기"
+msgstr "Open session"
+
+#: src/workspace_ui.py:34
+msgid "작업 저장"
+msgstr "Save session"
+
+#: src/app.py:1208
+msgid "작업 파일 형식을 확인해 주세요."
+msgstr "Check the session file format."
+
+#: src/app.py:1231
+msgid "작업 파일의 선택된 영상을 확인해 주세요."
+msgstr "Check the selected video in the session file."
+
+#: src/app.py:1227
+msgid "작업 파일의 영상 경로를 확인해 주세요."
+msgstr "Check the video paths in the session file."
+
+#: src/app.py:1094
+msgid "작업을 완료하지 못했습니다. 고급에서 상세 내용을 확인해 주세요."
+msgstr "Could not complete the operation. See Settings for details."
+
+#: src/app.py:1087
+msgid "작업을 중지하고 있습니다."
+msgstr "Stopping…"
+
+#: src/app.py:1062 src/sources.py:83 src/sources.py:239 src/sources.py:105
+msgid "작업을 취소했습니다."
+msgstr "Operation cancelled."
+
+#: src/app.py:1372 src/preview.py:230 src/preview.py:360
+msgid "재생"
+msgstr "Play"
+
+#: src/preview.py:246
+msgid "재생 배속"
+msgstr "Playback speed"
+
+#: src/app.py:1382
+msgid "재생 위치 이동"
+msgstr "Seek"
+
+#: src/app.py:1374
+msgid "재생 중: 1초 이동 · 일시정지 중: 이전/다음 프레임"
+msgstr "Playing: seek 1 second · Paused: previous/next frame"
+
+#: src/app.py:1373
+msgid "재생·일시정지 / 일시정지"
+msgstr "Play/pause / Pause"
+
+#: src/app.py:1117
+msgid "재시작 실패"
+msgstr "Restart failed"
+
+#: src/workspace_ui.py:319
+msgid "저장 대상 확인"
+msgstr "Review export"
+
+#: src/export_settings.py:8 src/workspace_ui.py:373
+msgid "저장 설정"
+msgstr "Export settings"
+
+#: src/export.py:74
+msgid "저장 설정을 확인해 주세요."
+msgstr "Check the export settings."
+
+#: src/workspace_ui.py:361
+msgid "저장 시작 시 대상 폴더 아래에 YYYY-MM-DD_HH-MM-SS 형식의 폴더를 만듭니다."
+msgstr "Creates a YYYY-MM-DD_HH-MM-SS subfolder in the destination when export starts."
+
+#: src/app.py:902
+#, python-brace-format
+msgid "저장 실패: {source} · {error}"
+msgstr "Export failed: {source} · {error}"
+
+#: src/profile_panel.py:377
+msgid "저장 없이 곡 찾기"
+msgstr "Find songs without saving"
+
+#: src/app.py:909
+msgid "저장 완료"
+msgstr "Export complete"
+
+#: src/app.py:900
+#, python-brace-format
+msgid "저장 완료: {path}"
+msgstr "Exported: {path}"
+
+#: src/app.py:909
+msgid "저장 중지"
+msgstr "Export stopped"
+
+#: src/workspace_ui.py:356
+msgid "저장 폴더"
+msgstr "Output folder"
+
+#: src/clips.py:57
+msgid "저장된 구간 형식을 확인해 주세요."
+msgstr "Check the saved clip range format."
+
+#: src/export.py:166
+msgid "저장된 영상 길이가 선택 구간과 다릅니다."
+msgstr "The exported video duration does not match the selected range."
+
+#: src/app.py:699
+msgid "저장된 자동 인식 원본이 없습니다."
+msgstr "No original detection results are saved."
+
+#: src/app.py:892 src/export.py:76
+msgid "저장할 구간을 선택해 주세요."
+msgstr "Select a range to export."
+
+#: src/export.py:88
+msgid "저장할 구간의 시작과 끝 시각을 확인해 주세요."
+msgstr "Check the start and end of the export range."
+
+#: src/app.py:875
+msgid "저장할 영상을 먼저 열어 주세요."
+msgstr "Open a video to export first."
+
+#: src/workspace_ui.py:353
+msgid "저장할 클립을 선택하세요."
+msgstr "Select clips to export."
+
+#: src/app.py:163
+msgid "저장할 파일 이름과 폴더, 설정을 확인하세요."
+msgstr "Check the output filenames, folder, and export settings."
+
+#: src/workspace_ui.py:367
+msgid "저장할 파일명"
+msgstr "Output filenames"
+
+#: src/setup_dialog.py:63
+msgid "저장할 폴더를 선택하세요."
+msgstr "Choose an output folder."
+
+#: src/app.py:417
+msgid "저장할 폴더를 지정해 주세요."
+msgstr "Set an output folder."
+
+#: src/export_settings.py:149 src/profile_panel.py:226 src/profile_panel.py:457 src/setup_dialog.py:34
+msgid "적용"
+msgstr "Apply"
+
+#: src/app.py:1105
+msgid "적용 후 재시작"
+msgstr "Apply and restart"
+
+#: src/export_settings.py:118
+#, python-brace-format
+msgid "적용할 설정: {preset}"
+msgstr "Pending settings: {preset}"
+
+#: src/export_settings.py:138
+msgid "적용할 설정: 사용자 지정"
+msgstr "Pending settings: Custom"
+
+#: src/workspace_ui.py:232
+msgid "전체 구간"
+msgstr "Full range"
+
+#: src/workspace_ui.py:175
+msgid "전체 시간 보기"
+msgstr "Fit timeline"
+
+#: src/app.py:137
+msgid "전체 시간축 · 분석 구간"
+msgstr "Full timeline · Scan range"
+
+#: src/app.py:137
+msgid "전체 시간축 · 점선 테두리: 확대해서 보는 범위"
+msgstr "Full timeline · Dashed outline: zoomed view"
+
+#: src/workspace_ui.py:141
+msgid "전체 저장 (0)"
+msgstr "Export visible (0)"
+
+#: src/sources.py:173
+msgid "접근 가능한 라이브 구간을 확인하고 있습니다."
+msgstr "Checking the available live range."
+
+#: src/export_settings.py:167
+msgid "정확한 구간"
+msgstr "Frame-accurate"
+
+#: src/export_settings.py:28
+msgid "정확한 구간 자르기"
+msgstr "Frame-accurate trim"
+
+#: src/workspace_ui.py:322
+msgid "정확한 저장"
+msgstr "Frame-accurate export"
+
+#: src/workspace_ui.py:35
+msgid "조작 도움말"
+msgstr "Controls"
+
+#: src/app.py:989
+msgid "조회 구간 첫 장면"
+msgstr "First frame of available range"
+
+#: src/live.py:102
+msgid "조회한 라이브 구간 안에서 시작과 끝을 선택해 주세요."
+msgstr "Select start and end times within the available live range."
+
+#: src/sources.py:197
+msgid "조회한 영상과 다운로드 대상이 다릅니다."
+msgstr "The download target does not match the video you checked."
+
+#: src/profile_panel.py:104
+msgid "좌표 입력"
+msgstr "Enter coordinates"
+
+#: src/setup_dialog.py:113
+msgid "준비를 중지하고 있습니다."
+msgstr "Stopping setup…"
+
+#: src/setup_dialog.py:94
+msgid "준비를 중지했습니다. 시작하기를 눌러 이어서 받을 수 있습니다."
+msgstr "Setup stopped. Click Get started to resume the download."
+
+#: src/app.py:1389
+msgid "직전 클립 편집 되돌리기"
+msgstr "Undo last clip edit"
+
+#: src/advanced_settings.py:46
+msgid "진단 로그"
+msgstr "Diagnostic log"
+
+#: src/export_settings.py:82
+msgid "채널"
+msgstr "Channels"
+
+#: src/export_settings.py:74
+msgid "처리 속도"
+msgstr "Encoding speed"
+
+#: src/export_settings.py:33
+msgid "천천히 · 같은 화질에서 용량 절약"
+msgstr "Slow · Smaller files at the same quality"
+
+#: src/workspace_ui.py:110
+msgid "체크 해제"
+msgstr "Uncheck visible"
+
+#: src/app.py:372
+#, python-brace-format
+msgid "체크한 클립 {count}개 저장 설정 →"
+msgid_plural "체크한 클립 {count}개 저장 설정 →"
+msgstr[0] "Export {count} checked clip →"
+msgstr[1] "Export {count} checked clips →"
+
+#: src/workspace_ui.py:145
+msgid "체크한 클립의 저장 대상과 파일명을 확인합니다."
+msgstr "Review the output files and filenames for checked clips."
+
+#: src/app.py:1398
+msgid "체크한 클립의 저장 설정 열기"
+msgstr "Open export settings for checked clips"
+
+#: src/export_settings.py:46
+#, python-brace-format
+msgid "최대 {h}p"
+msgstr "Up to {h}p"
+
+#: src/app.py:658 src/app.py:706 src/app.py:774 src/export_settings.py:147 src/profile_panel.py:227 src/profile_panel.py:458 src/profile_panel.py:378 src/setup_dialog.py:68 src/setup_dialog.py:39 src/workspace_ui.py:435
+msgid "취소"
+msgstr "Cancel"
+
+#: src/launcher.py:20
+msgid "콘솔과 로그 파일에 진단 정보 기록"
+msgstr "Write diagnostics to the console and log files"
+
+#: src/app.py:1387
+msgid "클릭"
+msgstr "Click"
+
+#: src/timeline.py:32
+msgid "클릭·드래그: 탐색 | 양끝: 트리밍 | Ctrl+드래그: 구간 이동\n휠: 시간축 이동 | Ctrl+휠: 확대 | 중간 버튼 드래그: 이동 | Alt: 스냅 해제"
+msgstr "Click/drag: seek | Edges: trim | Ctrl+drag: move selection\nWheel: scroll timeline | Ctrl+wheel: zoom | Middle-drag: pan | Alt: disable snapping"
+
+#: src/app.py:398
+#, python-brace-format
+msgid "클립 {value1}개 · 총 {value2}"
+msgstr "Clips: {value1} · Duration: {value2}"
+
+#: src/clips.py:72
+msgid "클립 검수 상태를 확인해 주세요."
+msgstr "Check the clip review status."
+
+#: src/export.py:122
+msgid "클립 길이에 비해 목표 용량이 너무 작습니다. 용량을 늘려 주세요."
+msgstr "The target size is too small for this clip's duration. Increase the size."
+
+#: src/workspace_ui.py:95
+msgid "클립 목록"
+msgstr "Clips"
+
+#: src/workspace_ui.py:115
+msgid "클립 목록 · 체크하여 저장 선택"
+msgstr "Clip list · Check clips to export"
+
+#: src/workspace_ui.py:276
+msgid "클립 선택·재생 위치를 따라 확대 시간축 이동"
+msgstr "Follow selected clip and playhead in the zoomed timeline"
+
+#: src/workspace_ui.py:320
+msgid "클립 선택으로 돌아가기"
+msgstr "Back to clip selection"
+
+#: src/workspace_ui.py:253
+msgid "클립 시작·끝 일괄 조정"
+msgstr "Adjust all clip boundaries"
+
+#: src/clips.py:74
+msgid "클립 식별자를 확인해 주세요."
+msgstr "Check the clip ID."
+
+#: src/clips.py:81
+msgid "클립 오프셋을 확인해 주세요."
+msgstr "Check the clip offsets."
+
+#: src/export.py:110
+#, python-brace-format
+msgid "클립 저장 {index:,} / {value2:,} · {name}"
+msgstr "Exporting clip {index:,} / {value2:,} · {name}"
+
+#: src/export.py:177
+#, python-brace-format
+msgid "클립 저장 실패 {index:,} / {value2:,} · {error}"
+msgstr "Clip export failed {index:,} / {value2:,} · {error}"
+
+#: src/app.py:382
+msgid "클립 저장 폴더"
+msgstr "Clip output folder"
+
+#: src/workspace_ui.py:128
+msgid "클립 직접 추가"
+msgstr "Add clip manually"
+
+#: src/app.py:1388
+msgid "클립 직접 추가 / 목록에서 제거"
+msgstr "Add clip manually / Remove from list"
+
+#: src/app.py:128 src/app.py:1386 src/workspace_ui.py:56
+msgid "클립 확인"
+msgstr "Review clips"
+
+#: src/export_settings.py:70
+msgid "클립당 목표 크기"
+msgstr "Target size per clip"
+
+#: src/export_settings.py:174
+#, python-brace-format
+msgid "클립당 약 {value1:g} MB"
+msgstr "About {value1:g} MB per clip"
+
+#: src/app.py:162
+msgid "클립을 선택해 시작과 끝을 확인하세요. 저장할 클립은 체크하세요."
+msgstr "Select a clip to check its start and end. Check the clips you want to export."
+
+#: src/app.py:376
+msgid "클립이 없습니다. 인식 영역에서 곡을 찾거나 클립을 직접 추가하세요."
+msgstr "No clips yet. Find songs in Recognition regions or add a clip manually."
+
+#: src/app.py:410
+#, python-brace-format
+msgid "파일 {count}개 저장 시작"
+msgid_plural "파일 {count}개 저장 시작"
+msgstr[0] "Export {count} file"
+msgstr[1] "Export {count} files"
+
+#: src/app.py:128 src/workspace_ui.py:56
+msgid "파일 저장"
+msgstr "Export clips"
+
+#: src/workspace_ui.py:374
+msgid "파일 저장 시작"
+msgstr "Start export"
+
+#: src/workspace_ui.py:89
+msgid "파일 추가"
+msgstr "Add files"
+
+#: src/export_settings.py:69
+msgid "파일 형식"
+msgstr "File format"
+
+#: src/export.py:78
+msgid "파일 형식·해상도·프레임·채널 설정을 확인해 주세요."
+msgstr "Check the file format, resolution, frame rate, and channel settings."
+
+#: src/workspace_ui.py:81
+msgid "파일이나 폴더를 추가하거나 영상을 여기에 놓으세요."
+msgstr "Add files or a folder, or drop videos here."
+
+#: src/license_dialog.py:37
+msgid "패키지에 라이선스 정보가 없습니다."
+msgstr "No license information provided in the package."
+
+#: src/app.py:1200
+msgid "편집 작업 열기"
+msgstr "Open session"
+
+#: src/app.py:1192 src/app.py:1398
+msgid "편집 작업 저장"
+msgstr "Save session"
+
+#: src/app.py:704
+msgid "편집한 내용과 시작·끝 조정을 초기화하고 제거한 클립을 복원합니다. 자동 클립의 저장 체크도 해제합니다. 직접 추가한 클립은 유지합니다."
+msgstr "Resets edits and trimmed boundaries, restores removed clips, and unchecks detected clips for export. Manually added clips are kept."
+
+#: src/app.py:159
+msgid "편집할 영상을 선택하세요."
+msgstr "Select a video to edit."
+
+#: src/setup_dialog.py:25 src/workspace_ui.py:364
+msgid "폴더 선택"
+msgstr "Choose folder"
+
+#: src/workspace_ui.py:90
+msgid "폴더 추가"
+msgstr "Add folder"
+
+#: src/app.py:393
+msgid "폴더를 열 수 없습니다. 대상 경로를 확인해 주세요."
+msgstr "Could not open the folder. Check the destination path."
+
+#: src/app.py:37
+msgid "폴더에서 영상을 찾고 있습니다…"
+msgstr "Looking for videos in the folder…"
+
+#: src/export_settings.py:73
+msgid "프레임 속도"
+msgstr "Frame rate"
+
+#: src/media.py:47
+msgid "프레임 시각을 확인해 주세요."
+msgstr "Check the frame timestamp."
+
+#: src/media.py:90
+msgid "프레임을 찾을 수 없습니다."
+msgstr "Could not find a frame."
+
+#: src/app.py:1117
+msgid "프로그램을 다시 시작하지 못했습니다. 기존 데이터 폴더를 유지합니다."
+msgstr "Could not restart the app. The existing data folder will be kept."
+
+#: src/profiles.py:24
+msgid "프로파일 이름을 입력해 주세요."
+msgstr "Enter a profile name."
+
+#: src/profiles.py:21
+msgid "프로파일 형식을 확인해 주세요."
+msgstr "Check the profile format."
+
+#: src/profile_panel.py:329
+msgid "프로필 (*.json *.zip)"
+msgstr "Profiles (*.json *.zip)"
+
+#: src/profile_panel.py:343
+#, python-brace-format
+msgid "프로필 {value1}개를 가져왔습니다."
+msgstr "Imported profiles: {value1}."
+
+#: src/profile_panel.py:46 src/profile_panel.py:329 src/profile_panel.py:345 src/profile_panel.py:334
+msgid "프로필 가져오기"
+msgstr "Import profiles"
+
+#: src/profile_panel.py:45
+msgid "프로필 가져오기 (JSON / ZIP)"
+msgstr "Import profiles (JSON / ZIP)"
+
+#: src/profile_panel.py:350 src/profile_panel.py:105 src/profile_panel.py:358
+msgid "프로필 내보내기"
+msgstr "Export profile"
+
+#: src/profile_panel.py:286
+msgid "프로필 변경"
+msgstr "Switch profile"
+
+#: src/profile_panel.py:254 src/profile_panel.py:309
+msgid "프로필 선택"
+msgstr "Select profile"
+
+#: src/profiles.py:124
+msgid "프로필 압축 파일을 읽을 수 없습니다."
+msgstr "Could not read the profile archive."
+
+#: src/profile_panel.py:51 src/profile_panel.py:52 src/profile_panel.py:363
+msgid "프로필 이름"
+msgstr "Profile name"
+
+#: src/profile_panel.py:105 src/profile_panel.py:326
+msgid "프로필 저장"
+msgstr "Save profile"
+
+#: src/app.py:1220
+msgid "프로필 파일 이름을 확인해 주세요."
+msgstr "Check the profile filename."
+
+#: src/profiles.py:103
+msgid "프로필 파일이 너무 큽니다."
+msgstr "The profile file exceeds the size limit."
+
+#: src/app.py:161
+msgid "프로필을 선택하거나, 지정할 영역을 고르고 영상에서 드래그하세요."
+msgstr "Choose a profile, or select a region type and drag on the video to define it."
+
+#: src/profile_panel.py:324
+msgid "프로필을 저장했습니다."
+msgstr "Profile saved."
+
+#: src/profile_panel.py:374
+msgid "프로필의 변경 내용을 어떻게 처리할까요?"
+msgstr "What would you like to do with the profile changes?"
+
+#: src/export_settings.py:108
+msgid "프리셋 적용"
+msgstr "Apply preset"
+
+#: src/export_settings.py:130
+msgid "프리셋을 선택했습니다. 적용 버튼을 눌러 설정에 반영하세요."
+msgstr "Preset selected. Click Apply preset to use its settings."
+
+#: src/workspace_ui.py:97
+msgid "플레이어 이름 검색"
+msgstr "Search player names"
+
+#: src/profiles.py:16
+msgid "필수 영역을 지정해 주세요: "
+msgstr "Define the required regions: "
+
+#: src/profile_panel.py:449
+msgid "한국어·영문"
+msgstr "Korean & English"
+
+#: src/clips.py:77
+msgid "합친 클립의 식별자를 확인해 주세요."
+msgstr "Check the merged clip IDs."
+
+#: src/media.py:63
+msgid "해당 시각의 프레임을 찾을 수 없습니다."
+msgstr "Could not find a frame at that time."
+
+#: src/export_settings.py:72
+msgid "해상도"
+msgstr "Resolution"
+
+#: src/advanced_settings.py:42
+msgid "현재 데이터 폴더"
+msgstr "Current data folder"
+
+#: src/export_settings.py:127
+msgid "현재 설정: 사용자 지정"
+msgstr "Current settings: Custom"
+
+#: src/export_settings.py:127
+msgid "현재 설정: 원본 빠른 복사"
+msgstr "Current settings: Fast source copy"
+
+#: src/workspace_ui.py:25
+msgid "현재 영상"
+msgstr "Current video"
+
+#: src/workspace_ui.py:29
+msgid "현재 영상 전환 · 클립은 영상별로 관리"
+msgstr "Switch video · Clips are managed per video"
+
+#: src/app.py:478
+msgid "현재 영상에서 저장할 클립을 선택하세요."
+msgstr "Select clips from the current video to export."
+
+#: src/workspace_ui.py:272
+msgid "현재 영상의 삭제·편집한 자동 클립을 원본으로 복원합니다. 직접 추가한 클립은 유지합니다."
+msgstr "Restores edited or removed detected clips for this video to their original state. Manually added clips are kept."
+
+#: src/workspace_ui.py:262
+msgid "현재 영상의 자동 인식 결과 기준\n−: 앞당김 / +: 늦춤"
+msgstr "Relative to this video's detection results\n−: earlier / +: later"
+
+#: src/app.py:703
+msgid "현재 영상의 자동 인식 클립을 복원할까요?"
+msgstr "Restore detected clips for the current video?"
+
+#: src/app.py:1380
+msgid "현재 위치를 구간 시작 / 끝으로 설정"
+msgstr "Set selection start / end to playhead"
+
+#: src/workspace_ui.py:230
+msgid "현재 위치를 끝으로"
+msgstr "Set end here"
+
+#: src/workspace_ui.py:229
+msgid "현재 위치를 시작으로"
+msgstr "Set start here"
+
+#: src/app.py:1106
+msgid "현재 작업은 기존 폴더에 보관됩니다. 새 폴더 준비가 끝나면 프로그램을 다시 시작합니다."
+msgstr "Your current session will stay in the existing folder. The app will restart once the new folder is ready."
+
+#: src/live.py:74
+msgid "현재 접근 가능한 라이브 구간이 없습니다."
+msgstr "No live range is currently available."
+
+#: src/profile_panel.py:98
+msgid "현재 지정 영역"
+msgstr "Current region"
+
+#: src/workspace_ui.py:252
+msgid "현재 클립"
+msgstr "Current clip"
+
+#: src/workspace_ui.py:144
+msgid "현재 필터로 보이는 클립의 저장 설정을 엽니다."
+msgstr "Open export settings for clips visible with the current filters."
+
+#: src/workspace_ui.py:250
+msgid "현재 화면 인식 확인"
+msgstr "Test current frame"
+
+#: src/profile_panel.py:186
+msgid "화면 비율이 바뀌었습니다. 인식 영역을 선택해 주세요."
+msgstr "The aspect ratio has changed. Define the recognition regions again."
+
+#: src/advanced_settings.py:31
+msgid "화면 탐색"
+msgstr "Navigation"
+
+#: src/export_settings.py:55
+msgid "화질 우선 · 용량 자동"
+msgstr "Quality priority · Auto size"
+
+#: src/export_settings.py:71
+msgid "화질과 용량"
+msgstr "Quality and size"
+
+#: src/workspace_ui.py:181
+msgid "확대 시간축 가로 이동"
+msgstr "Scroll zoomed timeline horizontally"
+
+#: src/app.py:1390
+msgid "확대 시간축 확대 / 축소 / 전체 시간 보기"
+msgstr "Zoom timeline in / out / fit"
+
+#: src/live.py:144
+msgid "확보한 라이브 구간 길이가 선택과 다릅니다."
+msgstr "The retrieved live duration does not match the selection."
+
+#: src/app.py:1151
+msgid "확인 실패"
+msgstr "Check failed"
+
+#: src/workspace_ui.py:46
+msgid "확인 중…"
+msgstr "Checking…"
+
+#: src/setup_dialog.py:17
+msgid "환영합니다"
+msgstr "Welcome"
+
+#: src/app.py:1391
+msgid "휠 / Shift + 휠"
+msgstr "Wheel / Shift + wheel"
+
+
+#: src/help_view.py src/workspace_ui.py
+msgid "도움말"
+msgstr "Help"
+
+#: src/help_view.py
+msgid "이전 페이지"
+msgstr "Back"
+
+#: src/help_view.py
+msgid "설명서 파일이 없습니다. 앱 설치 파일을 확인해 주세요."
+msgstr "The user guide is missing. Check your app installation."
+
+#: src/help_view.py
+msgid "설명서를 열지 못했습니다. manual 폴더의 manual.html을 브라우저에서 열어 주세요."
+msgstr "Could not open the guide. Open manual.html in the manual folder with your browser."
+
+#: src/help_view.py
+msgid "설명서를 불러오지 못했습니다. 앱 설치 파일을 확인해 주세요."
+msgstr "Could not load the user guide. Check your app installation."
+
+
+msgid "STEP 2/4 · 선택 구간 원본 다운로드 · {start:g}–{end:g}초"
+msgstr "STEP 2/4 · Downloading original streams · {start:g}–{end:g} s"
+
+msgid "STEP 3/4 · 라이브 원본 병합 및 길이 검증"
+msgstr "STEP 3/4 · Merging original live streams and checking duration"
+
+msgid "Ctrl + 드래그 또는 오른쪽 버튼 드래그: 영상 화면 이동\nCtrl + 휠, Ctrl + +, Ctrl + −: 확대·축소\nCtrl + 휠 버튼 클릭, Ctrl + 0: 영상 맞춤"
+msgstr "Ctrl + drag or right-button drag: Pan video\nCtrl + wheel, Ctrl + +, Ctrl + −: Zoom in/out\nCtrl + middle click, Ctrl + 0: Fit video"
+
+msgid "드래그: 영역 지정   Ctrl + 드래그 또는 오른쪽 버튼 드래그: 영상 화면 이동\nCtrl + 휠: 확대·축소   Ctrl + 휠 버튼 클릭: 영상 맞춤"
+msgstr "Drag: Select region   Ctrl + drag or right-button drag: Pan video\nCtrl + wheel: Zoom in/out   Ctrl + middle click: Fit video"
+
+msgid "전체 시간축 가로 이동"
+msgstr "Scroll full timeline horizontally"
+
+msgid "동시 다운로드 수는 1–16개로 지정해 주세요."
+msgstr "Choose between 1 and 16 concurrent downloads."
+
+msgid "원본 조각 병렬 다운로드 · 동시 최대 {workers}개"
+msgstr "Downloading original fragments · Up to {workers} at once"
+
+msgid "STEP 3/4 · 원본 영상·음성 병합 및 길이 검증"
+msgstr "STEP 3/4 · Merging original video and audio and checking duration"
+
+msgid "원본 조각 다운로드 {done} / {total} · 동시 최대 {workers}개"
+msgstr "Original fragments: {done} / {total} · Up to {workers} at once"
+
+msgid "다운로드 조각에 접근할 수 없습니다. 영상 정보를 다시 확인해 주세요."
+msgstr "Could not access a video fragment. Refresh the video details and try again."
+
+msgid "요청이 너무 많아 다운로드를 중지했습니다. 잠시 후 동시 다운로드 수를 줄여 다시 시도해 주세요."
+msgstr "Download stopped because the server received too many requests. Wait, then try again with fewer concurrent downloads."
+
+msgid "이 원본 형식은 조각 병렬 다운로드를 지원하지 않아 일반 다운로드로 진행합니다. 화질·음질은 유지됩니다."
+msgstr "This source format does not support parallel fragment downloads. Using the standard download method with video and audio quality preserved."
+
+msgid "동시 다운로드 수"
+msgstr "Concurrent downloads"
+
+msgid "권장 범위에서도 요청이 제한될 수 있습니다. 오류가 나면 수를 줄이고 잠시 후 다시 시도하세요."
+msgstr "Requests can be limited even in the recommended range. If errors occur, lower the count and wait before trying again."
+
+msgid "{count}개 · 권장 범위 (1–4)"
+msgstr "{count} · Recommended range (1–4)"
+
+msgid "{count}개 · 주의: 요청 제한 가능성 증가 (5–16)"
+msgstr "{count} · Caution: greater risk of request limits (5–16)"
+
+msgid "일반 다운로드 · 이 영상은 조각 병렬 다운로드를 지원하지 않습니다."
+msgstr "Standard download · Parallel fragment downloads are unavailable for this video."
+
+msgid "조각 병렬 다운로드"
+msgstr "Parallel fragment download"
+
+msgid "예상 남은 시간 계산 중…"
+msgstr "Estimating time remaining…"
+
+msgid "현재 단계 예상 남은 시간: 약 {time}"
+msgstr "Estimated time remaining for this step: about {time}"
+
+#: src/updates.py
+msgid "### 재현 방법"
+msgstr "### How to reproduce it"
+
+#: src/updates.py
+msgid "### 무엇을 하려고 했나요?"
+msgstr "### What were you trying to do?"
+
+#: src/updates.py
+msgid "### 어떤 일이 일어났나요?"
+msgstr "### What happened instead?"
+
+#: src/updates.py
+msgid "공개된 버전을 찾지 못했습니다."
+msgstr "No published release was found."
+
+#: src/advanced_settings.py
+msgid "문제 신고"
+msgstr "Report a problem"
+
+#: src/advanced_settings.py
+msgid "문제 신고는 브라우저에서 열립니다. 위 진단 로그의 내용을 함께 붙여 주세요."
+msgstr "The report opens in your browser. Paste the diagnostic log above into it."
+
+#: src/advanced_settings.py
+msgid "브라우저를 열지 못했습니다. 저장소의 Issues 페이지에서 신고해 주세요."
+msgstr "The browser did not open. Report the problem on the Issues page of the repository."
+
+#: src/advanced_settings.py
+#, python-brace-format
+msgid "새 버전 {name}이 있습니다."
+msgstr "Version {name} is available."
+
+#: src/advanced_settings.py
+#, python-brace-format
+msgid "새 버전 {name}이 있습니다. 받는 곳을 열까요?"
+msgstr "Version {name} is available. Open the download page?"
+
+#: src/advanced_settings.py
+msgid "새 버전 확인"
+msgstr "Check for a new version"
+
+#: src/advanced_settings.py
+msgid "새 버전을 확인하는 중입니다…"
+msgstr "Checking for a new version..."
+
+#: src/advanced_settings.py
+msgid "새 버전을 확인하지 못했습니다. 인터넷 연결을 확인해 주세요."
+msgstr "The check did not finish. Check your internet connection."
+
+#: src/advanced_settings.py
+msgid "앱 버전"
+msgstr "App version"
+
+#: src/advanced_settings.py
+#, python-brace-format
+msgid "최신 버전입니다. 현재 버전 {name}"
+msgstr "This is the latest version. You have {name}."
+
+#: src/advanced_settings.py
+#, python-brace-format
+msgid "현재 버전 {name}"
+msgstr "You have version {name}."

@@ -1,0 +1,102 @@
+name: Release
+
+# Pushing a tag such as v0.1.0 builds the Windows bundle and publishes it.
+# A manual run builds the same bundle and keeps it as an artifact without publishing.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10
+        with:
+          enable-cache: true
+
+      - name: Read the app version
+        id: version
+        shell: pwsh
+        run: |
+          $version = (Select-String -Path src/updates.py -Pattern '^VERSION = "(.+)"').Matches[0].Groups[1].Value
+          if (-not $version) { throw 'VERSION not found in src/updates.py.' }
+          # The in-app check compares release tags against this, so a mismatch must not ship.
+          if ($env:GITHUB_REF_TYPE -eq 'tag' -and $env:GITHUB_REF_NAME -ne "v$version") {
+            throw "Tag $env:GITHUB_REF_NAME does not match the app version $version."
+          }
+          "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          Write-Host "App version $version"
+
+      # Nuitka compiles about 1,100 modules; without this every run pays for all of them.
+      - name: Reuse the Nuitka cache
+        uses: actions/cache@v6
+        with:
+          path: ~\AppData\Local\Nuitka\Nuitka
+          key: nuitka-${{ hashFiles('uv.lock', 'run/pysidedeploy.spec') }}-${{ github.sha }}
+          restore-keys: |
+            nuitka-${{ hashFiles('uv.lock', 'run/pysidedeploy.spec') }}-
+            nuitka-
+
+      # tools/ is not in the repository; the lock file names the build and every hash.
+      - name: Fetch the pinned FFmpeg
+        run: uv run --locked python run/fetch_tools.py
+
+      - name: Run the tests
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: uv run --locked --directory src python -m unittest discover -s tests
+
+      - name: Build the bundle
+        run: .\run\build_windows.ps1
+
+      - name: Package the bundle
+        id: package
+        shell: pwsh
+        run: |
+          $name = "ArcadeClip-${{ steps.version.outputs.version }}-windows-x64.zip"
+          7z a -tzip -mx=5 $name .\dist\ArcadeClip.dist\*
+          if ($LASTEXITCODE -ne 0) { throw 'Packaging failed.' }
+          "name=$name" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          Write-Host ("{0:N0} MB" -f ((Get-Item $name).Length / 1MB))
+
+      - name: Keep the bundle as an artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ArcadeClip-${{ steps.version.outputs.version }}-windows-x64
+          path: ${{ steps.package.outputs.name }}
+          retention-days: 14
+
+      - name: Publish the release
+        if: github.ref_type == 'tag'
+        uses: softprops/action-gh-release@v3
+        with:
+          files: ${{ steps.package.outputs.name }}
+          draft: true
+          body: |
+            ## 설치 / Install
+
+            ZIP을 풀고 `ArcadeClip.exe`를 실행하세요. 폴더 안의 다른 파일도 함께 두세요.
+            진단 로그가 필요하면 `ArcadeClip_dbg.lnk`로 실행하세요.
+
+            Unpack the ZIP and run `ArcadeClip.exe`, keeping the other files beside it.
+            Run `ArcadeClip_dbg.lnk` when you need the diagnostic log.
+
+            ## 실행 환경 / Requirements
+
+            Windows 10·11 x64. Windows N·KN 에디션은 Media Feature Pack이 필요합니다.
+            Windows 10/11 x64. Windows N and KN editions need the Media Feature Pack.
+
+            ## 라이선스 / License
+
+            GNU General Public License v3.0. 함께 배포하는 FFmpeg는 GPL 빌드이며,
+            소스는 https://github.com/FFmpeg/FFmpeg/tree/n9.0.1 에서 받을 수 있습니다.
+
+            GPLv3. The bundled FFmpeg is a GPL build; its source is at
+            https://github.com/FFmpeg/FFmpeg/tree/n9.0.1

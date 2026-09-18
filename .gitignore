@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+*.build/
+*.dist/
+*.onefile-build/
+dist/
+build/
+tools/
+*.exe
+*.bin
+
+run/deployment/
+
+.validation-data/
+/tmp/

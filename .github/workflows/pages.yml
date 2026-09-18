@@ -1,0 +1,62 @@
+name: Pages
+
+# Publishes docs/manual: index.html is the project page, manual.html the guide.
+# Set Settings -> Pages -> Source to GitHub Actions once, then pushes deploy.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/manual/**'
+      - 'src/locales/**'
+      - 'run/build_manual.py'
+      - 'run/check_manual.py'
+      - 'run/check_manual_interactions.cjs'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deployment finish; a queued run then publishes the newer commit.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # The guide is generated from content.json and the UI translations, so a stale
+      # manual.html would publish menu names the app no longer uses. These checks need
+      # no third-party packages.
+      - name: Check the guide against its source
+        run: python run/check_manual.py
+
+      - name: Check the guide scripts
+        run: |
+          node --check docs/manual/guide.js
+          node run/check_manual_interactions.cjs
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs/manual
+
+      - id: deploy
+        uses: actions/deploy-pages@v5

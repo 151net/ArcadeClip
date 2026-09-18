@@ -1,0 +1,10 @@
+{
+  "LICENSE.md": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/n9.0.1/LICENSE.md",
+  "COPYING.GPLv2": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/n9.0.1/COPYING.GPLv2",
+  "COPYING.GPLv3": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/n9.0.1/COPYING.GPLv3",
+  "COPYING.LGPLv2.1": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/n9.0.1/COPYING.LGPLv2.1",
+  "COPYING.LGPLv3": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/n9.0.1/COPYING.LGPLv3",
+  "RapidOCR-LICENSE.txt": "https://raw.githubusercontent.com/RapidAI/RapidOCR/v3.9.2/LICENSE",
+  "PaddleOCR-LICENSE.txt": "https://raw.githubusercontent.com/PaddlePaddle/PaddleOCR/v3.0.0/LICENSE",
+  "Deno-LICENSE.txt": "https://raw.githubusercontent.com/denoland/deno/v2.9.6/LICENSE.md"
+}

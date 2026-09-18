@@ -1,0 +1,22 @@
+[project]
+name = "arcade-clip"
+version = "0.1.0"
+description = "Desktop tools for selecting arcade video clips"
+license = "GPL-3.0-only"
+requires-python = ">=3.11"
+dependencies = [
+    "PySide6==6.11.2",
+    "av==18.1.0",
+    "Pillow==12.3.0",
+    "yt-dlp[default]==2026.8.19",
+    "rapidocr==3.9.2",
+    "onnxruntime==1.30.0",
+    "numpy>=2.2,<3",
+    "deno==2.9.6",
+]
+
+[dependency-groups]
+build = ["nuitka==4.2.1", "ordered-set", "zstandard"]
+
+[tool.uv]
+package = false

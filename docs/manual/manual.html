@@ -1,0 +1,372 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ArcadeClip 사용 설명서 / User guide</title><link rel="icon" href="icon.png"><link rel="stylesheet" href="guide.css"><script src="guide.js" defer></script></head><body>
+<header><h1 data-ko="ArcadeClip 사용 설명서" data-en="ArcadeClip user guide">ArcadeClip 사용 설명서</h1>
+<div id="tools" hidden><label>한국어 / English <select id="language"><option value="ko">한국어</option><option value="en">English</option></select></label> <label><span data-ko="목차" data-en="Contents">목차</span> <select id="topic"></select></label> <label><input type="checkbox" id="all" checked><span data-ko="전체 보기" data-en="Show all">전체 보기</span></label> <button id="print" data-ko="인쇄" data-en="Print">인쇄</button></div>
+<nav id="navigation" hidden><button id="prev" data-ko="이전" data-en="Previous">이전</button> <span id="progress" aria-live="polite"></span> <button id="next" data-ko="다음" data-en="Next">다음</button></nav></header>
+<noscript><p>한국어 설명 뒤에 English guide가 이어집니다. / The English guide follows the Korean guide.</p></noscript><main>
+<section lang="ko" id="ko" aria-label="한국어 설명서">
+<article id="ko-overview" data-topic="overview"><h2 tabindex="-1">0. 어떻게 진행되나요?</h2><p>영상에서 곡을 찾고, 필요한 구간을 클립으로 저장합니다. 원본 영상은 그대로 유지됩니다.</p><ol class="flow">
+<li><a data-topic-link="video" href="#ko/video/1">영상 열기</a></li>
+<li><a data-topic-link="range" href="#ko/range/1">시간 범위 지정</a></li>
+<li><a data-topic-link="regions" href="#ko/regions/1">곡·글자 위치 지정 → 곡 찾기</a></li>
+<li><a data-topic-link="review" href="#ko/review/1">클립 확인·저장 대상 확정</a></li>
+<li><a data-topic-link="export" href="#ko/export/1">영상 파일 저장</a></li>
+</ol><p>처음 실행한다면 다음 ‘환영합니다’부터 시작하세요. 이미 설정했다면 ‘영상 열기’로 이동하세요.</p>
+<h3>어떤 영상에서 곡을 찾을 수 있나요?</h3>
+<p>곡 인식은 화면의 자켓을 공식 자켓과 비교하는 방식입니다. 인식 영역 안에 자켓이 정사각형 그대로, 잘리지 않고 들어와야 인식됩니다.</p>
+<ul class="cases">
+<li><figure><svg viewBox="0 0 108 136" role="img" aria-labelledby="ko-fit-title"><title id="ko-fit-title">인식 영역 안에 정사각형으로 들어온 자켓</title><rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/><image href="jacket-example.png" x="20" y="20" width="68" height="68"/><rect x="20" y="20" width="68" height="68" fill="none" stroke="#171717" stroke-width="2"/><circle cx="54" cy="122" r="10" fill="none" stroke="#2e7d32" stroke-width="4"/></svg><figcaption><b>정사각형</b>인식 가능</figcaption></figure></li>
+<li><figure><svg viewBox="0 0 108 136" role="img" aria-labelledby="ko-skew-title"><title id="ko-skew-title">가로세로 비율이 맞지 않아 찌그러진 자켓</title><rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/><g transform="matrix(0.96 0.15 -0.06 0.95 8 -6)"><image href="jacket-example.png" x="22" y="22" width="64" height="64" preserveAspectRatio="none"/><rect x="22" y="22" width="64" height="64" fill="none" stroke="#171717" stroke-width="2"/></g><g stroke="#c62828" stroke-width="4" stroke-linecap="round"><line x1="46" y1="114" x2="62" y2="130"/><line x1="62" y1="114" x2="46" y2="130"/></g></svg><figcaption><b>찌그러짐</b>인식 불가</figcaption></figure></li>
+<li><figure><svg viewBox="0 0 108 136" role="img" aria-labelledby="ko-cut-title"><title id="ko-cut-title">인식 영역 밖으로 나가 잘린 자켓</title><defs><clipPath id="ko-region-clip"><rect x="8" y="8" width="92" height="92"/></clipPath></defs><g clip-path="url(#ko-region-clip)"><image href="jacket-example.png" x="-12" y="20" width="68" height="68"/><rect x="-12" y="20" width="68" height="68" fill="none" stroke="#171717" stroke-width="2"/></g><rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/><g stroke="#c62828" stroke-width="4" stroke-linecap="round"><line x1="46" y1="114" x2="62" y2="130"/><line x1="62" y1="114" x2="46" y2="130"/></g></svg><figcaption><b>잘림</b>인식 불가</figcaption></figure></li>
+</ul></article>
+<article id="ko-welcome" data-topic="welcome"><h2 tabindex="-1">환영합니다 · 처음 한 번</h2><p>데이터 폴더를 정하면 곡 인식에 필요한 파일을 받습니다.</p><div class="walkthrough"><figure><div class="shot" style="max-width:540px"><img src="images/welcome.png" width="540" height="230" alt="환영합니다 · 처음 한 번 — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#ko-welcome-1" data-point="1" data-box="2,35,96,14" style="left:4%;top:37%" aria-label="1. 데이터 폴더 지정">1</a>
+<a class="hotspot" href="#ko-welcome-2" data-point="2" data-box="80,80,18,16" style="left:82%;top:82%" aria-label="2. 다운로드 시작">2</a>
+</div><figcaption><a href="images/welcome.png" target="_blank" rel="noopener">사진 크게 보기</a></figcaption></figure><div class="instructions">
+<section class="point" id="ko-welcome-1"><button class="point-select" data-point="1">(1) 데이터 폴더 지정</button><p><b data-msgid="폴더 선택">폴더 선택</b>으로 데이터 폴더를 지정하세요. 최초 1회 곡 자켓 약 100 MB를 다운로드합니다.</p></section>
+<section class="point" id="ko-welcome-2"><button class="point-select" data-point="2">(2) 다운로드 시작</button><p><b data-msgid="시작하기 →">시작하기 →</b>를 누르세요. 다운로드에 약 10분이 걸릴 수 있습니다. 완료될 때까지 기다리세요.</p></section>
+<aside class="extra"><h4>다음 실행부터</h4><p>같은 데이터 폴더의 파일을 다시 사용합니다. 신곡은 <b data-msgid="Settings">Settings</b> → <b data-msgid="곡 데이터 업데이트">곡 데이터 업데이트</b>로 받으세요.</p></aside>
+</div></div></article>
+<article id="ko-video" data-topic="video"><h2 tabindex="-1">1. 영상 열기</h2><p>파일 또는 폴더 중 한 방법으로 영상을 여세요.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/video.png" width="1024" height="780" alt="1. 영상 열기 — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#ko-video-1" data-point="1" data-box="2,18,25,5" style="left:4%;top:20%" aria-label="1. 파일 추가">1</a>
+<a class="hotspot" href="#ko-video-2" data-point="2" data-box="28,18,26,5" style="left:30%;top:20%" aria-label="2. 폴더 추가">2</a>
+<a class="hotspot" href="#ko-video-3" data-point="3" data-box="17,1,50,5" style="left:19%;top:3%" aria-label="3. 현재 영상 선택">3</a>
+<a class="hotspot" href="#ko-video-4" data-point="4" data-box="55,89,43,7" style="left:57%;top:91%" aria-label="4. 시간 선택으로 이동">4</a>
+</div><figcaption><a href="images/video.png" target="_blank" rel="noopener">사진 크게 보기</a></figcaption></figure><div class="instructions">
+<h3>파일 또는 폴더로 열기 · 둘 중 하나</h3>
+<section class="point" id="ko-video-1"><button class="point-select" data-point="1">(1) 파일 추가</button><p><b data-msgid="파일 추가">파일 추가</b>를 누르세요. 영상 파일을 선택하면 미리보기가 열립니다.</p></section>
+<section class="point" id="ko-video-2"><button class="point-select" data-point="2">(2) 폴더 추가</button><p>여러 영상을 가져오려면 <b data-msgid="폴더 추가">폴더 추가</b>를 누르세요. 파일을 창으로 끌어와도 됩니다.</p></section>
+<h3>열린 영상 확인</h3>
+<section class="point" id="ko-video-3"><button class="point-select" data-point="3">(3) 현재 영상 선택</button><p><b data-msgid="현재 영상">현재 영상</b>에서 작업할 영상을 고르세요. 클립 목록도 그 영상에 맞춰 바뀝니다.</p></section>
+<section class="point" id="ko-video-4"><button class="point-select" data-point="4">(4) 시간 선택으로 이동</button><p>영상이 열리면 <b data-msgid="시간 선택으로 →">시간 선택으로 →</b>를 누르세요.</p></section>
+<aside class="extra"><h4>YouTube 영상이라면</h4><p>아래 YouTube 구간 가져오기에서 필요한 부분만 받으세요.</p></aside>
+<a data-topic-link="youtube" href="#ko/youtube/1">YouTube 구간 가져오기 →</a>
+</div></div></article>
+<article id="ko-range" data-topic="range"><h2 tabindex="-1">2. 시간 범위 지정</h2><p>A·B·C 중 편한 방법 하나로 시작과 끝을 정하세요.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/range.png" width="1024" height="780" alt="2. 시간 범위 지정 — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#ko-range-1" data-point="1" data-box="1,86,98,4" style="left:3%;top:88%" aria-label="A. 시간 입력">A</a>
+<a class="hotspot" href="#ko-range-2" data-point="2" data-box="1,90,39,6" style="left:25%;top:94%" aria-label="B. 현재 위치 사용">B</a>
+<a class="hotspot" href="#ko-range-3" data-point="3" data-box="1,73,98,5" style="left:50%;top:75%" aria-label="C. 구간 조정">C</a>
+<a class="hotspot" href="#ko-range-4" data-point="4" data-box="79,90,20,6" style="left:81%;top:92%" aria-label="1. 인식 영역으로 이동">1</a>
+</div><figcaption><a href="images/range.png" target="_blank" rel="noopener">사진 크게 보기</a></figcaption></figure><div class="instructions">
+<h3>시간 범위 지정 · 세 방법 중 하나</h3>
+<section class="point" id="ko-range-1"><button class="point-select" data-point="1">(A) 시간 입력</button><p><b data-msgid="시작">시작</b>과 <b data-msgid="끝">끝</b>에 시간을 입력하세요. 예: 00:01:30.000은 1분 30초입니다.</p></section>
+<section class="point" id="ko-range-2"><button class="point-select" data-point="2">(B) 현재 위치 사용</button><p>시작 장면에서 <b data-msgid="현재 위치를 시작으로">현재 위치를 시작으로</b>를 누르세요. 끝 장면에서는 <b data-msgid="현재 위치를 끝으로">현재 위치를 끝으로</b>를 누르세요.</p></section>
+<section class="point" id="ko-range-3"><button class="point-select" data-point="3">(C) 구간 조정</button><p>파란 구간의 양끝을 드래그하세요. <b data-msgid="선택 구간 재생">선택 구간 재생</b>으로 선택한 구간을 확인하세요.</p></section>
+<h3>다음 화면으로</h3>
+<section class="point" id="ko-range-4"><button class="point-select" data-point="4">(1) 인식 영역으로 이동</button><p>구간이 맞으면 <b data-msgid="인식 영역으로 →">인식 영역으로 →</b>를 누르세요.</p></section>
+<aside class="extra"><h4>영상 전체를 분석하려면</h4><p><b data-msgid="전체 구간">전체 구간</b>을 누르세요.</p></aside>
+</div></div></article>
+<article id="ko-regions" data-topic="regions"><h2 tabindex="-1">3. 곡과 글자 위치 지정하기</h2><p>같은 촬영 구도라면 저장한 프로필을 사용하세요.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/regions.png" width="1024" height="780" alt="3. 곡과 글자 위치 지정하기 — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#ko-regions-1" data-point="1" data-box="68,21,28,5" style="left:70%;top:23%" aria-label="1. 프로필 고르기">1</a>
+<a class="hotspot" href="#ko-regions-2" data-point="2" data-box="68,30,28,5" style="left:94%;top:32%" aria-label="2. 영역 종류 고르기">2</a>
+<a class="hotspot" href="#ko-regions-3" data-point="3" data-box="1,14,65,72" style="left:3%;top:16%" aria-label="3. 영상에 사각형 그리기">3</a>
+<a class="hotspot" href="#ko-regions-4" data-point="4" data-box="68,86,30,4" style="left:70%;top:88%" aria-label="4. 현재 장면으로 확인">4</a>
+<a class="hotspot" href="#ko-regions-5" data-point="5" data-box="68,90,30,6" style="left:94%;top:94%" aria-label="5. 곡 찾기">5</a>
+</div><figcaption><a href="images/regions.png" target="_blank" rel="noopener">사진 크게 보기</a></figcaption></figure><div class="instructions">
+<h3>프로필 고르기 또는 새 프로필 만들기</h3>
+<section class="point" id="ko-regions-1"><button class="point-select" data-point="1">(1) 프로필 고르기</button><p><b data-msgid="프로필 선택">프로필 선택</b>에서 프로필을 고르세요. 받은 JSON·ZIP 파일은 오른쪽 가져오기 아이콘으로 여세요.</p></section>
+<h4>새 프로필 만들기</h4>
+<section class="point" id="ko-regions-2"><button class="point-select" data-point="2">(2) 영역 종류 고르기</button><p><b data-msgid="영역 선택">영역 선택</b>에서 <b data-msgid="자켓">자켓</b>(곡 이미지)을 고르세요.</p></section>
+<section class="point" id="ko-regions-3"><button class="point-select" data-point="3">(3) 영상에 사각형 그리기</button><p>곡 이미지를 감싸도록 드래그하세요. <b data-msgid="1P 이름">1P 이름</b>과 <b data-msgid="1P 달성률">1P 달성률</b>도 각각 영역을 지정하세요.</p></section>
+<aside class="extra"><h4>팁 · 프로필을 새로 만들 때</h4><p>필수 영역은 <b data-msgid="자켓">자켓</b>·<b data-msgid="1P 이름">1P 이름</b>·<b data-msgid="1P 달성률">1P 달성률</b>입니다. 2P 영역은 필요할 때 추가하세요. <b data-msgid="프로필 저장">프로필 저장</b>으로 저장하면 다음 영상에서도 사용할 수 있습니다.</p></aside>
+<h3>인식 확인과 곡 찾기</h3>
+<section class="point" id="ko-regions-4"><button class="point-select" data-point="4">(4) 현재 장면으로 확인</button><p><b data-msgid="현재 화면 인식 확인">현재 화면 인식 확인</b>을 누르세요. 인식한 곡명과 이름을 확인하세요.</p></section>
+<section class="point" id="ko-regions-5"><button class="point-select" data-point="5">(5) 곡 찾기</button><p><b data-msgid="이 구간에서 곡 찾기 →">이 구간에서 곡 찾기 →</b>를 누르세요. 긴 영상은 곡 찾기에 시간이 오래 걸릴 수 있습니다. 하단 진행 상태를 확인하세요.</p></section>
+</div></div></article>
+<article id="ko-review" data-topic="review"><h2 tabindex="-1">4. 클립 확인하기</h2><p>클립을 선택하면 편집할 수 있습니다. 체크박스는 저장할 클립을 표시합니다.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/review.png" width="1024" height="780" alt="4. 클립 확인하기 — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#ko-review-1" data-point="1" data-box="2,34,27,8" style="left:4%;top:36%" aria-label="1. 확인할 클립 선택">1</a>
+<a class="hotspot" href="#ko-review-2" data-point="2" data-box="2,18,27,15" style="left:4%;top:20%" aria-label="2. 목록 필터">2</a>
+<a class="hotspot" href="#ko-review-3" data-point="3" data-box="2,85,27,10" style="left:4%;top:87%" aria-label="3. 저장 대상 확정하기">3</a>
+<a class="hotspot" href="#ko-review-4" data-point="4" data-box="70,48,28,43" style="left:72%;top:50%" aria-label="A. 내용 수정">A</a>
+<a class="hotspot" href="#ko-review-5" data-point="5" data-box="31,80,38,15" style="left:33%;top:82%" aria-label="B. 시간축으로 자르기">B</a>
+<a class="hotspot" href="#ko-review-6" data-point="6" data-box="70,15,28,27" style="left:72%;top:17%" aria-label="C. 전체 클립의 시작·끝 조정">C</a>
+</div><figcaption><a href="images/review.png" target="_blank" rel="noopener">사진 크게 보기</a></figcaption></figure><div class="instructions">
+<h3>저장할 클립 선택하기</h3>
+<section class="point" id="ko-review-1"><button class="point-select" data-point="1">(1) 확인할 클립 선택</button><p>목록에서 클립을 선택하면 편집할 수 있습니다. 저장할 클립은 체크박스로 표시하세요.</p></section>
+<section class="point" id="ko-review-2"><button class="point-select" data-point="2">(2) 목록 필터</button><p>이름을 검색해 목록을 좁히세요. <b data-msgid="보이는 클립 체크">보이는 클립 체크</b>는 현재 보이는 항목에 체크합니다.</p></section>
+<section class="point" id="ko-review-3"><button class="point-select" data-point="3">(3) 저장 대상 확정하기</button><p><b data-msgid="체크한 클립 {count}개 저장 설정 →">체크한 클립 …개 저장 설정 →</b> 또는 <b data-msgid="보이는 클립 {count}개 저장 설정 →">보이는 클립 …개 저장 설정 →</b>로 저장 대상을 확정하세요. 파일은 다음 화면에서 저장합니다.</p></section>
+<h3>클립 수정하기 · 선택 사항</h3>
+<section class="point" id="ko-review-4"><button class="point-select" data-point="4">(A) 내용 수정</button><p>곡명·이름·달성률은 파일명을 만들 때 쓰는 정보입니다. 영상에 글자로 입혀지지 않으므로, 파일명이 괜찮다면 수정하지 않아도 됩니다. 바꾼 뒤 <b data-msgid="수정 적용">수정 적용</b>을 누르세요.</p></section>
+<section class="point" id="ko-review-5"><button class="point-select" data-point="5">(B) 시간축으로 자르기</button><p>필요할 때만 파란 구간의 양끝을 드래그하세요. 오른쪽 <b data-msgid="시작">시작</b>·<b data-msgid="끝">끝</b>에 시간을 입력하고 <b data-msgid="수정 적용">수정 적용</b>을 눌러도 됩니다. 이 값은 실제 저장 구간을 바꿉니다. <b data-msgid="시작 부분 재생">시작 부분 재생</b>·<b data-msgid="끝 부분 재생">끝 부분 재생</b>으로 확인하세요.</p></section>
+<section class="point" id="ko-review-6"><button class="point-select" data-point="6">(C) 전체 클립의 시작·끝 조정</button><p><b data-msgid="클립 시작·끝 일괄 조정">클립 시작·끝 일괄 조정</b>에서 <b data-msgid="시작 오프셋">시작 오프셋</b>·<b data-msgid="끝 오프셋">끝 오프셋</b>을 입력하고 <b data-msgid="모든 클립에 일괄 적용">모든 클립에 일괄 적용</b>을 누르세요. 예: 시작 −10초, 끝 +10초는 곡 앞뒤를 10초씩 더 담습니다.</p><p>현재 영상의 자동 인식 클립에 적용됩니다. 매번 자동 인식 원본을 기준으로 계산하며, 직접 추가한 클립은 그대로 둡니다. 개별로 시간을 수정한 클립이 있으면 유지할지 선택할 수 있습니다.</p></section>
+<aside class="extra"><h4>직접 추가·합치기·되돌리기</h4><p><b data-msgid="클립 직접 추가">클립 직접 추가</b>는 현재 구간을 추가합니다. Shift·Ctrl로 여러 클립을 선택하고 <b data-msgid="선택한 클립 합치기">선택한 클립 합치기</b>를 누르면 합칩니다. <b data-msgid="목록에서 제거">목록에서 제거</b>는 목록에서 제거하고, <b data-msgid="되돌리기">되돌리기</b>는 직전 편집을 되돌립니다.</p></aside>
+</div></div></article>
+<article id="ko-export" data-topic="export"><h2 tabindex="-1">5. 저장 대상 확정 및 파일 저장</h2><p>폴더와 파일명을 확인한 뒤 내보내세요.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/export.png" width="1024" height="780" alt="5. 저장 대상 확정 및 파일 저장 — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#ko-export-1" data-point="1" data-box="49,28,49,19" style="left:51%;top:30%" aria-label="1. 저장 폴더 선택">1</a>
+<a class="hotspot" href="#ko-export-2" data-point="2" data-box="49,47,49,40" style="left:51%;top:49%" aria-label="2. 파일명 확인">2</a>
+<a class="hotspot" href="#ko-export-3" data-point="3" data-box="49,90,24,6" style="left:51%;top:92%" aria-label="3. 저장 방식 선택">3</a>
+<a class="hotspot" href="#ko-export-4" data-point="4" data-box="74,90,24,6" style="left:76%;top:92%" aria-label="4. 파일 내보내기">4</a>
+</div><figcaption><a href="images/export.png" target="_blank" rel="noopener">사진 크게 보기</a></figcaption></figure><div class="instructions">
+<section class="point" id="ko-export-1"><button class="point-select" data-point="1">(1) 저장 폴더 선택</button><p><b data-msgid="폴더 선택">폴더 선택</b>으로 저장 위치를 고르세요. 날짜 폴더 옵션을 켜면 내보낼 때 하위 폴더를 만듭니다.</p></section>
+<section class="point" id="ko-export-2"><button class="point-select" data-point="2">(2) 파일명 확인</button><p><b data-msgid="저장할 파일명">저장할 파일명</b>에서 결과 이름을 확인하세요. 이름이 겹치면 번호가 붙습니다.</p></section>
+<section class="point" id="ko-export-3"><button class="point-select" data-point="3">(3) 저장 방식 선택</button><p><b data-msgid="저장 설정">저장 설정</b>에서 자르는 방식과 화질을 정하세요. <b data-msgid="적용">적용</b>으로 적용하세요.</p></section>
+<section class="point" id="ko-export-4"><button class="point-select" data-point="4">(4) 파일 내보내기</button><p><b data-msgid="파일 {count}개 저장 시작">파일 …개 저장 시작</b>을 누르세요. 완료 후 <b data-msgid="선택한 폴더 열기">선택한 폴더 열기</b>로 결과를 여세요.</p></section>
+<aside class="extra"><h4>저장이 일부 실패했다면</h4><p>하단 성공·실패 수와 진단 로그를 확인하세요. 실패한 클립을 저장 대상으로 다시 지정한 뒤 저장하세요.</p></aside>
+</div></div></article>
+<article id="ko-encoding" data-topic="encoding"><h2 tabindex="-1">저장 방식과 화질</h2><p>시작·끝을 정확히 맞추려면 <b data-msgid="정확한 구간 자르기">정확한 구간 자르기</b>를 쓰세요.</p><div class="walkthrough"><figure><div class="shot" style="max-width:560px"><img src="images/encoding.png" width="560" height="720" alt="저장 방식과 화질 — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#ko-encoding-1" data-point="1" data-box="4,9,92,5" style="left:6%;top:11%" aria-label="1. 공유용 설정 사용">1</a>
+<a class="hotspot" href="#ko-encoding-2" data-point="2" data-box="4,26,92,5" style="left:6%;top:28%" aria-label="2. 자르는 방식">2</a>
+<a class="hotspot" href="#ko-encoding-3" data-point="3" data-box="4,35,92,27" style="left:6%;top:37%" aria-label="3. 크기·화질">3</a>
+<a class="hotspot" href="#ko-encoding-4" data-point="4" data-box="4,65,92,21" style="left:6%;top:67%" aria-label="4. 소리 조정">4</a>
+</div><figcaption><a href="images/encoding.png" target="_blank" rel="noopener">사진 크게 보기</a></figcaption></figure><div class="instructions">
+<section class="point" id="ko-encoding-1"><button class="point-select" data-point="1">(1) 공유용 설정 사용</button><p>프리셋을 고른 뒤 <b data-msgid="프리셋 적용">프리셋 적용</b>을 누르세요. 창 아래 <b data-msgid="적용">적용</b>을 눌러 확정하세요.</p></section>
+<section class="point" id="ko-encoding-2"><button class="point-select" data-point="2">(2) 자르는 방식</button><p><b data-msgid="정확한 구간 자르기">정확한 구간 자르기</b>는 지정한 경계에 맞춰 변환합니다. <b data-msgid="원본 빠른 복사">원본 빠른 복사</b>는 빠르지만 경계가 조금 달라질 수 있습니다.</p></section>
+<section class="point" id="ko-encoding-3"><button class="point-select" data-point="3">(3) 크기·화질</button><p><b data-msgid="클립당 목표 크기">클립당 목표 크기</b>는 클립별 목표 크기입니다. 0이면 화질 기준으로 저장합니다. 실제 크기는 달라질 수 있습니다.</p></section>
+<section class="point" id="ko-encoding-4"><button class="point-select" data-point="4">(4) 소리 조정</button><p><b data-msgid="소리 포함">소리 포함</b>으로 소리를 포함하세요. <b data-msgid="음량 조절">음량 조절</b>의 0은 원래 음량입니다.</p></section>
+<aside class="extra"><h4>화질·속도·저장 방식의 차이</h4><p><b data-msgid="자르는 방식">자르는 방식</b>이 <b data-msgid="원본 빠른 복사">원본 빠른 복사</b>이면 화질을 바꾸지 않고 원본을 그대로 복사합니다. 화질·용량을 조절하려면 <b data-msgid="정확한 구간 자르기">정확한 구간 자르기</b>를 선택하세요.</p><p>처음에는 <b data-msgid="균형 있게 · 일반적인 공유용">균형 있게 · 일반적인 공유용</b>을 쓰세요. 더 선명한 영상을 원하면 <b data-msgid="선명하게 · 용량 큼">선명하게 · 용량 큼</b>, 파일을 작게 만들려면 <b data-msgid="작게 · 화질보다 용량 우선">작게 · 화질보다 용량 우선</b>을 선택하세요. 작은 파일을 택하면 세부 표현이 뭉개질 수 있습니다.</p><p>처리 속도는 영상의 재생 속도가 아니라 저장을 끝내는 데 걸리는 시간입니다. <b data-msgid="빠르게 처리">빠르게 처리</b>는 빨리 저장합니다. <b data-msgid="천천히 · 같은 화질에서 용량 절약">천천히 · 같은 화질에서 용량 절약</b>은 더 오래 계산해 비슷한 화질을 더 적은 용량에 담습니다. 여유가 있을 때 선택하세요.</p></aside>
+</div></div></article>
+<article id="ko-youtube" data-topic="youtube"><h2 tabindex="-1">YouTube 구간 가져오기</h2><p>영상 열기 화면에서 <b data-msgid="YouTube 링크">YouTube 링크</b>를 붙여넣고 <b data-msgid="영상 정보 확인 →">영상 정보 확인 →</b>를 누르세요.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1280px"><img src="images/youtube-download.png" width="1280" height="780" alt="YouTube 구간 가져오기 — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#ko-youtube-1" data-point="1" data-box="1,30,98,9" style="left:94%;top:32%" aria-label="1. 받을 구간 입력">1</a>
+<a class="hotspot" href="#ko-youtube-2" data-point="2" data-box="1,40,98,8" style="left:25%;top:44%" aria-label="2. 동시 다운로드 수 확인">2</a>
+<a class="hotspot" href="#ko-youtube-3" data-point="3" data-box="1,51,98,5" style="left:75%;top:54%" aria-label="3. 다운로드 시작">3</a>
+<a class="hotspot" href="#ko-youtube-4" data-point="4" data-box="1,56,98,15" style="left:15%;top:64%" aria-label="4. 진행 상태 확인">4</a>
+</div><figcaption><a href="images/youtube-download.png" target="_blank" rel="noopener">사진 크게 보기</a></figcaption></figure><div class="instructions">
+<section class="point" id="ko-youtube-1"><button class="point-select" data-point="1">(1) 받을 구간 입력</button><p><b data-msgid="시작">시작</b>·<b data-msgid="끝">끝</b>에 필요한 구간을 입력하세요. 정확한 경계는 다운로드 후 다음 단계에서 조정할 수 있습니다.</p></section>
+<section class="point" id="ko-youtube-2"><button class="point-select" data-point="2">(2) 동시 다운로드 수 확인</button><p><b data-msgid="동시 다운로드 수">동시 다운로드 수</b>는 기본 4개입니다. 녹색 1–4개를 권장합니다. 붉은색 5–16개는 요청 제한 가능성이 커집니다.</p><p>권장 범위에서도 요청이 제한될 수 있습니다. 오류가 나면 수를 줄이고 잠시 후 다시 시도하세요.</p></section>
+<section class="point" id="ko-youtube-3"><button class="point-select" data-point="3">(3) 다운로드 시작</button><p><b data-msgid="선택 구간 다운로드">선택 구간 다운로드</b>를 누르세요.</p></section>
+<section class="point" id="ko-youtube-4"><button class="point-select" data-point="4">(4) 진행 상태 확인</button><p>진행률과 현재 단계의 예상 남은 시간을 확인하세요. 완료되면 영상 선택 화면으로 돌아옵니다.</p><p>조각 병렬 다운로드를 지원하지 않으면 화면에 안내되며 일반 방식으로 받습니다.</p></section>
+<aside class="extra"><h4>라이브 시간 입력</h4><p>라이브는 화면에 표시된 00:00:00 기준 시각을 확인한 뒤 구간을 입력하세요.</p></aside>
+</div></div></article>
+<article id="ko-session" data-topic="session"><h2 tabindex="-1">작업 저장하고 이어하기</h2><p>다음에 이어할 편집 내용은 <b data-msgid="작업 저장">작업 저장</b>으로 저장하세요.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/video.png" width="1024" height="780" alt="작업 저장하고 이어하기 — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#ko-session-1" data-point="1" data-box="76,1,9,5" style="left:84%;top:5%" aria-label="1. 작업 저장">1</a>
+<a class="hotspot" href="#ko-session-2" data-point="2" data-box="67,1,9,5" style="left:69%;top:3%" aria-label="2. 작업 다시 열기">2</a>
+</div><figcaption><a href="images/video.png" target="_blank" rel="noopener">사진 크게 보기</a></figcaption></figure><div class="instructions">
+<section class="point" id="ko-session-1"><button class="point-select" data-point="1">(1) 작업 저장</button><p><b data-msgid="작업 저장">작업 저장</b>으로 JSON 파일을 저장하세요. 클립과 편집 정보를 보관합니다.</p></section>
+<section class="point" id="ko-session-2"><button class="point-select" data-point="2">(2) 작업 다시 열기</button><p><b data-msgid="작업 열기">작업 열기</b>에서 저장한 JSON을 고르세요. 원본 영상은 같은 경로에 보관하세요.</p></section>
+<aside class="extra"><h4>영상 파일이 필요하다면</h4><p>완성 영상은 <b data-msgid="파일 저장">파일 저장</b>에서 만드세요. 작업 JSON은 원본 영상을 포함하지 않습니다.</p></aside>
+</div></div></article>
+<article id="ko-settings" data-topic="settings"><h2 tabindex="-1">언어와 앱 설정</h2><p>상단 <b data-msgid="Settings">Settings</b> 버튼으로 여세요.</p><div class="walkthrough"><figure><div class="shot" style="max-width:700px"><img src="images/settings.png" width="700" height="745" alt="언어와 앱 설정 — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#ko-settings-1" data-point="1" data-box="2,1,96,5" style="left:4%;top:3%" aria-label="1. 표시 언어 바꾸기">1</a>
+<a class="hotspot" href="#ko-settings-2" data-point="2" data-box="2,14,96,5" style="left:4%;top:16%" aria-label="2. 인식 설정 열기">2</a>
+<a class="hotspot" href="#ko-settings-3" data-point="3" data-box="2,25,96,19" style="left:4%;top:27%" aria-label="3. 분석 성능">3</a>
+<a class="hotspot" href="#ko-settings-4" data-point="4" data-box="2,61,96,12" style="left:4%;top:63%" aria-label="4. 데이터 폴더">4</a>
+<a class="hotspot" href="#ko-settings-5" data-point="5" data-box="2,76,96,17" style="left:4%;top:78%" aria-label="5. 오류 확인">5</a>
+</div><figcaption><a href="images/settings.png" target="_blank" rel="noopener">사진 크게 보기</a></figcaption></figure><div class="instructions">
+<section class="point" id="ko-settings-1"><button class="point-select" data-point="1">(1) 표시 언어 바꾸기</button><p><b data-msgid="Language">Language</b>에서 한국어·English를 고르세요. 앱을 다시 열면 적용됩니다.</p></section>
+<section class="point" id="ko-settings-2"><button class="point-select" data-point="2">(2) 인식 설정 열기</button><p><b data-msgid="자켓 · 글자 인식 설정…">자켓 · 글자 인식 설정…</b>에서 곡과 글자 인식 옵션을 조절하세요.</p></section>
+<section class="point" id="ko-settings-3"><button class="point-select" data-point="3">(3) 분석 성능</button><p>처음에는 자동값을 사용하세요. 영상 디코더 스레드는 프레임 읽기, 자켓 인식 작업 수는 곡 비교에 사용됩니다. 값을 높이면 CPU·메모리 사용도 늘 수 있습니다. 변경은 다음 분석부터 적용됩니다.</p></section>
+<section class="point" id="ko-settings-4"><button class="point-select" data-point="4">(4) 데이터 폴더</button><p><b data-msgid="데이터 폴더 변경…">데이터 폴더 변경…</b>로 위치를 바꾸세요. 새 폴더 준비 후 앱이 다시 시작됩니다.</p></section>
+<section class="point" id="ko-settings-5"><button class="point-select" data-point="5">(5) 오류 확인</button><p><b data-msgid="진단 로그">진단 로그</b>에서 상세 내용을 확인하세요. 도구 오류라면 <b data-msgid="FFmpeg·다운로드 도구 확인">FFmpeg·다운로드 도구 확인</b>을 누르세요.</p></section>
+</div></div></article>
+<article id="ko-recognition" data-topic="recognition"><h2 tabindex="-1">인식이 잘 안 될 때</h2><p>영역과 현재 장면을 먼저 확인하세요.</p><div class="walkthrough"><figure><div class="shot" style="max-width:401px"><img src="images/recognition.png" width="401" height="406" alt="인식이 잘 안 될 때 — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#ko-recognition-1" data-point="1" data-box="3,9,94,6" style="left:5%;top:11%" aria-label="1. 촬영 구도가 움직일 때">1</a>
+<a class="hotspot" href="#ko-recognition-2" data-point="2" data-box="3,17,94,20" style="left:60%;top:25%" aria-label="2. 곡을 놓칠 때">2</a>
+<a class="hotspot" href="#ko-recognition-3" data-point="3" data-box="72,89,25,9" style="left:74%;top:91%" aria-label="3. 적용 후 확인">3</a>
+</div><figcaption><a href="images/recognition.png" target="_blank" rel="noopener">사진 크게 보기</a></figcaption></figure><div class="instructions">
+<section class="point" id="ko-recognition-1"><button class="point-select" data-point="1">(1) 촬영 구도가 움직일 때</button><p><b data-msgid="자켓 위치 보정 간격 (초)">자켓 위치 보정 간격 (초)</b>을 줄이면 위치를 더 자주 맞춥니다.</p></section>
+<section class="point" id="ko-recognition-2"><button class="point-select" data-point="2">(2) 곡을 놓칠 때</button><p><b data-msgid="곡 확인 간격 (초)">곡 확인 간격 (초)</b>을 줄이면 더 자주 확인합니다. 비슷한 자켓을 혼동하면 <b data-msgid="자켓 차이 허용값">자켓 차이 허용값</b>을 낮춰 보세요.</p></section>
+<section class="point" id="ko-recognition-3"><button class="point-select" data-point="3">(3) 적용 후 확인</button><p><b data-msgid="적용">적용</b>으로 저장하세요. 인식 영역 화면에서 <b data-msgid="현재 화면 인식 확인">현재 화면 인식 확인</b>으로 다시 확인하세요.</p></section>
+<aside class="extra"><h4>곡 데이터가 없다고 나오면</h4><p><b data-msgid="Settings">Settings</b> → <b data-msgid="곡 데이터 업데이트">곡 데이터 업데이트</b>를 누르세요. 다운로드가 끝난 뒤 다시 분석하세요.</p></aside>
+</div></div></article>
+<article id="ko-help" data-topic="help"><h2 tabindex="-1">문제 해결·단축키</h2>
+<aside class="extra"><h4>곡 데이터가 없다고 나오는 경우 / 신곡이 나왔을 경우</h4><p><b data-msgid="Settings">Settings</b> → <b data-msgid="곡 데이터 업데이트">곡 데이터 업데이트</b>를 누르세요. 다운로드가 끝나면 다시 곡을 찾으세요.</p></aside>
+<aside class="extra"><h4>클립이 안 보여요</h4><p>검색어를 지우고 <b data-msgid="곡 미확인 구간 표시">곡 미확인 구간 표시</b>를 켜세요. <b data-msgid="현재 영상">현재 영상</b>이 맞는지 확인하세요.</p></aside>
+<aside class="extra"><h4>저장 후 시작·끝이 달라요</h4><p><b data-msgid="저장 설정">저장 설정</b>에서 <b data-msgid="정확한 구간 자르기">정확한 구간 자르기</b>를 고르세요.</p></aside>
+<aside class="extra"><h4>이름이 틀리게 나와요</h4><p><b data-msgid="1P 이름">1P 이름</b> 영역이 글자를 정확히 감싸는지 확인하세요. 이름을 고친 뒤 <b data-msgid="수정 적용">수정 적용</b>을 누를 수도 있습니다.</p></aside>
+<aside class="extra"><h4>설명서 열기·공유</h4><p>앱의 <b data-msgid="도움말">도움말</b> 또는 F1을 누르면 별도 창으로 열립니다. Windows·macOS·Linux의 브라우저에서 manual.html을 열어도 됩니다. 공유할 때는 manual 폴더 전체를 보내세요.</p></aside>
+<table><caption>앱에서 사용하는 키</caption><thead><tr><th>키</th><th>동작</th></tr></thead><tbody>
+<tr><td><kbd>F1</kbd></td><td>도움말 열기</td></tr>
+<tr><td><kbd>Space / K</kbd></td><td>재생·일시정지 / 일시정지</td></tr>
+<tr><td><kbd>← / →</kbd></td><td>재생 중 1초 이동 · 일시정지 중 한 프레임 이동</td></tr>
+<tr><td><kbd>Shift + ← / →</kbd></td><td>1초 이동</td></tr>
+<tr><td><kbd>Ctrl + ← / →</kbd></td><td>5초 이동</td></tr>
+<tr><td><kbd>J / L</kbd></td><td>뒤로 탐색 / 앞으로 재생 · 반복하면 속도 증가</td></tr>
+<tr><td><kbd>Home / End</kbd></td><td>영상 처음 / 끝으로</td></tr>
+<tr><td><kbd>I / O</kbd></td><td>현재 위치를 구간 시작 / 끝으로</td></tr>
+<tr><td><kbd>Alt + ← / →</kbd></td><td>구간 시작 / 끝으로 이동</td></tr>
+<tr><td><kbd>Ctrl + drag</kbd></td><td>시간축: 구간 길이를 유지하며 이동 · 영상: 화면 이동</td></tr>
+<tr><td><kbd>Alt + drag</kbd></td><td>다른 경계에 맞추지 않고 구간 조정</td></tr>
+<tr><td><kbd>Ctrl / Shift + click</kbd></td><td>클립 개별 / 연속 선택</td></tr>
+<tr><td><kbd>A / Delete</kbd></td><td>클립 직접 추가 / 목록에서 제거</td></tr>
+<tr><td><kbd>+ / − / 0</kbd></td><td>시간축 확대 / 축소 / 전체 보기</td></tr>
+<tr><td><kbd>wheel / Shift + wheel</kbd></td><td>시간축 가로 이동 / 빠르게 이동</td></tr>
+<tr><td><kbd>Ctrl + wheel</kbd></td><td>앱 영상·시간축 확대·축소</td></tr>
+<tr><td><kbd>Ctrl + + / −</kbd></td><td>인식 영역 화면의 영상 확대·축소</td></tr>
+<tr><td><kbd>Ctrl + 0 / middle click</kbd></td><td>인식 영역 화면의 영상 맞춤</td></tr>
+<tr><td><kbd>Ctrl + S</kbd></td><td>작업 JSON 저장</td></tr>
+<tr><td><kbd>Ctrl + E</kbd></td><td>체크한 클립의 저장 설정 열기</td></tr>
+<tr><td><kbd>Ctrl + Z</kbd></td><td>직전 클립 편집 되돌리기</td></tr>
+</tbody></table><p>문자 입력 중에는 입력란의 편집 단축키가 우선합니다.</p></article></section>
+<section lang="en" id="en" aria-label="English guide">
+<article id="en-overview" data-topic="overview"><h2 tabindex="-1">0. How does it work?</h2><p>Find songs in a video, then save the sections you need as clips. The source video stays unchanged.</p><ol class="flow">
+<li><a data-topic-link="video" href="#en/video/1">Open video</a></li>
+<li><a data-topic-link="range" href="#en/range/1">Set time range</a></li>
+<li><a data-topic-link="regions" href="#en/regions/1">Mark song/text regions → Find songs</a></li>
+<li><a data-topic-link="review" href="#en/review/1">Review clips and confirm what to save</a></li>
+<li><a data-topic-link="export" href="#en/export/1">Save video files</a></li>
+</ol><p>On your first launch, start with Welcome below. If setup is complete, go to Open a video.</p>
+<h3>Which videos does this work with?</h3>
+<p>Songs are recognized by comparing the jacket on screen with the official art, so the jacket has to sit inside the region square and uncropped.</p>
+<ul class="cases">
+<li><figure><svg viewBox="0 0 108 136" role="img" aria-labelledby="en-fit-title"><title id="en-fit-title">A square jacket inside the region</title><rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/><image href="jacket-example.png" x="20" y="20" width="68" height="68"/><rect x="20" y="20" width="68" height="68" fill="none" stroke="#171717" stroke-width="2"/><circle cx="54" cy="122" r="10" fill="none" stroke="#2e7d32" stroke-width="4"/></svg><figcaption><b>Square</b>Recognized</figcaption></figure></li>
+<li><figure><svg viewBox="0 0 108 136" role="img" aria-labelledby="en-skew-title"><title id="en-skew-title">A jacket squeezed out of square</title><rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/><g transform="matrix(0.96 0.15 -0.06 0.95 8 -6)"><image href="jacket-example.png" x="22" y="22" width="64" height="64" preserveAspectRatio="none"/><rect x="22" y="22" width="64" height="64" fill="none" stroke="#171717" stroke-width="2"/></g><g stroke="#c62828" stroke-width="4" stroke-linecap="round"><line x1="46" y1="114" x2="62" y2="130"/><line x1="62" y1="114" x2="46" y2="130"/></g></svg><figcaption><b>Skewed</b>Not recognized</figcaption></figure></li>
+<li><figure><svg viewBox="0 0 108 136" role="img" aria-labelledby="en-cut-title"><title id="en-cut-title">A jacket cut off by the region edge</title><defs><clipPath id="en-region-clip"><rect x="8" y="8" width="92" height="92"/></clipPath></defs><g clip-path="url(#en-region-clip)"><image href="jacket-example.png" x="-12" y="20" width="68" height="68"/><rect x="-12" y="20" width="68" height="68" fill="none" stroke="#171717" stroke-width="2"/></g><rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/><g stroke="#c62828" stroke-width="4" stroke-linecap="round"><line x1="46" y1="114" x2="62" y2="130"/><line x1="62" y1="114" x2="46" y2="130"/></g></svg><figcaption><b>Cut off</b>Not recognized</figcaption></figure></li>
+</ul></article>
+<article id="en-welcome" data-topic="welcome"><h2 tabindex="-1">Welcome · First launch</h2><p>Choose where to keep the files used for song recognition.</p><div class="walkthrough"><figure><div class="shot" style="max-width:540px"><img src="images/welcome.png" width="540" height="230" alt="Welcome · First launch — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#en-welcome-1" data-point="1" data-box="2,35,96,14" style="left:4%;top:37%" aria-label="1. Choose a data folder">1</a>
+<a class="hotspot" href="#en-welcome-2" data-point="2" data-box="80,80,18,16" style="left:82%;top:82%" aria-label="2. Start the download">2</a>
+</div><figcaption><a href="images/welcome.png" target="_blank" rel="noopener">Open full-size image</a></figcaption></figure><div class="instructions">
+<section class="point" id="en-welcome-1"><button class="point-select" data-point="1">(1) Choose a data folder</button><p>Use <b data-msgid="폴더 선택">Choose folder</b> to choose a data folder. The first launch downloads about 100 MB of song jackets.</p></section>
+<section class="point" id="en-welcome-2"><button class="point-select" data-point="2">(2) Start the download</button><p>Click <b data-msgid="시작하기 →">Get started →</b>. The download may take about 10 minutes. Wait for it to finish.</p></section>
+<aside class="extra"><h4>On later launches</h4><p>Files in the same data folder are reused. Get new songs with <b data-msgid="Settings">Settings</b> → <b data-msgid="곡 데이터 업데이트">Update song data</b>.</p></aside>
+</div></div></article>
+<article id="en-video" data-topic="video"><h2 tabindex="-1">1. Open a video</h2><p>Open a video using either files or a folder.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/video.png" width="1024" height="780" alt="1. Open a video — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#en-video-1" data-point="1" data-box="2,18,25,5" style="left:4%;top:20%" aria-label="1. Add files">1</a>
+<a class="hotspot" href="#en-video-2" data-point="2" data-box="28,18,26,5" style="left:30%;top:20%" aria-label="2. Add a folder">2</a>
+<a class="hotspot" href="#en-video-3" data-point="3" data-box="17,1,50,5" style="left:19%;top:3%" aria-label="3. Choose the current video">3</a>
+<a class="hotspot" href="#en-video-4" data-point="4" data-box="55,89,43,7" style="left:57%;top:91%" aria-label="4. Continue to Select range">4</a>
+</div><figcaption><a href="images/video.png" target="_blank" rel="noopener">Open full-size image</a></figcaption></figure><div class="instructions">
+<h3>Open files or a folder · Choose one</h3>
+<section class="point" id="en-video-1"><button class="point-select" data-point="1">(1) Add files</button><p>Click <b data-msgid="파일 추가">Add files</b>. Choose a video file to open its preview.</p></section>
+<section class="point" id="en-video-2"><button class="point-select" data-point="2">(2) Add a folder</button><p>Click <b data-msgid="폴더 추가">Add folder</b> to add several videos. You can also drag video files into the window.</p></section>
+<h3>Check the opened video</h3>
+<section class="point" id="en-video-3"><button class="point-select" data-point="3">(3) Choose the current video</button><p>Choose a video in <b data-msgid="현재 영상">Current video</b>. The clip list switches to that video.</p></section>
+<section class="point" id="en-video-4"><button class="point-select" data-point="4">(4) Continue to Select range</button><p>Once the video opens, click <b data-msgid="시간 선택으로 →">Select range →</b>.</p></section>
+<aside class="extra"><h4>For a YouTube video</h4><p>Use Download a YouTube range below to get only the part you need.</p></aside>
+<a data-topic-link="youtube" href="#en/youtube/1">Download a YouTube range →</a>
+</div></div></article>
+<article id="en-range" data-topic="range"><h2 tabindex="-1">2. Set the time range</h2><p>Use any one of methods A–C to set the start and end.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/range.png" width="1024" height="780" alt="2. Set the time range — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#en-range-1" data-point="1" data-box="1,86,98,4" style="left:3%;top:88%" aria-label="A. Enter times">A</a>
+<a class="hotspot" href="#en-range-2" data-point="2" data-box="1,90,39,6" style="left:25%;top:94%" aria-label="B. Use the playhead">B</a>
+<a class="hotspot" href="#en-range-3" data-point="3" data-box="1,73,98,5" style="left:50%;top:75%" aria-label="C. Adjust the selection">C</a>
+<a class="hotspot" href="#en-range-4" data-point="4" data-box="79,90,20,6" style="left:81%;top:92%" aria-label="1. Continue to Recognition regions">1</a>
+</div><figcaption><a href="images/range.png" target="_blank" rel="noopener">Open full-size image</a></figcaption></figure><div class="instructions">
+<h3>Set the range · Choose one method</h3>
+<section class="point" id="en-range-1"><button class="point-select" data-point="1">(A) Enter times</button><p>Enter <b data-msgid="시작">Start</b> and <b data-msgid="끝">End</b> times. For example, 00:01:30.000 means 1 minute and 30 seconds.</p></section>
+<section class="point" id="en-range-2"><button class="point-select" data-point="2">(B) Use the playhead</button><p>At the first scene, click <b data-msgid="현재 위치를 시작으로">Set start here</b>. At the last scene, click <b data-msgid="현재 위치를 끝으로">Set end here</b>.</p></section>
+<section class="point" id="en-range-3"><button class="point-select" data-point="3">(C) Adjust the selection</button><p>Drag either edge of the blue selection. Use <b data-msgid="선택 구간 재생">Play selection</b> to check the range.</p></section>
+<h3>Continue</h3>
+<section class="point" id="en-range-4"><button class="point-select" data-point="4">(1) Continue to Recognition regions</button><p>When the range is right, click <b data-msgid="인식 영역으로 →">Recognition regions →</b>.</p></section>
+<aside class="extra"><h4>To scan the whole video</h4><p>Click <b data-msgid="전체 구간">Full range</b>.</p></aside>
+</div></div></article>
+<article id="en-regions" data-topic="regions"><h2 tabindex="-1">3. Mark song and text regions</h2><p>Reuse a saved profile for the same camera layout.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/regions.png" width="1024" height="780" alt="3. Mark song and text regions — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#en-regions-1" data-point="1" data-box="68,21,28,5" style="left:70%;top:23%" aria-label="1. Choose a profile">1</a>
+<a class="hotspot" href="#en-regions-2" data-point="2" data-box="68,30,28,5" style="left:94%;top:32%" aria-label="2. Choose a region type">2</a>
+<a class="hotspot" href="#en-regions-3" data-point="3" data-box="1,14,65,72" style="left:3%;top:16%" aria-label="3. Draw a rectangle">3</a>
+<a class="hotspot" href="#en-regions-4" data-point="4" data-box="68,86,30,4" style="left:70%;top:88%" aria-label="4. Test the current frame">4</a>
+<a class="hotspot" href="#en-regions-5" data-point="5" data-box="68,90,30,6" style="left:94%;top:94%" aria-label="5. Find songs">5</a>
+</div><figcaption><a href="images/regions.png" target="_blank" rel="noopener">Open full-size image</a></figcaption></figure><div class="instructions">
+<h3>Choose or create a profile</h3>
+<section class="point" id="en-regions-1"><button class="point-select" data-point="1">(1) Choose a profile</button><p>Choose a profile in <b data-msgid="프로필 선택">Select profile</b>. Use the import icon on its right to open a shared JSON or ZIP file.</p></section>
+<h4>Create a new profile</h4>
+<section class="point" id="en-regions-2"><button class="point-select" data-point="2">(2) Choose a region type</button><p>Choose <b data-msgid="자켓">Jacket</b> (the song artwork) in <b data-msgid="영역 선택">Choose region</b>.</p></section>
+<section class="point" id="en-regions-3"><button class="point-select" data-point="3">(3) Draw a rectangle</button><p>Drag around the song artwork. Define separate regions for <b data-msgid="1P 이름">1P name</b> and <b data-msgid="1P 달성률">1P achievement</b> too.</p></section>
+<aside class="extra"><h4>Tip · Creating a profile</h4><p><b data-msgid="자켓">Jacket</b>, <b data-msgid="1P 이름">1P name</b>, and <b data-msgid="1P 달성률">1P achievement</b> are required. Add 2P regions when needed. Use <b data-msgid="프로필 저장">Save profile</b> to reuse the layout.</p></aside>
+<h3>Test recognition and find songs</h3>
+<section class="point" id="en-regions-4"><button class="point-select" data-point="4">(4) Test the current frame</button><p>Click <b data-msgid="현재 화면 인식 확인">Test current frame</b>. Check the detected song title and player name.</p></section>
+<section class="point" id="en-regions-5"><button class="point-select" data-point="5">(5) Find songs</button><p>Click <b data-msgid="이 구간에서 곡 찾기 →">Find songs in range →</b>. Finding songs in a long video can take a while. Check progress at the bottom.</p></section>
+</div></div></article>
+<article id="en-review" data-topic="review"><h2 tabindex="-1">4. Review clips</h2><p>Select a clip to edit it. Check its box to mark it for saving.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/review.png" width="1024" height="780" alt="4. Review clips — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#en-review-1" data-point="1" data-box="2,34,27,8" style="left:4%;top:36%" aria-label="1. Select a clip to review">1</a>
+<a class="hotspot" href="#en-review-2" data-point="2" data-box="2,18,27,15" style="left:4%;top:20%" aria-label="2. Filter the list">2</a>
+<a class="hotspot" href="#en-review-3" data-point="3" data-box="2,85,27,10" style="left:4%;top:87%" aria-label="3. Confirm clips to save">3</a>
+<a class="hotspot" href="#en-review-4" data-point="4" data-box="70,48,28,43" style="left:72%;top:50%" aria-label="A. Edit clip details">A</a>
+<a class="hotspot" href="#en-review-5" data-point="5" data-box="31,80,38,15" style="left:33%;top:82%" aria-label="B. Trim on the timeline">B</a>
+<a class="hotspot" href="#en-review-6" data-point="6" data-box="70,15,28,27" style="left:72%;top:17%" aria-label="C. Adjust all clip boundaries">C</a>
+</div><figcaption><a href="images/review.png" target="_blank" rel="noopener">Open full-size image</a></figcaption></figure><div class="instructions">
+<h3>Select clips to save</h3>
+<section class="point" id="en-review-1"><button class="point-select" data-point="1">(1) Select a clip to review</button><p>Select a row to edit that clip. Use its checkbox to mark it for saving.</p></section>
+<section class="point" id="en-review-2"><button class="point-select" data-point="2">(2) Filter the list</button><p>Search a player name to narrow the list. <b data-msgid="보이는 클립 체크">Check visible clips</b> checks the items currently shown.</p></section>
+<section class="point" id="en-review-3"><button class="point-select" data-point="3">(3) Confirm clips to save</button><p>Confirm your clips with <b data-msgid="체크한 클립 {count}개 저장 설정 →">Export … checked clips →</b> or <b data-msgid="보이는 클립 {count}개 저장 설정 →">Export … visible clips →</b>. Save the files on the next screen.</p></section>
+<h3>Edit clips · Optional</h3>
+<section class="point" id="en-review-4"><button class="point-select" data-point="4">(A) Edit clip details</button><p>Song titles, names, and achievement values are used to build filenames. They are not drawn onto the video. Skip these edits if the filename is fine. Click <b data-msgid="수정 적용">Apply edits</b> after making changes.</p></section>
+<section class="point" id="en-review-5"><button class="point-select" data-point="5">(B) Trim on the timeline</button><p>If needed, drag either edge of the blue selection. You can also enter <b data-msgid="시작">Start</b> and <b data-msgid="끝">End</b> times on the right and click <b data-msgid="수정 적용">Apply edits</b>. These values change the saved video range. Check it with <b data-msgid="시작 부분 재생">Preview start</b> and <b data-msgid="끝 부분 재생">Preview end</b>.</p></section>
+<section class="point" id="en-review-6"><button class="point-select" data-point="6">(C) Adjust all clip boundaries</button><p>In <b data-msgid="클립 시작·끝 일괄 조정">Adjust all clip boundaries</b>, enter <b data-msgid="시작 오프셋">Start offset</b> and <b data-msgid="끝 오프셋">End offset</b>, then click <b data-msgid="모든 클립에 일괄 적용">Apply to all clips</b>. For example, −10 seconds at the start and +10 seconds at the end includes 10 extra seconds on each side.</p><p>This affects detected clips in the current video. Each application uses the original detection times; it does not keep adding time. Manually added clips stay unchanged. If you edited a clip’s boundaries individually, you can choose to keep them.</p></section>
+<aside class="extra"><h4>Add, merge, or undo</h4><p><b data-msgid="클립 직접 추가">Add clip manually</b> adds the current range. Select clips with Shift or Ctrl, then click <b data-msgid="선택한 클립 합치기">Merge selected clips</b> to combine them. <b data-msgid="목록에서 제거">Remove from list</b> removes clips; <b data-msgid="되돌리기">Undo</b> restores the last edit.</p></aside>
+</div></div></article>
+<article id="en-export" data-topic="export"><h2 tabindex="-1">5. Confirm and save video files</h2><p>Check the folder and filenames, then export.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/export.png" width="1024" height="780" alt="5. Confirm and save video files — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#en-export-1" data-point="1" data-box="49,28,49,19" style="left:51%;top:30%" aria-label="1. Choose an output folder">1</a>
+<a class="hotspot" href="#en-export-2" data-point="2" data-box="49,47,49,40" style="left:51%;top:49%" aria-label="2. Check filenames">2</a>
+<a class="hotspot" href="#en-export-3" data-point="3" data-box="49,90,24,6" style="left:51%;top:92%" aria-label="3. Choose export settings">3</a>
+<a class="hotspot" href="#en-export-4" data-point="4" data-box="74,90,24,6" style="left:76%;top:92%" aria-label="4. Export files">4</a>
+</div><figcaption><a href="images/export.png" target="_blank" rel="noopener">Open full-size image</a></figcaption></figure><div class="instructions">
+<section class="point" id="en-export-1"><button class="point-select" data-point="1">(1) Choose an output folder</button><p>Choose an output folder with <b data-msgid="폴더 선택">Choose folder</b>. The date-folder option creates a subfolder when export starts.</p></section>
+<section class="point" id="en-export-2"><button class="point-select" data-point="2">(2) Check filenames</button><p>Check the names under <b data-msgid="저장할 파일명">Output filenames</b>. Duplicate filenames get a number suffix.</p></section>
+<section class="point" id="en-export-3"><button class="point-select" data-point="3">(3) Choose export settings</button><p>Open <b data-msgid="저장 설정">Export settings</b> to choose trimming and quality options. Click <b data-msgid="적용">Apply</b> to use them.</p></section>
+<section class="point" id="en-export-4"><button class="point-select" data-point="4">(4) Export files</button><p>Click <b data-msgid="파일 {count}개 저장 시작">Export … files</b>. When it finishes, use <b data-msgid="선택한 폴더 열기">Open selected folder</b> to view the results.</p></section>
+<aside class="extra"><h4>If some exports fail</h4><p>Check the success and failure counts and diagnostic log. Mark the failed clips for saving and try again.</p></aside>
+</div></div></article>
+<article id="en-encoding" data-topic="encoding"><h2 tabindex="-1">Trim method and quality</h2><p>Use <b data-msgid="정확한 구간 자르기">Frame-accurate trim</b> for exact start and end times.</p><div class="walkthrough"><figure><div class="shot" style="max-width:560px"><img src="images/encoding.png" width="560" height="720" alt="Trim method and quality — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#en-encoding-1" data-point="1" data-box="4,9,92,5" style="left:6%;top:11%" aria-label="1. Use a sharing preset">1</a>
+<a class="hotspot" href="#en-encoding-2" data-point="2" data-box="4,26,92,5" style="left:6%;top:28%" aria-label="2. Choose a trim method">2</a>
+<a class="hotspot" href="#en-encoding-3" data-point="3" data-box="4,35,92,27" style="left:6%;top:37%" aria-label="3. Set size and quality">3</a>
+<a class="hotspot" href="#en-encoding-4" data-point="4" data-box="4,65,92,21" style="left:6%;top:67%" aria-label="4. Adjust audio">4</a>
+</div><figcaption><a href="images/encoding.png" target="_blank" rel="noopener">Open full-size image</a></figcaption></figure><div class="instructions">
+<section class="point" id="en-encoding-1"><button class="point-select" data-point="1">(1) Use a sharing preset</button><p>Choose a preset and click <b data-msgid="프리셋 적용">Apply preset</b>. Confirm with <b data-msgid="적용">Apply</b> at the bottom of the window.</p></section>
+<section class="point" id="en-encoding-2"><button class="point-select" data-point="2">(2) Choose a trim method</button><p><b data-msgid="정확한 구간 자르기">Frame-accurate trim</b> re-encodes at your chosen boundaries. <b data-msgid="원본 빠른 복사">Fast source copy</b> is faster, but the boundaries may shift slightly.</p></section>
+<section class="point" id="en-encoding-3"><button class="point-select" data-point="3">(3) Set size and quality</button><p><b data-msgid="클립당 목표 크기">Target size per clip</b> sets a size target for each clip. Zero uses the quality setting. Actual sizes can vary.</p></section>
+<section class="point" id="en-encoding-4"><button class="point-select" data-point="4">(4) Adjust audio</button><p>Enable <b data-msgid="소리 포함">Include audio</b> to keep sound. A <b data-msgid="음량 조절">Volume adjustment</b> of 0 keeps the original level.</p></section>
+<aside class="extra"><h4>Quality, speed, and trim methods</h4><p><b data-msgid="원본 빠른 복사">Fast source copy</b> copies the original video without changing its quality. Choose <b data-msgid="정확한 구간 자르기">Frame-accurate trim</b> to adjust quality and file size.</p><p>Start with <b data-msgid="균형 있게 · 일반적인 공유용">Balanced · For general sharing</b>. Choose <b data-msgid="선명하게 · 용량 큼">High quality · Larger files</b> for more detail, or <b data-msgid="작게 · 화질보다 용량 우선">Small files · Lower quality</b> for smaller files. Smaller files may lose fine detail.</p><p>Processing speed controls how long saving takes, not how fast the video plays. <b data-msgid="빠르게 처리">Fast</b> finishes sooner. <b data-msgid="천천히 · 같은 화질에서 용량 절약">Slow · Smaller files at the same quality</b> spends more time fitting similar quality into a smaller file. Use it when you can wait.</p></aside>
+</div></div></article>
+<article id="en-youtube" data-topic="youtube"><h2 tabindex="-1">Download a YouTube range</h2><p>On the video selection screen, paste a <b data-msgid="YouTube 링크">YouTube link</b> and click <b data-msgid="영상 정보 확인 →">Check video details →</b>.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1280px"><img src="images/youtube-download.png" width="1280" height="780" alt="Download a YouTube range — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#en-youtube-1" data-point="1" data-box="1,30,98,9" style="left:94%;top:32%" aria-label="1. Enter the range">1</a>
+<a class="hotspot" href="#en-youtube-2" data-point="2" data-box="1,40,98,8" style="left:25%;top:44%" aria-label="2. Check concurrent downloads">2</a>
+<a class="hotspot" href="#en-youtube-3" data-point="3" data-box="1,51,98,5" style="left:75%;top:54%" aria-label="3. Start downloading">3</a>
+<a class="hotspot" href="#en-youtube-4" data-point="4" data-box="1,56,98,15" style="left:15%;top:64%" aria-label="4. Check progress">4</a>
+</div><figcaption><a href="images/youtube-download.png" target="_blank" rel="noopener">Open full-size image</a></figcaption></figure><div class="instructions">
+<section class="point" id="en-youtube-1"><button class="point-select" data-point="1">(1) Enter the range</button><p>Enter the range in <b data-msgid="시작">Start</b> and <b data-msgid="끝">End</b>. You can adjust the exact boundaries in the next step after downloading.</p></section>
+<section class="point" id="en-youtube-2"><button class="point-select" data-point="2">(2) Check concurrent downloads</button><p><b data-msgid="동시 다운로드 수">Concurrent downloads</b> defaults to 4. Green (1–4) is recommended. Red (5–16) means greater risk of request limits.</p><p>Requests may be limited even in the recommended range. If errors occur, lower the count and wait before trying again.</p></section>
+<section class="point" id="en-youtube-3"><button class="point-select" data-point="3">(3) Start downloading</button><p>Click <b data-msgid="선택 구간 다운로드">Download selection</b>.</p></section>
+<section class="point" id="en-youtube-4"><button class="point-select" data-point="4">(4) Check progress</button><p>Check the progress and estimated time remaining for the current step. When the download finishes, you return to the video selection screen.</p><p>If parallel fragment downloads are unavailable, the screen shows a notice and uses the standard method.</p></section>
+<aside class="extra"><h4>Entering live stream times</h4><p>For live streams, check the displayed origin for 00:00:00 before entering the range.</p></aside>
+</div></div></article>
+<article id="en-session" data-topic="session"><h2 tabindex="-1">Save and resume a session</h2><p>Use <b data-msgid="작업 저장">Save session</b> to keep your edits for later.</p><div class="walkthrough"><figure><div class="shot" style="max-width:1024px"><img src="images/video.png" width="1024" height="780" alt="Save and resume a session — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#en-session-1" data-point="1" data-box="76,1,9,5" style="left:84%;top:5%" aria-label="1. Save the session">1</a>
+<a class="hotspot" href="#en-session-2" data-point="2" data-box="67,1,9,5" style="left:69%;top:3%" aria-label="2. Open the session">2</a>
+</div><figcaption><a href="images/video.png" target="_blank" rel="noopener">Open full-size image</a></figcaption></figure><div class="instructions">
+<section class="point" id="en-session-1"><button class="point-select" data-point="1">(1) Save the session</button><p>Save a JSON file with <b data-msgid="작업 저장">Save session</b>. It keeps your clips and editing information.</p></section>
+<section class="point" id="en-session-2"><button class="point-select" data-point="2">(2) Open the session</button><p>Choose the saved JSON with <b data-msgid="작업 열기">Open session</b>. Keep the source videos at their original paths.</p></section>
+<aside class="extra"><h4>To create video files</h4><p>Create finished videos in <b data-msgid="파일 저장">Export clips</b>. The session JSON does not contain the source videos.</p></aside>
+</div></div></article>
+<article id="en-settings" data-topic="settings"><h2 tabindex="-1">Language and app settings</h2><p>Open <b data-msgid="Settings">Settings</b> from the top bar.</p><div class="walkthrough"><figure><div class="shot" style="max-width:700px"><img src="images/settings.png" width="700" height="745" alt="Language and app settings — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#en-settings-1" data-point="1" data-box="2,1,96,5" style="left:4%;top:3%" aria-label="1. Change the display language">1</a>
+<a class="hotspot" href="#en-settings-2" data-point="2" data-box="2,14,96,5" style="left:4%;top:16%" aria-label="2. Open recognition settings">2</a>
+<a class="hotspot" href="#en-settings-3" data-point="3" data-box="2,25,96,19" style="left:4%;top:27%" aria-label="3. Analysis performance">3</a>
+<a class="hotspot" href="#en-settings-4" data-point="4" data-box="2,61,96,12" style="left:4%;top:63%" aria-label="4. Change the data folder">4</a>
+<a class="hotspot" href="#en-settings-5" data-point="5" data-box="2,76,96,17" style="left:4%;top:78%" aria-label="5. Check an error">5</a>
+</div><figcaption><a href="images/settings.png" target="_blank" rel="noopener">Open full-size image</a></figcaption></figure><div class="instructions">
+<section class="point" id="en-settings-1"><button class="point-select" data-point="1">(1) Change the display language</button><p>Choose 한국어 or English under <b data-msgid="Language">언어</b>. Reopen the app to apply it.</p></section>
+<section class="point" id="en-settings-2"><button class="point-select" data-point="2">(2) Open recognition settings</button><p>Open <b data-msgid="자켓 · 글자 인식 설정…">Jacket and text recognition…</b> to adjust song and text recognition.</p></section>
+<section class="point" id="en-settings-3"><button class="point-select" data-point="3">(3) Analysis performance</button><p>Use automatic values. Decoder threads read frames; jacket workers compare artwork. Higher values can use more CPU and memory. Changes apply to the next analysis.</p></section>
+<section class="point" id="en-settings-4"><button class="point-select" data-point="4">(4) Change the data folder</button><p>Use <b data-msgid="데이터 폴더 변경…">Change data folder…</b> to choose a new location. The app restarts when the new folder is ready.</p></section>
+<section class="point" id="en-settings-5"><button class="point-select" data-point="5">(5) Check an error</button><p>Read the <b data-msgid="진단 로그">Diagnostic log</b> for details. For tool errors, click <b data-msgid="FFmpeg·다운로드 도구 확인">Check FFmpeg and download tools</b>.</p></section>
+</div></div></article>
+<article id="en-recognition" data-topic="recognition"><h2 tabindex="-1">Improve recognition</h2><p>Check the regions and current frame first.</p><div class="walkthrough"><figure><div class="shot" style="max-width:401px"><img src="images/recognition.png" width="401" height="406" alt="Improve recognition — English UI"><div class="highlight" hidden aria-hidden="true"></div>
+<a class="hotspot" href="#en-recognition-1" data-point="1" data-box="3,9,94,6" style="left:5%;top:11%" aria-label="1. When the camera moves">1</a>
+<a class="hotspot" href="#en-recognition-2" data-point="2" data-box="3,17,94,20" style="left:60%;top:25%" aria-label="2. When songs are missed">2</a>
+<a class="hotspot" href="#en-recognition-3" data-point="3" data-box="72,89,25,9" style="left:74%;top:91%" aria-label="3. Apply and test">3</a>
+</div><figcaption><a href="images/recognition.png" target="_blank" rel="noopener">Open full-size image</a></figcaption></figure><div class="instructions">
+<section class="point" id="en-recognition-1"><button class="point-select" data-point="1">(1) When the camera moves</button><p>Lower <b data-msgid="자켓 위치 보정 간격 (초)">Jacket alignment interval (s)</b> to check the position more often.</p></section>
+<section class="point" id="en-recognition-2"><button class="point-select" data-point="2">(2) When songs are missed</button><p>Lower <b data-msgid="곡 확인 간격 (초)">Song scan interval (s)</b> to check more often. If similar jackets get mixed up, try a lower <b data-msgid="자켓 차이 허용값">Jacket difference threshold</b>.</p></section>
+<section class="point" id="en-recognition-3"><button class="point-select" data-point="3">(3) Apply and test</button><p>Click <b data-msgid="적용">Apply</b>. Return to Recognition regions and use <b data-msgid="현재 화면 인식 확인">Test current frame</b> again.</p></section>
+<aside class="extra"><h4>If song data is missing</h4><p>Open <b data-msgid="Settings">Settings</b> → <b data-msgid="곡 데이터 업데이트">Update song data</b>. Analyze again when the download finishes.</p></aside>
+</div></div></article>
+<article id="en-help" data-topic="help"><h2 tabindex="-1">Troubleshooting and shortcuts</h2>
+<aside class="extra"><h4>Song data is missing / A new song was released</h4><p>Open <b data-msgid="Settings">Settings</b> → <b data-msgid="곡 데이터 업데이트">Update song data</b>. When the download finishes, find songs again.</p></aside>
+<aside class="extra"><h4>No clips are visible</h4><p>Clear the search and enable <b data-msgid="곡 미확인 구간 표시">Show unidentified song sections</b>. Check <b data-msgid="현재 영상">Current video</b>.</p></aside>
+<aside class="extra"><h4>Exported boundaries shifted</h4><p>Choose <b data-msgid="정확한 구간 자르기">Frame-accurate trim</b> in <b data-msgid="저장 설정">Export settings</b>.</p></aside>
+<aside class="extra"><h4>Player names are wrong</h4><p>Check that the <b data-msgid="1P 이름">1P name</b> region frames the text. You can also edit the name and click <b data-msgid="수정 적용">Apply edits</b>.</p></aside>
+<aside class="extra"><h4>Open or share this guide</h4><p>Click <b data-msgid="도움말">Help</b> or press F1 in the app to open this guide in a separate window. You can also open manual.html in a browser on Windows, macOS, or Linux. Share the whole manual folder.</p></aside>
+<table><caption>Keys used in the app</caption><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody>
+<tr><td><kbd>F1</kbd></td><td>Open Help</td></tr>
+<tr><td><kbd>Space / K</kbd></td><td>Play/pause / pause</td></tr>
+<tr><td><kbd>← / →</kbd></td><td>Seek 1 second while playing; step one frame while paused</td></tr>
+<tr><td><kbd>Shift + ← / →</kbd></td><td>Seek 1 second</td></tr>
+<tr><td><kbd>Ctrl + ← / →</kbd></td><td>Seek 5 seconds</td></tr>
+<tr><td><kbd>J / L</kbd></td><td>Seek backward / play forward; repeat to increase speed</td></tr>
+<tr><td><kbd>Home / End</kbd></td><td>Go to the start / end of the video</td></tr>
+<tr><td><kbd>I / O</kbd></td><td>Set selection start / end to the playhead</td></tr>
+<tr><td><kbd>Alt + ← / →</kbd></td><td>Go to the selection start / end</td></tr>
+<tr><td><kbd>Ctrl + drag</kbd></td><td>Timeline: move the selection without changing its length; video: pan</td></tr>
+<tr><td><kbd>Alt + drag</kbd></td><td>Adjust the selection without snapping to other boundaries</td></tr>
+<tr><td><kbd>Ctrl / Shift + click</kbd></td><td>Select individual clips / a range of clips</td></tr>
+<tr><td><kbd>A / Delete</kbd></td><td>Add a clip manually / remove from the list</td></tr>
+<tr><td><kbd>+ / − / 0</kbd></td><td>Zoom the timeline in / out / fit</td></tr>
+<tr><td><kbd>wheel / Shift + wheel</kbd></td><td>Scroll the timeline / scroll faster</td></tr>
+<tr><td><kbd>Ctrl + wheel</kbd></td><td>Zoom the video or timeline in the app</td></tr>
+<tr><td><kbd>Ctrl + + / −</kbd></td><td>Zoom the video in Recognition regions</td></tr>
+<tr><td><kbd>Ctrl + 0 / middle click</kbd></td><td>Fit the video in Recognition regions</td></tr>
+<tr><td><kbd>Ctrl + S</kbd></td><td>Save the session JSON</td></tr>
+<tr><td><kbd>Ctrl + E</kbd></td><td>Open export settings for checked clips</td></tr>
+<tr><td><kbd>Ctrl + Z</kbd></td><td>Undo the last clip edit</td></tr>
+</tbody></table><p>While typing, text-field editing shortcuts take priority.</p></article></section>
+</main><footer><small>ArcadeClip</small></footer></body></html>

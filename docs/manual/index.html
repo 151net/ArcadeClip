@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ArcadeClip</title>
+<meta name="description" content="한 번에 길게 녹화한 maimai 영상을 곡별 MP4 파일로 나누는 Windows 앱입니다.">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="guide.css">
+<style>
+/* Only what the guide stylesheet does not already cover. */
+#intro { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: .5rem; }
+#intro img { width: 80px; height: 80px; }
+#intro h1 { font-size: 2rem; }
+.tagline { font-size: 1.15rem; max-width: 58ch; margin: .4rem 0 0; }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.25rem 0 0; }
+.actions a { display: inline-block; padding: .6rem 1rem; border: 1px solid #171717; border-radius: .25rem; text-decoration: none; color: #171717; }
+.actions a.primary { background: #171717; color: white; }
+.does { list-style: none; padding: 0; display: grid; gap: 1.25rem; }
+.does h3 { margin: 0 0 .2rem; font-size: 1.05rem; }
+.does p { margin: 0; }
+.gallery { display: grid; gap: 1.5rem; padding: 0; list-style: none; }
+.gallery img { display: block; width: 100%; height: auto; border: 1px solid #aaa; }
+.gallery figcaption { margin-top: .4rem; }
+@media (min-width: 720px) {
+  .does { grid-template-columns: 1fr 1fr; gap: 1.25rem 2rem; }
+  .gallery { grid-template-columns: 1fr 1fr; }
+}
+.limits { list-style: none; padding: 0; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); max-width: 40rem; }
+.limits figure { margin: 0; }
+.limits svg { display: block; width: 100%; height: auto; }
+.limits figcaption { margin-top: .35rem; }
+.limits b { display: block; }
+.facts th { white-space: nowrap; }
+html[lang="ko"] [data-lang="en"], html[lang="en"] [data-lang="ko"] { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div id="tools">
+    <label>한국어 / English
+      <select id="language">
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="intro">
+    <img src="icon.png" alt="" width="80" height="80">
+    <div>
+      <h1>ArcadeClip</h1>
+      <p class="tagline" data-lang="ko">길게 녹화한 maimai 영상을 곡별 MP4 파일로 나눕니다.</p>
+      <p class="tagline" data-lang="en">Split a long maimai recording into one MP4 per song.</p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a class="primary" href="https://github.com/151net/ArcadeClip/releases/latest" data-lang="ko">Windows용 내려받기</a>
+    <a class="primary" href="https://github.com/151net/ArcadeClip/releases/latest" data-lang="en">Download for Windows</a>
+    <a href="manual.html#ko/overview/1" data-lang="ko">사용 설명서</a>
+    <a href="manual.html#en/overview/1" data-lang="en">User guide</a>
+    <a href="https://github.com/151net/ArcadeClip" data-lang="ko">소스 코드</a>
+    <a href="https://github.com/151net/ArcadeClip" data-lang="en">Source code</a>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <h2 data-lang="ko">소개</h2>
+  <h2 data-lang="en">About</h2>
+  <p data-lang="ko">아케이드 녹화 영상 하나에는 곡이 여러 개 들어 있습니다. 곡마다 시작과 끝을 찾아 직접 자르려면 시간이 오래 걸리고, 파일 이름도 하나씩 붙여야 합니다.</p>
+  <p data-lang="en">One arcade recording holds several songs. Cutting each one by hand takes a long time, and every file still needs a name.</p>
+  <p data-lang="ko">ArcadeClip은 영상 속 자켓으로 곡을 인식하고, 이름과 달성률을 읽어 파일 이름을 만듭니다. 결과를 확인한 뒤 저장할 클립만 고르면 됩니다.</p>
+  <p data-lang="en">ArcadeClip finds the songs by the jacket shown in the video, and reads the name and achievement to build the file names. You check the result and pick the clips to save.</p>
+</section>
+
+
+<section>
+  <h2 data-lang="ko">주요 기능</h2>
+  <h2 data-lang="en">Features</h2>
+  <ul class="does">
+    <li>
+      <h3 data-lang="ko">곡 찾기</h3>
+      <h3 data-lang="en">Find songs</h3>
+      <p data-lang="ko">화면의 자켓을 공식 자켓과 비교해 곡이 바뀌는 지점을 찾습니다.</p>
+      <p data-lang="en">Compares the jacket on screen with the official song art to find where each song starts and ends.</p>
+    </li>
+    <li>
+      <h3 data-lang="ko">이름과 달성률 읽기</h3>
+      <h3 data-lang="en">Read names and achievements</h3>
+      <p data-lang="ko">화면의 글자를 읽어 곡명·이름·달성률로 파일 이름을 만듭니다.</p>
+      <p data-lang="en">Reads the text on screen and builds file names from the song title, player name, and achievement.</p>
+    </li>
+    <li>
+      <h3 data-lang="ko">YouTube 구간 가져오기</h3>
+      <h3 data-lang="en">Download a YouTube range</h3>
+      <p data-lang="ko">링크를 붙여넣고 필요한 구간만 받습니다. 영상 전체를 받지 않아도 됩니다.</p>
+      <p data-lang="en">Paste a link and download only the range you need, not the whole video.</p>
+    </li>
+    <li>
+      <h3 data-lang="ko">저장 방식 선택</h3>
+      <h3 data-lang="en">Choose how to save</h3>
+      <p data-lang="ko"><b>원본 빠른 복사</b>로 빠르게 저장하거나, <b>정확한 구간 자르기</b>로 시작·끝을 맞춥니다.</p>
+      <p data-lang="en">Pick <b>Fast source copy</b> for speed, or <b>Frame-accurate trim</b> to match the start and end you set.</p>
+    </li>
+    <li>
+      <h3 data-lang="ko">프로필</h3>
+      <h3 data-lang="en">Profiles</h3>
+      <p data-lang="ko">인식 영역을 프로필로 저장해 두면 같은 촬영 구도의 다음 영상에서 그대로 씁니다. 오락실별로 프로필을 만들어 관리해 보세요.</p>
+      <p data-lang="en">Save the regions as a profile and use it again on the next video shot the same way. Keep one profile per game center.</p>
+    </li>
+    <li>
+      <h3 data-lang="ko">한국어와 English</h3>
+      <h3 data-lang="en">Korean and English</h3>
+      <p data-lang="ko">앱 표시 언어와 사용 설명서를 두 언어로 제공합니다.</p>
+      <p data-lang="en">The app and the user guide are available in both languages.</p>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2 data-lang="ko">한계</h2>
+  <h2 data-lang="en">Limits</h2>
+  <p data-lang="ko">곡 인식은 화면의 자켓을 공식 자켓과 비교하는 방식입니다. 인식 영역 안에 자켓이 정사각형 그대로, 잘리지 않고 들어와야 인식됩니다.</p>
+  <p data-lang="en">Songs are recognized by comparing the jacket on screen with the official art, so the jacket has to sit inside the region square and uncropped.</p>
+  <ul class="limits">
+    <li>
+      <figure>
+        <svg viewBox="0 0 108 136" role="img" aria-labelledby="fit-title">
+          <title id="fit-title">인식 영역 안에 정사각형으로 들어온 자켓 / A square jacket inside the region</title>
+          <rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <image href="jacket-example.png" x="20" y="20" width="68" height="68"/>
+          <rect x="20" y="20" width="68" height="68" fill="none" stroke="#171717" stroke-width="2"/>
+          <circle cx="54" cy="122" r="10" fill="none" stroke="#2e7d32" stroke-width="4"/>
+        </svg>
+        <figcaption>
+          <b data-lang="ko">정사각형</b><b data-lang="en">Square</b>
+          <span data-lang="ko">인식 가능</span><span data-lang="en">Recognized</span>
+        </figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <svg viewBox="0 0 108 136" role="img" aria-labelledby="skew-title">
+          <title id="skew-title">가로세로 비율이 맞지 않아 찌그러진 자켓 / A jacket squeezed out of square</title>
+          <rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <g transform="matrix(0.96 0.15 -0.06 0.95 8 -6)">
+            <image href="jacket-example.png" x="22" y="22" width="64" height="64" preserveAspectRatio="none"/>
+            <rect x="22" y="22" width="64" height="64" fill="none" stroke="#171717" stroke-width="2"/>
+          </g>
+          <g stroke="#c62828" stroke-width="4" stroke-linecap="round">
+            <line x1="46" y1="114" x2="62" y2="130"/><line x1="62" y1="114" x2="46" y2="130"/>
+          </g>
+        </svg>
+        <figcaption>
+          <b data-lang="ko">찌그러짐</b><b data-lang="en">Skewed</b>
+          <span data-lang="ko">인식 불가</span><span data-lang="en">Not recognized</span>
+        </figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <svg viewBox="0 0 108 136" role="img" aria-labelledby="cut-title">
+          <title id="cut-title">인식 영역 밖으로 나가 잘린 자켓 / A jacket cut off by the region edge</title>
+          <defs><clipPath id="region-clip"><rect x="8" y="8" width="92" height="92"/></clipPath></defs>
+          <g clip-path="url(#region-clip)">
+            <image href="jacket-example.png" x="-12" y="20" width="68" height="68"/>
+            <rect x="-12" y="20" width="68" height="68" fill="none" stroke="#171717" stroke-width="2"/>
+          </g>
+          <rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <g stroke="#c62828" stroke-width="4" stroke-linecap="round">
+            <line x1="46" y1="114" x2="62" y2="130"/><line x1="62" y1="114" x2="46" y2="130"/>
+          </g>
+        </svg>
+        <figcaption>
+          <b data-lang="ko">잘림</b><b data-lang="en">Cut off</b>
+          <span data-lang="ko">인식 불가</span><span data-lang="en">Not recognized</span>
+        </figcaption>
+      </figure>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2 data-lang="ko">화면</h2>
+  <h2 data-lang="en">Screens</h2>
+  <ul class="gallery">
+    <li>
+      <figure>
+        <img src="images/regions.png" alt="영상 위에 인식 영역을 지정하는 화면 / Marking recognition regions on the video" width="1024" height="780">
+        <figcaption data-lang="ko">자켓과 글자를 읽을 인식 영역을 영상 위에 지정합니다.</figcaption>
+        <figcaption data-lang="en">Mark the regions where the jacket and the text appear.</figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <img src="images/review.png" alt="찾아낸 클립을 확인하는 화면 / Reviewing the clips it found" width="1024" height="780">
+        <figcaption data-lang="ko">인식한 클립을 확인하고 저장할 클립에 체크합니다.</figcaption>
+        <figcaption data-lang="en">Review the clips it found and choose which ones to save.</figcaption>
+      </figure>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2 data-lang="ko">설치</h2>
+  <h2 data-lang="en">Install</h2>
+  <table class="facts">
+    <tbody>
+      <tr>
+        <th scope="row" data-lang="ko">운영체제</th>
+        <th scope="row" data-lang="en">Operating system</th>
+        <td data-lang="ko">Windows 10 · 11 x64</td>
+        <td data-lang="en">Windows 10 or 11, x64</td>
+      </tr>
+      <tr>
+        <th scope="row" data-lang="ko">실행</th>
+        <th scope="row" data-lang="en">Run</th>
+        <td data-lang="ko">ZIP을 풀고 <b>ArcadeClip.exe</b>를 실행하세요.</td>
+        <td data-lang="en">Unpack the ZIP and run <b>ArcadeClip.exe</b>.</td>
+      </tr>
+      <tr>
+        <th scope="row" data-lang="ko">라이선스</th>
+        <th scope="row" data-lang="en">License</th>
+        <td data-lang="ko">GNU General Public License v3.0</td>
+        <td data-lang="en">GNU General Public License v3.0</td>
+      </tr>
+    </tbody>
+  </table>
+  <p data-lang="ko">Windows N·KN 에디션에서는 Media Feature Pack이 필요합니다.</p>
+  <p data-lang="en">Windows N and KN editions need the Media Feature Pack.</p>
+</section>
+
+<section>
+  <h2 data-lang="ko">도움말과 문의</h2>
+  <h2 data-lang="en">Help and contact</h2>
+  <p data-lang="ko">사용 방법은 <a href="manual.html#ko/overview/1">사용 설명서</a>에 있습니다. 앱에서 <b>도움말</b> 또는 F1을 눌러도 같은 내용이 열립니다.</p>
+  <p data-lang="en">The <a href="manual.html#en/overview/1">user guide</a> covers how to use it. <b>Help</b> or F1 in the app opens the same pages.</p>
+  <p data-lang="ko">문제가 생기면 앱의 <b>Settings → 문제 신고</b>를 누르거나 아래에서 알려 주세요.</p>
+  <p data-lang="en">If something goes wrong, use <b>Settings → Report a problem</b> in the app, or report it below.</p>
+  <div class="actions">
+    <a href="https://github.com/151net/ArcadeClip/issues" data-lang="ko">문제 신고</a>
+    <a href="https://github.com/151net/ArcadeClip/issues" data-lang="en">Report a problem</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <small data-lang="ko">ArcadeClip · <a href="manual.html#ko/overview/1">사용 설명서</a> · <a href="https://github.com/151net/ArcadeClip">소스 코드</a><br>
+  곡 자켓 이미지는 <a href="https://maimai.sega.jp/">maimai 공식 사이트</a>의 자료이며, 권리는 SEGA와 각 권리자들에게 있습니다.</small>
+  <small data-lang="en">ArcadeClip · <a href="manual.html#en/overview/1">User guide</a> · <a href="https://github.com/151net/ArcadeClip">Source code</a><br>
+  Song jacket images come from the <a href="https://maimai.sega.jp/">official maimai site</a>; SEGA and the respective owners hold the rights.</small>
+</footer>
+
+<script>
+// Reading language follows the URL so a link can point at either one.
+(function () {
+  var select = document.getElementById('language');
+  function apply(language) {
+    document.documentElement.lang = language === 'en' ? 'en' : 'ko';
+    select.value = document.documentElement.lang;
+  }
+  apply(location.hash.replace('#', '') || (navigator.language || '').slice(0, 2));
+  select.addEventListener('change', function () {
+    apply(select.value);
+    location.hash = select.value;
+  });
+  addEventListener('hashchange', function () { apply(location.hash.replace('#', '')); });
+})();
+</script>
+
+</body>
+</html>

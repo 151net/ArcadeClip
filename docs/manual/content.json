@@ -1,0 +1,905 @@
+[
+  [
+    "welcome",
+    "welcome.png",
+    [
+      "환영합니다 · 처음 한 번",
+      "Welcome · First launch"
+    ],
+    [
+      "데이터 폴더를 정하면 곡 인식에 필요한 파일을 받습니다.",
+      "Choose where to keep the files used for song recognition."
+    ],
+    [
+      [
+        [
+          2,
+          35,
+          96,
+          14
+        ],
+        [
+          "데이터 폴더 지정",
+          "Choose a data folder"
+        ],
+        [
+          "{{폴더 선택}}으로 데이터 폴더를 지정하세요. 최초 1회 곡 자켓 약 100 MB를 다운로드합니다.",
+          "Use {{폴더 선택}} to choose a data folder. The first launch downloads about 100 MB of song jackets."
+        ]
+      ],
+      [
+        [
+          80,
+          80,
+          18,
+          16
+        ],
+        [
+          "다운로드 시작",
+          "Start the download"
+        ],
+        [
+          "{{시작하기 →}}를 누르세요. 다운로드에 약 10분이 걸릴 수 있습니다. 완료될 때까지 기다리세요.",
+          "Click {{시작하기 →}}. The download may take about 10 minutes. Wait for it to finish."
+        ]
+      ]
+    ],
+    [
+      "다음 실행부터",
+      "On later launches",
+      "같은 데이터 폴더의 파일을 다시 사용합니다. 신곡은 {{Settings}} → {{곡 데이터 업데이트}}로 받으세요.",
+      "Files in the same data folder are reused. Get new songs with {{Settings}} → {{곡 데이터 업데이트}}."
+    ]
+  ],
+  [
+    "video",
+    "video.png",
+    [
+      "1. 영상 열기",
+      "1. Open a video"
+    ],
+    [
+      "파일 또는 폴더 중 한 방법으로 영상을 여세요.",
+      "Open a video using either files or a folder."
+    ],
+    [
+      [
+        [
+          2,
+          18,
+          25,
+          5
+        ],
+        [
+          "파일 추가",
+          "Add files"
+        ],
+        [
+          "{{파일 추가}}를 누르세요. 영상 파일을 선택하면 미리보기가 열립니다.",
+          "Click {{파일 추가}}. Choose a video file to open its preview."
+        ]
+      ],
+      [
+        [
+          28,
+          18,
+          26,
+          5
+        ],
+        [
+          "폴더 추가",
+          "Add a folder"
+        ],
+        [
+          "여러 영상을 가져오려면 {{폴더 추가}}를 누르세요. 파일을 창으로 끌어와도 됩니다.",
+          "Click {{폴더 추가}} to add several videos. You can also drag video files into the window."
+        ]
+      ],
+      [
+        [
+          17,
+          1,
+          50,
+          5
+        ],
+        [
+          "현재 영상 선택",
+          "Choose the current video"
+        ],
+        [
+          "{{현재 영상}}에서 작업할 영상을 고르세요. 클립 목록도 그 영상에 맞춰 바뀝니다.",
+          "Choose a video in {{현재 영상}}. The clip list switches to that video."
+        ]
+      ],
+      [
+        [
+          55,
+          89,
+          43,
+          7
+        ],
+        [
+          "시간 선택으로 이동",
+          "Continue to Select range"
+        ],
+        [
+          "영상이 열리면 {{시간 선택으로 →}}를 누르세요.",
+          "Once the video opens, click {{시간 선택으로 →}}."
+        ]
+      ]
+    ],
+    [
+      "YouTube 영상이라면",
+      "For a YouTube video",
+      "아래 YouTube 구간 가져오기에서 필요한 부분만 받으세요.",
+      "Use Download a YouTube range below to get only the part you need."
+    ]
+  ],
+  [
+    "range",
+    "range.png",
+    [
+      "2. 시간 범위 지정",
+      "2. Set the time range"
+    ],
+    [
+      "A·B·C 중 편한 방법 하나로 시작과 끝을 정하세요.",
+      "Use any one of methods A–C to set the start and end."
+    ],
+    [
+      [
+        [
+          1,
+          86,
+          98,
+          4
+        ],
+        [
+          "시간 입력",
+          "Enter times"
+        ],
+        [
+          "{{시작}}과 {{끝}}에 시간을 입력하세요. 예: 00:01:30.000은 1분 30초입니다.",
+          "Enter {{시작}} and {{끝}} times. For example, 00:01:30.000 means 1 minute and 30 seconds."
+        ]
+      ],
+      [
+        [
+          1,
+          90,
+          39,
+          6
+        ],
+        [
+          "현재 위치 사용",
+          "Use the playhead"
+        ],
+        [
+          "시작 장면에서 {{현재 위치를 시작으로}}를 누르세요. 끝 장면에서는 {{현재 위치를 끝으로}}를 누르세요.",
+          "At the first scene, click {{현재 위치를 시작으로}}. At the last scene, click {{현재 위치를 끝으로}}."
+        ]
+      ],
+      [
+        [
+          1,
+          73,
+          98,
+          5
+        ],
+        [
+          "구간 조정",
+          "Adjust the selection"
+        ],
+        [
+          "파란 구간의 양끝을 드래그하세요. {{선택 구간 재생}}으로 선택한 구간을 확인하세요.",
+          "Drag either edge of the blue selection. Use {{선택 구간 재생}} to check the range."
+        ]
+      ],
+      [
+        [
+          79,
+          90,
+          20,
+          6
+        ],
+        [
+          "인식 영역으로 이동",
+          "Continue to Recognition regions"
+        ],
+        [
+          "구간이 맞으면 {{인식 영역으로 →}}를 누르세요.",
+          "When the range is right, click {{인식 영역으로 →}}."
+        ]
+      ]
+    ],
+    [
+      "영상 전체를 분석하려면",
+      "To scan the whole video",
+      "{{전체 구간}}을 누르세요.",
+      "Click {{전체 구간}}."
+    ]
+  ],
+  [
+    "regions",
+    "regions.png",
+    [
+      "3. 곡과 글자 위치 지정하기",
+      "3. Mark song and text regions"
+    ],
+    [
+      "같은 촬영 구도라면 저장한 프로필을 사용하세요.",
+      "Reuse a saved profile for the same camera layout."
+    ],
+    [
+      [
+        [
+          68,
+          21,
+          28,
+          5
+        ],
+        [
+          "프로필 고르기",
+          "Choose a profile"
+        ],
+        [
+          "{{프로필 선택}}에서 프로필을 고르세요. 받은 JSON·ZIP 파일은 오른쪽 가져오기 아이콘으로 여세요.",
+          "Choose a profile in {{프로필 선택}}. Use the import icon on its right to open a shared JSON or ZIP file."
+        ]
+      ],
+      [
+        [
+          68,
+          30,
+          28,
+          5
+        ],
+        [
+          "영역 종류 고르기",
+          "Choose a region type"
+        ],
+        [
+          "{{영역 선택}}에서 {{자켓}}(곡 이미지)을 고르세요.",
+          "Choose {{자켓}} (the song artwork) in {{영역 선택}}."
+        ]
+      ],
+      [
+        [
+          1,
+          14,
+          65,
+          72
+        ],
+        [
+          "영상에 사각형 그리기",
+          "Draw a rectangle"
+        ],
+        [
+          "곡 이미지를 감싸도록 드래그하세요. {{1P 이름}}과 {{1P 달성률}}도 각각 영역을 지정하세요.",
+          "Drag around the song artwork. Define separate regions for {{1P 이름}} and {{1P 달성률}} too."
+        ]
+      ],
+      [
+        [
+          68,
+          86,
+          30,
+          4
+        ],
+        [
+          "현재 장면으로 확인",
+          "Test the current frame"
+        ],
+        [
+          "{{현재 화면 인식 확인}}을 누르세요. 인식한 곡명과 이름을 확인하세요.",
+          "Click {{현재 화면 인식 확인}}. Check the detected song title and player name."
+        ]
+      ],
+      [
+        [
+          68,
+          90,
+          30,
+          6
+        ],
+        [
+          "곡 찾기",
+          "Find songs"
+        ],
+        [
+          "{{이 구간에서 곡 찾기 →}}를 누르세요. 긴 영상은 곡 찾기에 시간이 오래 걸릴 수 있습니다. 하단 진행 상태를 확인하세요.",
+          "Click {{이 구간에서 곡 찾기 →}}. Finding songs in a long video can take a while. Check progress at the bottom."
+        ]
+      ]
+    ],
+    [
+      "팁 · 프로필을 새로 만들 때",
+      "Tip · Creating a profile",
+      "필수 영역은 {{자켓}}·{{1P 이름}}·{{1P 달성률}}입니다. 2P 영역은 필요할 때 추가하세요. {{프로필 저장}}으로 저장하면 다음 영상에서도 사용할 수 있습니다.",
+      "{{자켓}}, {{1P 이름}}, and {{1P 달성률}} are required. Add 2P regions when needed. Use {{프로필 저장}} to reuse the layout."
+    ]
+  ],
+  [
+    "review",
+    "review.png",
+    [
+      "4. 클립 확인하기",
+      "4. Review clips"
+    ],
+    [
+      "클립을 선택하면 편집할 수 있습니다. 체크박스는 저장할 클립을 표시합니다.",
+      "Select a clip to edit it. Check its box to mark it for saving."
+    ],
+    [
+      [
+        [
+          2,
+          34,
+          27,
+          8
+        ],
+        [
+          "확인할 클립 선택",
+          "Select a clip to review"
+        ],
+        [
+          "목록에서 클립을 선택하면 편집할 수 있습니다. 저장할 클립은 체크박스로 표시하세요.",
+          "Select a row to edit that clip. Use its checkbox to mark it for saving."
+        ]
+      ],
+      [
+        [
+          2,
+          18,
+          27,
+          15
+        ],
+        [
+          "목록 필터",
+          "Filter the list"
+        ],
+        [
+          "이름을 검색해 목록을 좁히세요. {{보이는 클립 체크}}는 현재 보이는 항목에 체크합니다.",
+          "Search a player name to narrow the list. {{보이는 클립 체크}} checks the items currently shown."
+        ]
+      ],
+      [
+        [
+          2,
+          85,
+          27,
+          10
+        ],
+        [
+          "저장 대상 확정하기",
+          "Confirm clips to save"
+        ],
+        [
+          "{{체크한 클립 {count}개 저장 설정 →}} 또는 {{보이는 클립 {count}개 저장 설정 →}}로 저장 대상을 확정하세요. 파일은 다음 화면에서 저장합니다.",
+          "Confirm your clips with {{체크한 클립 {count}개 저장 설정 →}} or {{보이는 클립 {count}개 저장 설정 →}}. Save the files on the next screen."
+        ]
+      ],
+      [
+        [
+          70,
+          48,
+          28,
+          43
+        ],
+        [
+          "내용 수정",
+          "Edit clip details"
+        ],
+        [
+          "곡명·이름·달성률은 파일명을 만들 때 쓰는 정보입니다. 영상에 글자로 입혀지지 않으므로, 파일명이 괜찮다면 수정하지 않아도 됩니다. 바꾼 뒤 {{수정 적용}}을 누르세요.",
+          "Song titles, names, and achievement values are used to build filenames. They are not drawn onto the video. Skip these edits if the filename is fine. Click {{수정 적용}} after making changes."
+        ]
+      ],
+      [
+        [
+          31,
+          80,
+          38,
+          15
+        ],
+        [
+          "시간축으로 자르기",
+          "Trim on the timeline"
+        ],
+        [
+          "필요할 때만 파란 구간의 양끝을 드래그하세요. 오른쪽 {{시작}}·{{끝}}에 시간을 입력하고 {{수정 적용}}을 눌러도 됩니다. 이 값은 실제 저장 구간을 바꿉니다. {{시작 부분 재생}}·{{끝 부분 재생}}으로 확인하세요.",
+          "If needed, drag either edge of the blue selection. You can also enter {{시작}} and {{끝}} times on the right and click {{수정 적용}}. These values change the saved video range. Check it with {{시작 부분 재생}} and {{끝 부분 재생}}."
+        ]
+      ],
+      [
+        [
+          70,
+          15,
+          28,
+          27
+        ],
+        [
+          "전체 클립의 시작·끝 조정",
+          "Adjust all clip boundaries"
+        ],
+        [
+          "{{클립 시작·끝 일괄 조정}}에서 {{시작 오프셋}}·{{끝 오프셋}}을 입력하고 {{모든 클립에 일괄 적용}}을 누르세요. 예: 시작 −10초, 끝 +10초는 곡 앞뒤를 10초씩 더 담습니다.\n\n현재 영상의 자동 인식 클립에 적용됩니다. 매번 자동 인식 원본을 기준으로 계산하며, 직접 추가한 클립은 그대로 둡니다. 개별로 시간을 수정한 클립이 있으면 유지할지 선택할 수 있습니다.",
+          "In {{클립 시작·끝 일괄 조정}}, enter {{시작 오프셋}} and {{끝 오프셋}}, then click {{모든 클립에 일괄 적용}}. For example, −10 seconds at the start and +10 seconds at the end includes 10 extra seconds on each side.\n\nThis affects detected clips in the current video. Each application uses the original detection times; it does not keep adding time. Manually added clips stay unchanged. If you edited a clip’s boundaries individually, you can choose to keep them."
+        ]
+      ]
+    ],
+    [
+      "직접 추가·합치기·되돌리기",
+      "Add, merge, or undo",
+      "{{클립 직접 추가}}는 현재 구간을 추가합니다. Shift·Ctrl로 여러 클립을 선택하고 {{선택한 클립 합치기}}를 누르면 합칩니다. {{목록에서 제거}}는 목록에서 제거하고, {{되돌리기}}는 직전 편집을 되돌립니다.",
+      "{{클립 직접 추가}} adds the current range. Select clips with Shift or Ctrl, then click {{선택한 클립 합치기}} to combine them. {{목록에서 제거}} removes clips; {{되돌리기}} restores the last edit."
+    ]
+  ],
+  [
+    "export",
+    "export.png",
+    [
+      "5. 저장 대상 확정 및 파일 저장",
+      "5. Confirm and save video files"
+    ],
+    [
+      "폴더와 파일명을 확인한 뒤 내보내세요.",
+      "Check the folder and filenames, then export."
+    ],
+    [
+      [
+        [
+          49,
+          28,
+          49,
+          19
+        ],
+        [
+          "저장 폴더 선택",
+          "Choose an output folder"
+        ],
+        [
+          "{{폴더 선택}}으로 저장 위치를 고르세요. 날짜 폴더 옵션을 켜면 내보낼 때 하위 폴더를 만듭니다.",
+          "Choose an output folder with {{폴더 선택}}. The date-folder option creates a subfolder when export starts."
+        ]
+      ],
+      [
+        [
+          49,
+          47,
+          49,
+          40
+        ],
+        [
+          "파일명 확인",
+          "Check filenames"
+        ],
+        [
+          "{{저장할 파일명}}에서 결과 이름을 확인하세요. 이름이 겹치면 번호가 붙습니다.",
+          "Check the names under {{저장할 파일명}}. Duplicate filenames get a number suffix."
+        ]
+      ],
+      [
+        [
+          49,
+          90,
+          24,
+          6
+        ],
+        [
+          "저장 방식 선택",
+          "Choose export settings"
+        ],
+        [
+          "{{저장 설정}}에서 자르는 방식과 화질을 정하세요. {{적용}}으로 적용하세요.",
+          "Open {{저장 설정}} to choose trimming and quality options. Click {{적용}} to use them."
+        ]
+      ],
+      [
+        [
+          74,
+          90,
+          24,
+          6
+        ],
+        [
+          "파일 내보내기",
+          "Export files"
+        ],
+        [
+          "{{파일 {count}개 저장 시작}}을 누르세요. 완료 후 {{선택한 폴더 열기}}로 결과를 여세요.",
+          "Click {{파일 {count}개 저장 시작}}. When it finishes, use {{선택한 폴더 열기}} to view the results."
+        ]
+      ]
+    ],
+    [
+      "저장이 일부 실패했다면",
+      "If some exports fail",
+      "하단 성공·실패 수와 진단 로그를 확인하세요. 실패한 클립을 저장 대상으로 다시 지정한 뒤 저장하세요.",
+      "Check the success and failure counts and diagnostic log. Mark the failed clips for saving and try again."
+    ]
+  ],
+  [
+    "encoding",
+    "encoding.png",
+    [
+      "저장 방식과 화질",
+      "Trim method and quality"
+    ],
+    [
+      "시작·끝을 정확히 맞추려면 {{정확한 구간 자르기}}를 쓰세요.",
+      "Use {{정확한 구간 자르기}} for exact start and end times."
+    ],
+    [
+      [
+        [
+          4,
+          9,
+          92,
+          5
+        ],
+        [
+          "공유용 설정 사용",
+          "Use a sharing preset"
+        ],
+        [
+          "프리셋을 고른 뒤 {{프리셋 적용}}을 누르세요. 창 아래 {{적용}}을 눌러 확정하세요.",
+          "Choose a preset and click {{프리셋 적용}}. Confirm with {{적용}} at the bottom of the window."
+        ]
+      ],
+      [
+        [
+          4,
+          26,
+          92,
+          5
+        ],
+        [
+          "자르는 방식",
+          "Choose a trim method"
+        ],
+        [
+          "{{정확한 구간 자르기}}는 지정한 경계에 맞춰 변환합니다. {{원본 빠른 복사}}는 빠르지만 경계가 조금 달라질 수 있습니다.",
+          "{{정확한 구간 자르기}} re-encodes at your chosen boundaries. {{원본 빠른 복사}} is faster, but the boundaries may shift slightly."
+        ]
+      ],
+      [
+        [
+          4,
+          35,
+          92,
+          27
+        ],
+        [
+          "크기·화질",
+          "Set size and quality"
+        ],
+        [
+          "{{클립당 목표 크기}}는 클립별 목표 크기입니다. 0이면 화질 기준으로 저장합니다. 실제 크기는 달라질 수 있습니다.",
+          "{{클립당 목표 크기}} sets a size target for each clip. Zero uses the quality setting. Actual sizes can vary."
+        ]
+      ],
+      [
+        [
+          4,
+          65,
+          92,
+          21
+        ],
+        [
+          "소리 조정",
+          "Adjust audio"
+        ],
+        [
+          "{{소리 포함}}으로 소리를 포함하세요. {{음량 조절}}의 0은 원래 음량입니다.",
+          "Enable {{소리 포함}} to keep sound. A {{음량 조절}} of 0 keeps the original level."
+        ]
+      ]
+    ],
+    [
+      "화질·속도·저장 방식의 차이",
+      "Quality, speed, and trim methods",
+      "{{자르는 방식}}이 {{원본 빠른 복사}}이면 화질을 바꾸지 않고 원본을 그대로 복사합니다. 화질·용량을 조절하려면 {{정확한 구간 자르기}}를 선택하세요.\n\n처음에는 {{균형 있게 · 일반적인 공유용}}을 쓰세요. 더 선명한 영상을 원하면 {{선명하게 · 용량 큼}}, 파일을 작게 만들려면 {{작게 · 화질보다 용량 우선}}을 선택하세요. 작은 파일을 택하면 세부 표현이 뭉개질 수 있습니다.\n\n처리 속도는 영상의 재생 속도가 아니라 저장을 끝내는 데 걸리는 시간입니다. {{빠르게 처리}}는 빨리 저장합니다. {{천천히 · 같은 화질에서 용량 절약}}은 더 오래 계산해 비슷한 화질을 더 적은 용량에 담습니다. 여유가 있을 때 선택하세요.",
+      "{{원본 빠른 복사}} copies the original video without changing its quality. Choose {{정확한 구간 자르기}} to adjust quality and file size.\n\nStart with {{균형 있게 · 일반적인 공유용}}. Choose {{선명하게 · 용량 큼}} for more detail, or {{작게 · 화질보다 용량 우선}} for smaller files. Smaller files may lose fine detail.\n\nProcessing speed controls how long saving takes, not how fast the video plays. {{빠르게 처리}} finishes sooner. {{천천히 · 같은 화질에서 용량 절약}} spends more time fitting similar quality into a smaller file. Use it when you can wait."
+    ]
+  ],
+  [
+    "youtube",
+    "youtube-download.png",
+    [
+      "YouTube 구간 가져오기",
+      "Download a YouTube range"
+    ],
+    [
+      "영상 열기 화면에서 {{YouTube 링크}}를 붙여넣고 {{영상 정보 확인 →}}를 누르세요.",
+      "On the video selection screen, paste a {{YouTube 링크}} and click {{영상 정보 확인 →}}."
+    ],
+    [
+      [
+        [
+          1,
+          30,
+          98,
+          9
+        ],
+        [
+          "받을 구간 입력",
+          "Enter the range"
+        ],
+        [
+          "{{시작}}·{{끝}}에 필요한 구간을 입력하세요. 정확한 경계는 다운로드 후 다음 단계에서 조정할 수 있습니다.",
+          "Enter the range in {{시작}} and {{끝}}. You can adjust the exact boundaries in the next step after downloading."
+        ]
+      ],
+      [
+        [
+          1,
+          40,
+          98,
+          8
+        ],
+        [
+          "동시 다운로드 수 확인",
+          "Check concurrent downloads"
+        ],
+        [
+          "{{동시 다운로드 수}}는 기본 4개입니다. 녹색 1–4개를 권장합니다. 붉은색 5–16개는 요청 제한 가능성이 커집니다.\n\n권장 범위에서도 요청이 제한될 수 있습니다. 오류가 나면 수를 줄이고 잠시 후 다시 시도하세요.",
+          "{{동시 다운로드 수}} defaults to 4. Green (1–4) is recommended. Red (5–16) means greater risk of request limits.\n\nRequests may be limited even in the recommended range. If errors occur, lower the count and wait before trying again."
+        ]
+      ],
+      [
+        [
+          1,
+          51,
+          98,
+          5
+        ],
+        [
+          "다운로드 시작",
+          "Start downloading"
+        ],
+        [
+          "{{선택 구간 다운로드}}를 누르세요.",
+          "Click {{선택 구간 다운로드}}."
+        ]
+      ],
+      [
+        [
+          1,
+          56,
+          98,
+          15
+        ],
+        [
+          "진행 상태 확인",
+          "Check progress"
+        ],
+        [
+          "진행률과 현재 단계의 예상 남은 시간을 확인하세요. 완료되면 영상 선택 화면으로 돌아옵니다.\n\n조각 병렬 다운로드를 지원하지 않으면 화면에 안내되며 일반 방식으로 받습니다.",
+          "Check the progress and estimated time remaining for the current step. When the download finishes, you return to the video selection screen.\n\nIf parallel fragment downloads are unavailable, the screen shows a notice and uses the standard method."
+        ]
+      ]
+    ],
+    [
+      "라이브 시간 입력",
+      "Entering live stream times",
+      "라이브는 화면에 표시된 00:00:00 기준 시각을 확인한 뒤 구간을 입력하세요.",
+      "For live streams, check the displayed origin for 00:00:00 before entering the range."
+    ]
+  ],
+  [
+    "session",
+    "video.png",
+    [
+      "작업 저장하고 이어하기",
+      "Save and resume a session"
+    ],
+    [
+      "다음에 이어할 편집 내용은 {{작업 저장}}으로 저장하세요.",
+      "Use {{작업 저장}} to keep your edits for later."
+    ],
+    [
+      [
+        [
+          76,
+          1,
+          9,
+          5
+        ],
+        [
+          "작업 저장",
+          "Save the session"
+        ],
+        [
+          "{{작업 저장}}으로 JSON 파일을 저장하세요. 클립과 편집 정보를 보관합니다.",
+          "Save a JSON file with {{작업 저장}}. It keeps your clips and editing information."
+        ]
+      ],
+      [
+        [
+          67,
+          1,
+          9,
+          5
+        ],
+        [
+          "작업 다시 열기",
+          "Open the session"
+        ],
+        [
+          "{{작업 열기}}에서 저장한 JSON을 고르세요. 원본 영상은 같은 경로에 보관하세요.",
+          "Choose the saved JSON with {{작업 열기}}. Keep the source videos at their original paths."
+        ]
+      ]
+    ],
+    [
+      "영상 파일이 필요하다면",
+      "To create video files",
+      "완성 영상은 {{파일 저장}}에서 만드세요. 작업 JSON은 원본 영상을 포함하지 않습니다.",
+      "Create finished videos in {{파일 저장}}. The session JSON does not contain the source videos."
+    ]
+  ],
+  [
+    "settings",
+    "settings.png",
+    [
+      "언어와 앱 설정",
+      "Language and app settings"
+    ],
+    [
+      "상단 {{Settings}} 버튼으로 여세요.",
+      "Open {{Settings}} from the top bar."
+    ],
+    [
+      [
+        [
+          2,
+          1,
+          96,
+          5
+        ],
+        [
+          "표시 언어 바꾸기",
+          "Change the display language"
+        ],
+        [
+          "{{Language}}에서 한국어·English를 고르세요. 앱을 다시 열면 적용됩니다.",
+          "Choose 한국어 or English under {{Language}}. Reopen the app to apply it."
+        ]
+      ],
+      [
+        [
+          2,
+          14,
+          96,
+          5
+        ],
+        [
+          "인식 설정 열기",
+          "Open recognition settings"
+        ],
+        [
+          "{{자켓 · 글자 인식 설정…}}에서 곡과 글자 인식 옵션을 조절하세요.",
+          "Open {{자켓 · 글자 인식 설정…}} to adjust song and text recognition."
+        ]
+      ],
+      [
+        [
+          2,
+          25,
+          96,
+          19
+        ],
+        [
+          "분석 성능",
+          "Analysis performance"
+        ],
+        [
+          "처음에는 자동값을 사용하세요. 영상 디코더 스레드는 프레임 읽기, 자켓 인식 작업 수는 곡 비교에 사용됩니다. 값을 높이면 CPU·메모리 사용도 늘 수 있습니다. 변경은 다음 분석부터 적용됩니다.",
+          "Use automatic values. Decoder threads read frames; jacket workers compare artwork. Higher values can use more CPU and memory. Changes apply to the next analysis."
+        ]
+      ],
+      [
+        [
+          2,
+          61,
+          96,
+          12
+        ],
+        [
+          "데이터 폴더",
+          "Change the data folder"
+        ],
+        [
+          "{{데이터 폴더 변경…}}로 위치를 바꾸세요. 새 폴더 준비 후 앱이 다시 시작됩니다.",
+          "Use {{데이터 폴더 변경…}} to choose a new location. The app restarts when the new folder is ready."
+        ]
+      ],
+      [
+        [
+          2,
+          76,
+          96,
+          17
+        ],
+        [
+          "오류 확인",
+          "Check an error"
+        ],
+        [
+          "{{진단 로그}}에서 상세 내용을 확인하세요. 도구 오류라면 {{FFmpeg·다운로드 도구 확인}}을 누르세요.",
+          "Read the {{진단 로그}} for details. For tool errors, click {{FFmpeg·다운로드 도구 확인}}."
+        ]
+      ]
+    ],
+    null
+  ],
+  [
+    "recognition",
+    "recognition.png",
+    [
+      "인식이 잘 안 될 때",
+      "Improve recognition"
+    ],
+    [
+      "영역과 현재 장면을 먼저 확인하세요.",
+      "Check the regions and current frame first."
+    ],
+    [
+      [
+        [
+          3,
+          9,
+          94,
+          6
+        ],
+        [
+          "촬영 구도가 움직일 때",
+          "When the camera moves"
+        ],
+        [
+          "{{자켓 위치 보정 간격 (초)}}을 줄이면 위치를 더 자주 맞춥니다.",
+          "Lower {{자켓 위치 보정 간격 (초)}} to check the position more often."
+        ]
+      ],
+      [
+        [
+          3,
+          17,
+          94,
+          20
+        ],
+        [
+          "곡을 놓칠 때",
+          "When songs are missed"
+        ],
+        [
+          "{{곡 확인 간격 (초)}}을 줄이면 더 자주 확인합니다. 비슷한 자켓을 혼동하면 {{자켓 차이 허용값}}을 낮춰 보세요.",
+          "Lower {{곡 확인 간격 (초)}} to check more often. If similar jackets get mixed up, try a lower {{자켓 차이 허용값}}."
+        ]
+      ],
+      [
+        [
+          72,
+          89,
+          25,
+          9
+        ],
+        [
+          "적용 후 확인",
+          "Apply and test"
+        ],
+        [
+          "{{적용}}으로 저장하세요. 인식 영역 화면에서 {{현재 화면 인식 확인}}으로 다시 확인하세요.",
+          "Click {{적용}}. Return to Recognition regions and use {{현재 화면 인식 확인}} again."
+        ]
+      ]
+    ],
+    [
+      "곡 데이터가 없다고 나오면",
+      "If song data is missing",
+      "{{Settings}} → {{곡 데이터 업데이트}}를 누르세요. 다운로드가 끝난 뒤 다시 분석하세요.",
+      "Open {{Settings}} → {{곡 데이터 업데이트}}. Analyze again when the download finishes."
+    ]
+  ]
+]
