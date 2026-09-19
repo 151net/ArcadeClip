@@ -46,12 +46,14 @@ faq = [
 REGION = '<rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/>'
 JACKET_CASES = [
     ('fit', ('정사각형', 'Square'), ('인식 가능', 'Recognized')),
-    ('skew', ('찌그러짐', 'Skewed'), ('인식 불가', 'Not recognized')),
+    ('skew', ('비뚤어짐', 'Tilted'), ('인식 불가', 'Not recognized')),
+    ('flat', ('눌림', 'Squeezed'), ('인식 불가', 'Not recognized')),
     ('cut', ('잘림', 'Cut off'), ('인식 불가', 'Not recognized')),
 ]
 JACKET_TITLES = {
     'fit': ('인식 영역 안에 정사각형으로 들어온 자켓', 'A square jacket inside the region'),
-    'skew': ('가로세로 비율이 맞지 않아 찌그러진 자켓', 'A jacket squeezed out of square'),
+    'skew': ('기울어져 비뚤어진 자켓', 'A jacket tilted out of square'),
+    'flat': ('좌우로 눌려 납작해진 자켓', 'A jacket squeezed narrow'),
     'cut': ('인식 영역 밖으로 나가 잘린 자켓', 'A jacket cut off by the region edge'),
 }
 MARK_OK = '<circle cx="54" cy="122" r="10" fill="none" stroke="#2e7d32" stroke-width="4"/>'
@@ -63,6 +65,8 @@ JACKET_SHAPES = {
     'skew': REGION + '<g transform="matrix(0.96 0.15 -0.06 0.95 8 -6)">'
             '<image href="jacket-example.png" x="22" y="22" width="64" height="64" preserveAspectRatio="none"/>'
             '<rect x="22" y="22" width="64" height="64" fill="none" stroke="#171717" stroke-width="2"/></g>' + MARK_NO,
+    'flat': REGION + '<image href="jacket-example.png" x="32" y="20" width="44" height="68" preserveAspectRatio="none"/>'
+            '<rect x="32" y="20" width="44" height="68" fill="none" stroke="#171717" stroke-width="2"/>' + MARK_NO,
     'cut': '<defs><clipPath id="{lang}-region-clip"><rect x="8" y="8" width="92" height="92"/></clipPath></defs>'
            '<g clip-path="url(#{lang}-region-clip)">'
            '<image href="jacket-example.png" x="-12" y="20" width="68" height="68"/>'

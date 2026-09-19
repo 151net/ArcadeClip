@@ -28,7 +28,7 @@ figcaption { margin-top: .5rem; }
 .extra h4 { margin-bottom: .25rem; }
 .extra p { margin-top: .25rem; }
 .cases { list-style: none; padding: 0; margin: .5rem 0 0; display: grid; gap: 1rem;
-         grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); max-width: 34rem; }
+         grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr)); max-width: 36rem; }
 .cases figure { margin: 0; }
 .cases svg { display: block; width: 100%; height: auto; }
 .cases figcaption { margin-top: .3rem; }

@@ -145,7 +145,7 @@ html[lang="ko"] [data-lang="en"], html[lang="en"] [data-lang="ko"] { display: no
     <li>
       <figure>
         <svg viewBox="0 0 108 136" role="img" aria-labelledby="skew-title">
-          <title id="skew-title">가로세로 비율이 맞지 않아 찌그러진 자켓 / A jacket squeezed out of square</title>
+          <title id="skew-title">기울어져 비뚤어진 자켓 / A jacket tilted out of square</title>
           <rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/>
           <g transform="matrix(0.96 0.15 -0.06 0.95 8 -6)">
             <image href="jacket-example.png" x="22" y="22" width="64" height="64" preserveAspectRatio="none"/>
@@ -156,7 +156,24 @@ html[lang="ko"] [data-lang="en"], html[lang="en"] [data-lang="ko"] { display: no
           </g>
         </svg>
         <figcaption>
-          <b data-lang="ko">찌그러짐</b><b data-lang="en">Skewed</b>
+          <b data-lang="ko">비뚤어짐</b><b data-lang="en">Tilted</b>
+          <span data-lang="ko">인식 불가</span><span data-lang="en">Not recognized</span>
+        </figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <svg viewBox="0 0 108 136" role="img" aria-labelledby="flat-title">
+          <title id="flat-title">좌우로 눌려 납작해진 자켓 / A jacket squeezed narrow</title>
+          <rect x="8" y="8" width="92" height="92" fill="none" stroke="#075aa6" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <image href="jacket-example.png" x="32" y="20" width="44" height="68" preserveAspectRatio="none"/>
+          <rect x="32" y="20" width="44" height="68" fill="none" stroke="#171717" stroke-width="2"/>
+          <g stroke="#c62828" stroke-width="4" stroke-linecap="round">
+            <line x1="46" y1="114" x2="62" y2="130"/><line x1="62" y1="114" x2="46" y2="130"/>
+          </g>
+        </svg>
+        <figcaption>
+          <b data-lang="ko">눌림</b><b data-lang="en">Squeezed</b>
           <span data-lang="ko">인식 불가</span><span data-lang="en">Not recognized</span>
         </figcaption>
       </figure>
