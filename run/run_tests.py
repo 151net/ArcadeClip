@@ -44,4 +44,9 @@ def main(arguments):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    code = main(sys.argv[1:])
+    # Qt tears down the widgets a run left standing, and on Windows that teardown can
+    # fault after every result is already in, which would fail a green run. Leave now.
+    sys.stdout.flush()
+    sys.stderr.flush()
+    os._exit(code)

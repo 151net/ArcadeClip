@@ -26,7 +26,15 @@ uv run start.py --debug
 ## 검사 실행하기
 
 ```sh
-uv run --directory src python -m unittest discover -s tests
+uv run python run/run_tests.py
+```
+
+멈춘 검사가 있으면 10분 뒤에 모든 스레드의 위치를 출력하고 끝납니다. 시간은 `ARCADECLIP_TEST_TIMEOUT`(초)로 바꿉니다.
+
+화면이나 소리 장치가 없는 곳에서는 창을 띄우거나 영상을 재생하는 검사를 빼고 실행합니다.
+
+```sh
+uv run python run/run_tests.py --no-display
 ```
 
 ## 도구 해시 확인하기
