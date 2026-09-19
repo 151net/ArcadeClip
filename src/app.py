@@ -1129,6 +1129,16 @@ class MainWindow(QMainWindow):
             self.download_log.appendPlainText(tr('오류 · {error}', error=error))
         self.status.setText(str(error) if isinstance(error, ValueError) else tr('작업을 완료하지 못했습니다. 고급에서 상세 내용을 확인해 주세요.'))
 
+    def moved_data_directory(self, chosen):
+        """SetupDialog resolves the folder it prepared, so resolve this one the same way.
+        A short or linked path to the same folder must not look like a move and restart."""
+        current = Path(self.directory)
+        try:
+            current = current.resolve()
+        except OSError:
+            pass
+        return source_key(chosen) != source_key(current)
+
     def configure(self):
         if self.task:
             return
@@ -1140,7 +1150,7 @@ class MainWindow(QMainWindow):
         dialog = SetupDialog(self.directory, self)
         dialog.start.setText(tr('적용 후 재시작'))
         dialog.status.setText(tr('현재 작업은 기존 폴더에 보관됩니다. 새 폴더 준비가 끝나면 프로그램을 다시 시작합니다.'))
-        if dialog.exec() and source_key(dialog.directory) != source_key(self.directory):
+        if dialog.exec() and self.moved_data_directory(dialog.directory):
             settings = QSettings("ArcadeClip", "ArcadeClip")
             settings.sync()
             arguments = sys.argv[1:] if getattr(sys, "frozen", False) else sys.orig_argv[1:]

@@ -15,6 +15,7 @@ from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QApplication
 
 from preview import Preview, VideoCanvas
+from support import run_child
 
 
 class PreviewTest(unittest.TestCase):
@@ -198,10 +199,9 @@ app.exec()
                             "-c:a", "aac", "-pix_fmt", "yuv420p", str(a)],
                            check=True, capture_output=True, timeout=30)
             shutil.copyfile(a, b)
-            result = subprocess.run([sys.executable, "-c", script, str(a), str(b)],
-                                    capture_output=True, text=True, timeout=20)
-            self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertIn("SWITCHES_OK", result.stdout)
+            code, out, err = run_child([sys.executable, "-c", script, str(a), str(b)], 20)
+            self.assertEqual(code, 0, err)
+            self.assertIn("SWITCHES_OK", out)
 
 
     @unittest.skipUnless(shutil.which("ffmpeg"), "FFmpeg is required")

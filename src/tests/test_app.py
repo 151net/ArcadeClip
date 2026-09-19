@@ -17,6 +17,7 @@ from PySide6.QtWidgets import QApplication
 from app import MainWindow
 from profiles import load_profile, validate_profile, write_json
 from setup_dialog import SetupDialog
+from support import run_child
 
 
 class AppTests(unittest.TestCase):
@@ -625,10 +626,21 @@ with tempfile.TemporaryDirectory() as name:
 print('setup cycles passed')
 """
         environment = {**os.environ, "PYTHONPATH": str(Path(__file__).resolve().parents[1])}
-        result = subprocess.run([sys.executable, "-X", "faulthandler", "-c", script],
-                                env=environment, capture_output=True, text=True, timeout=30)
-        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-        self.assertIn("setup cycles passed", result.stdout)
+        code, out, err = run_child([sys.executable, "-X", "faulthandler", "-c", script],
+                                   30, env=environment)
+        self.assertEqual(code, 0, out + err)
+        self.assertIn("setup cycles passed", out)
+
+    def test_the_same_data_folder_reached_another_way_does_not_restart(self):
+        # A build machine's TEMP is an 8.3 short path, so the folder the setup dialog
+        # prepared and the one in use spell differently while being the same folder.
+        with tempfile.TemporaryDirectory() as name, patch.object(MainWindow, 'refresh_catalog_summary'):
+            folder = Path(name)
+            window = MainWindow(folder)
+            self.assertFalse(window.moved_data_directory(folder))
+            self.assertFalse(window.moved_data_directory(folder.resolve()))
+            self.assertTrue(window.moved_data_directory(folder.resolve() / 'elsewhere'))
+            window.close()
 
     def test_clip_defaults_offsets_ranks_and_filtered_scroll(self):
         from clips import achievement_text, label, validate_clip
