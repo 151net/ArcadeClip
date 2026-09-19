@@ -80,6 +80,8 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           files: ${{ steps.package.outputs.name }}
+          # Off by default: a glob that matches nothing leaves the step green and the release empty.
+          fail_on_unmatched_files: true
           draft: true
           body: |
             ## 설치 / Install
@@ -102,3 +104,20 @@ jobs:
 
             GPLv3. The bundled FFmpeg is a GPL build; its source is at
             https://github.com/FFmpeg/FFmpeg/tree/n9.0.1
+
+      # The upload is the one step whose result the release page depends on, so read it back.
+      - name: Check the release carries the bundle
+        if: github.ref_type == 'tag'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ASSET: ${{ steps.package.outputs.name }}
+        run: |
+          $headers = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json' }
+          $releases = Invoke-RestMethod -Headers $headers -Uri "https://api.github.com/repos/$env:GITHUB_REPOSITORY/releases?per_page=100"
+          $release = $releases | Where-Object { $_.tag_name -eq $env:GITHUB_REF_NAME } | Select-Object -First 1
+          if (-not $release) { throw "No release exists for $env:GITHUB_REF_NAME." }
+          $names = @($release.assets | ForEach-Object { $_.name })
+          Write-Host ("release id {0} draft={1} assets: {2}" -f $release.id, $release.draft, ($names -join ', '))
+          if ($names -notcontains $env:ASSET) { throw "The release does not carry $env:ASSET." }
+          Write-Host "$env:ASSET is attached."
