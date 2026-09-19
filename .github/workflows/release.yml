@@ -13,7 +13,7 @@ permissions:
 jobs:
   windows:
     runs-on: windows-latest
-    timeout-minutes: 240
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v7
 
@@ -48,12 +48,14 @@ jobs:
       - name: Fetch the pinned FFmpeg
         run: uv run --locked python run/fetch_tools.py
 
+      # The runner has no audio endpoint and no real display, so the tests that open a
+      # window or play media are left to the Tests workflow instead of blocking a release.
       - name: Run the tests
-        env:
-          QT_QPA_PLATFORM: offscreen
-        run: uv run --locked --directory src python -m unittest discover -s tests
+        timeout-minutes: 15
+        run: uv run --locked python run/run_tests.py --no-display
 
       - name: Build the bundle
+        timeout-minutes: 90
         run: .\run\build_windows.ps1
 
       - name: Package the bundle

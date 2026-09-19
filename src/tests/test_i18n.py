@@ -50,7 +50,7 @@ class TranslationTests(unittest.TestCase):
             result = subprocess.check_output(
                 [sys.executable, "-c", "from i18n import tr; print(tr('파일 저장'))"],
                 env={**os.environ, "ARCADECLIP_LANGUAGE": language, "PYTHONIOENCODING": "utf-8",
-                     "PYTHONPATH": str(i18n.LOCALES.parent)}, encoding="utf-8")
+                     "PYTHONPATH": str(i18n.LOCALES.parent)}, encoding="utf-8", timeout=60)
             self.assertEqual(result.strip(), expected)
 
     def test_real_gettext_catalog_fallback_placeholders_and_plurals(self):

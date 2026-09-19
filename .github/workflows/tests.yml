@@ -1,0 +1,34 @@
+name: Tests
+
+# The whole suite, including the tests that open a window and play media. A release
+# runs only the rest, so a runner without a display or an audio endpoint cannot hold
+# up a build here.
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['docs/**', '**.md']
+  pull_request:
+    paths-ignore: ['docs/**', '**.md']
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10.1.0
+        with:
+          enable-cache: true
+
+      # Export and preview tests call FFmpeg; the lock file names the build and every hash.
+      - name: Fetch the pinned FFmpeg
+        run: uv run --locked python run/fetch_tools.py
+
+      - name: Run the tests
+        timeout-minutes: 15
+        env:
+          # Under the step timeout, so a stuck test prints its stack instead of being killed.
+          ARCADECLIP_TEST_TIMEOUT: 600
+        run: uv run --locked python run/run_tests.py

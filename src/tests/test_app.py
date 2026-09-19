@@ -163,7 +163,7 @@ class AppTests(unittest.TestCase):
                     "print(i18n.tr('파일 저장'), i18n.tr('Settings'), i18n.tr('Language'), REGIONS['jacket'], sep='|')"
                 )
                 result = subprocess.check_output([sys.executable, "-c", code, path], encoding="utf-8",
-                    env={**os.environ, "PYTHONIOENCODING": "utf-8"})
+                    env={**os.environ, "PYTHONIOENCODING": "utf-8"}, timeout=60)
                 self.assertEqual(result.strip(), "Export clips|Settings|언어|Jacket")
                 with patch("PySide6.QtCore.QSettings", return_value=settings):
                     i18n.initialize_language()

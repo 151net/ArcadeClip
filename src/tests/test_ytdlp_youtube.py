@@ -27,7 +27,7 @@ print(json.dumps({
 class YoutubeOnlyTests(unittest.TestCase):
     def probe(self, *urls):
         result = subprocess.run([sys.executable, '-c', PROBE, *urls], check=True, text=True,
-                                capture_output=True, cwd=str(Path(ytdlp_youtube.__file__).parent))
+                                capture_output=True, cwd=str(Path(ytdlp_youtube.__file__).parent), timeout=60)
         import json
         return json.loads(result.stdout)
 
