@@ -1130,14 +1130,14 @@ class MainWindow(QMainWindow):
         self.status.setText(str(error) if isinstance(error, ValueError) else tr('작업을 완료하지 못했습니다. 고급에서 상세 내용을 확인해 주세요.'))
 
     def moved_data_directory(self, chosen):
-        """SetupDialog resolves the folder it prepared, so resolve this one the same way.
-        A short or linked path to the same folder must not look like a move and restart."""
-        current = Path(self.directory)
-        try:
-            current = current.resolve()
-        except OSError:
-            pass
-        return source_key(chosen) != source_key(current)
+        """Two spellings of one folder, such as a short or linked path, must not look
+        like a move and restart the app, so settle both sides before comparing."""
+        def settled(path):
+            try:
+                return Path(path).resolve()
+            except OSError:
+                return Path(path)
+        return source_key(settled(chosen)) != source_key(settled(self.directory))
 
     def configure(self):
         if self.task:
