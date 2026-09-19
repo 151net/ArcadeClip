@@ -29,7 +29,9 @@ class HelpTests(unittest.TestCase):
                     help_view.manual_url()
                 (folder / 'manual').mkdir()
                 (folder / 'manual/manual.html').touch()
-                self.assertEqual(Path(help_view.manual_url().toLocalFile()), folder / 'manual/manual.html')
+                # A build machine's TEMP is an 8.3 short path, which manual_url() resolves.
+                self.assertEqual(Path(help_view.manual_url().toLocalFile()),
+                                 (folder / 'manual/manual.html').resolve())
 
     def test_help_opens_the_guide_in_the_default_browser(self):
         parent = QWidget()
