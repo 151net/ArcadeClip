@@ -7,7 +7,8 @@ from PySide6.QtCore import QSettings, QStandardPaths
 from PySide6.QtWidgets import (QDialog, QFileDialog, QHBoxLayout, QLabel, QLineEdit, QMessageBox,
                                QPushButton, QVBoxLayout, QProgressBar)
 
-from jackets import catalog_status, download_jackets
+from jackets import download_jackets, migrate_legacy, source_status
+from jacket_source_ui import download_controls
 from tasks import Task
 
 
@@ -15,9 +16,10 @@ class SetupDialog(QDialog):
     def __init__(self, current=None, parent=None):
         super().__init__(parent)
         self.setWindowTitle(tr('데이터 폴더') if current else tr('환영합니다'))
-        self.resize(540, 230)
+        self.resize(560, 260)
         self.task = None
         self.directory = None
+        self.chosen = None
         self.settings = QSettings("ArcadeClip", "ArcadeClip")
         default = Path(QStandardPaths.writableLocation(QStandardPaths.StandardLocation.DocumentsLocation)) / "ArcadeClip"
         self.path = QLineEdit(str(current or self.settings.value("data_directory", str(default))))
@@ -45,6 +47,16 @@ class SetupDialog(QDialog):
         layout = QVBoxLayout(self)
         layout.addWidget(QLabel(tr('데이터 저장 위치') if current else tr('ArcadeClip에 오신 것을 환영합니다')))
         layout.addLayout(row)
+        self.source = download_controls(self.settings, self)
+        self.source.hide()
+        self.advanced = QPushButton(tr('고급'))
+        self.advanced.setCheckable(True)
+        self.advanced.toggled.connect(self.source.setVisible)
+        advanced_row = QHBoxLayout()
+        advanced_row.addWidget(self.advanced)
+        advanced_row.addStretch()
+        layout.addLayout(advanced_row)
+        layout.addWidget(self.source)
         layout.addWidget(self.status)
         layout.addWidget(self.progress)
         layout.addLayout(buttons)
@@ -62,8 +74,12 @@ class SetupDialog(QDialog):
         if not self.path.text().strip():
             self.status.setText(tr('저장할 폴더를 선택하세요.'))
             return
+        self.source.apply()
+        # Settle the addresses on this thread; the worker must not touch widgets.
+        self.chosen = self.source.current()
         self.directory = Path(self.path.text()).expanduser().resolve()
         self.path.setEnabled(False)
+        self.source.setEnabled(False)
         self.start.setEnabled(False)
         self.cancel.setText(tr('취소'))
         self.progress.setRange(0, 0)
@@ -78,15 +94,18 @@ class SetupDialog(QDialog):
         with TemporaryFile(dir=self.directory) as probe:
             probe.write(b"1")
             probe.flush()
-        report(tr('곡 데이터를 확인하고 있습니다.'))
-        if catalog_status(self.directory):
+        report(tr('자켓 데이터를 확인하고 있습니다.'))
+        migrate_legacy(self.directory)
+        source = self.chosen
+        if source_status(self.directory, source):
             return {"complete": True}
-        return download_jackets(self.directory, cancel, report)
+        return download_jackets(self.directory, cancel, report, source)
 
     def complete(self):
         self.task.wait()
         task, self.task = self.task, None
         self.path.setEnabled(True)
+        self.source.setEnabled(True)
         self.start.setEnabled(True)
         self.cancel.setText(tr('닫기'))
         self.progress.hide()
@@ -104,7 +123,7 @@ class SetupDialog(QDialog):
             self.settings.setValue("data_directory", str(self.directory))
             self.accept()
         else:
-            self.status.setText(tr('일부 곡 데이터를 다시 받아야 합니다. 시작하기를 눌러 주세요.'))
+            self.status.setText(tr('일부 자켓 데이터를 다시 받아야 합니다. 시작하기를 눌러 주세요.'))
         task.deleteLater()
 
     def reject(self):

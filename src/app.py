@@ -18,7 +18,7 @@ from PySide6.QtWidgets import QAbstractSpinBox, QApplication, QComboBox, QFileDi
 
 from clips import label as clip_label, validate_clip, achievement_text, offset_bounds, merge_rows, apply_offsets
 from export import export_clips
-from jackets import download_jackets, catalog_summary
+from jackets import download_jackets, catalog_summary, migrate_legacy, source_from
 from media import format_time, parse_time, adjacent_frame
 from preview import Preview
 from profiles import validate_profile, write_json, load_profile, require_regions
@@ -93,6 +93,8 @@ class MainWindow(QMainWindow):
         self.preview.play_button.clicked.connect(self.stop_reverse)
         QApplication.instance().installEventFilter(self)
         self.catalog_task = None
+        # Older data folders keep every jacket together; move them under their server.
+        migrate_legacy(self.directory)
         self.refresh_catalog_summary()
         if (self.directory / "recovery.json").is_file():
             QTimer.singleShot(0, lambda: self.load_session(self.directory / "recovery.json"))
@@ -1180,9 +1182,13 @@ class MainWindow(QMainWindow):
 
     def update_jackets(self):
         def complete(result):
-            self.status.setText(tr('곡 데이터 업데이트 완료') if result["complete"] else tr('다시 받을 곡 데이터가 있습니다.'))
+            self.status.setText(tr('자켓 데이터 업데이트 완료') if result["complete"] else tr('다시 받을 자켓 데이터가 있습니다.'))
+            # A server fetched for the first time becomes a choice in the settings.
+            if getattr(self, "catalog_sources", None):
+                self.catalog_sources()
             self.refresh_catalog_summary()
-        self.run_task(lambda cancel, report: download_jackets(self.directory, cancel, report),
+        source = source_from(QSettings("ArcadeClip", "ArcadeClip"))
+        self.run_task(lambda cancel, report: download_jackets(self.directory, cancel, report, source),
                       complete)
 
     def refresh_catalog_summary(self):
@@ -1494,6 +1500,9 @@ class MainWindow(QMainWindow):
             self.preview.player.stop()
             if self.advanced:
                 self.advanced.close()
+            # Same reason as Preview: the application holds every filter installed on it.
+            QApplication.instance().removeEventFilter(self)
+            self.preview.release()
             event.accept()
 
 

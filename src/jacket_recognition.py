@@ -12,7 +12,7 @@ from pathlib import Path
 from time import perf_counter
 import numpy as np
 from PIL import Image
-from jackets import _manifest, _verify_image
+from jackets import _manifest, _verify_image, catalog_folders
 from media import frame_at
 from profiles import load_profile, offset_path, write_json
 from analysis_common import DEFAULTS, check_cancel, crop, progress
@@ -30,10 +30,17 @@ def phash(image):
 
 
 def load_catalog(directory, cancel, report):
-    directory = Path(directory) / "jackets"
-    songs = _manifest((directory / "_manifest.json").read_bytes())
+    """Build one catalog from the jacket data the user chose to recognize with.
+
+    Servers keep their own folder, and the same song carries the same file name on
+    each, so one entry per name is kept: two near-identical copies of one jacket
+    would sit a bit apart and leave no margin between the best two matches.
+    """
+    folders = catalog_folders(directory)
+    songs = [(folder, song) for folder in folders
+             for song in _manifest((folder / "_manifest.json").read_bytes())]
     entries, seen, damaged = [], set(), 0
-    for number, song in enumerate(songs, 1):
+    for number, (folder, song) in enumerate(songs, 1):
         check_cancel(cancel)
         if number == 1 or number % 25 == 0 or number == len(songs):
             progress(report, 1, number, len(songs), tr('자켓 목록 준비'))
@@ -42,14 +49,14 @@ def load_catalog(directory, cancel, report):
             continue
         seen.add(name)
         try:
-            path = directory / name
+            path = folder / name
             _verify_image(path)
             with Image.open(path) as image:
                 entries.append({"image_url": name, "title": song["title"], "hash": phash(image)})
         except (OSError, ValueError):
             damaged += 1
     if not entries:
-        raise ValueError(tr('사용 가능한 자켓이 없습니다. 곡 데이터를 먼저 받아 주세요.'))
+        raise ValueError(tr('사용 가능한 자켓이 없습니다. 자켓 데이터를 먼저 받아 주세요.'))
     if damaged:
         report(tr('손상되거나 누락된 자켓 {damaged:,}개를 제외했습니다.', damaged=damaged))
     return entries

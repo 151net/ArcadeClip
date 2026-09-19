@@ -2542,3 +2542,63 @@ msgstr "This is the latest version. You have {name}."
 #, python-brace-format
 msgid "현재 버전 {name}"
 msgstr "You have version {name}."
+
+msgid "자켓 내려받기"
+msgstr "Song artwork download"
+
+msgid "곡 목록 주소"
+msgstr "Song list address"
+
+msgid "자켓 이미지 주소"
+msgstr "Artwork image address"
+
+msgid "인증서 검사"
+msgstr "Check the certificate"
+
+msgid "기본값으로"
+msgstr "Use the defaults"
+
+msgid "공식 서버는 인증서가 확인되지 않아 검사 없이 받습니다. 주소를 바꾸면 검사를 켭니다."
+msgstr "The official server's certificate cannot be checked, so artwork is fetched without checking it. Changing an address turns the check on."
+
+msgid "자켓 서버 주소는 http:// 또는 https://로 시작해야 합니다."
+msgstr "An artwork server address has to start with http:// or https://."
+
+msgid "자켓 데이터"
+msgstr "Jacket data"
+
+msgid "자켓 데이터 업데이트"
+msgstr "Update jacket data"
+
+msgid "자켓 데이터 업데이트 완료"
+msgstr "Jacket data updated"
+
+msgid "다시 받을 자켓 데이터가 있습니다."
+msgstr "Some jacket data still needs downloading."
+
+msgid "자켓 데이터를 확인하고 있습니다."
+msgstr "Checking jacket data."
+
+msgid "일부 자켓 데이터를 다시 받아야 합니다. 시작하기를 눌러 주세요."
+msgstr "Some jacket data needs downloading again. Press Get started."
+
+msgid "사용 가능한 자켓이 없습니다. 자켓 데이터를 먼저 받아 주세요."
+msgstr "No jackets are available. Download the jacket data first."
+
+msgid "다음 데이터 사용"
+msgstr "Recognize with"
+
+msgid "모든 데이터"
+msgstr "All data"
+
+msgid "받은 데이터 없음"
+msgstr "Nothing downloaded yet"
+
+msgid "내려받을 서버"
+msgstr "Download from"
+
+msgid "직접 입력"
+msgstr "Enter an address"
+
+msgid "고급"
+msgstr "Advanced"

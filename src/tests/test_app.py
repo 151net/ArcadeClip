@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from PySide6.QtCore import Qt, QPoint, QPointF, QTimer
+from PySide6.QtCore import Qt, QEvent, QPoint, QPointF, QTimer
 from PySide6.QtTest import QTest
 from PySide6.QtGui import QWheelEvent
 from PySide6.QtWidgets import QApplication
@@ -17,6 +17,8 @@ from PySide6.QtWidgets import QApplication
 from app import MainWindow
 from profiles import load_profile, validate_profile, write_json
 from setup_dialog import SetupDialog
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))  # however the suite is started
 from support import run_child
 
 
@@ -24,6 +26,29 @@ class AppTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.application = QApplication.instance() or QApplication([])
+
+    def tearDown(self):
+        """Close the windows this test built and stop their workers.
+
+        The windows themselves are not destroyed: deleting one takes its media
+        renderer with it and the next test then walks into freed memory. Closing
+        releases what closing can, which is the application-wide event filters.
+        """
+        for widget in list(self.application.topLevelWidgets()):
+            if not isinstance(widget, MainWindow):
+                continue
+            try:
+                # A worker still running would touch the window after it is gone.
+                for task in (widget.task, widget.catalog_task, widget.frame_task):
+                    if task is not None:
+                        task.cancel.set()
+                        task.wait()
+                # clear() detaches the renderer in the order Preview documents as safe.
+                widget.preview.clear()
+                widget.close()
+            except RuntimeError:
+                pass
+        self.application.processEvents()
 
     def test_download_eta_and_unsupported_notice_remain_visible(self):
         from i18n import tr
@@ -488,7 +513,8 @@ class AppTests(unittest.TestCase):
             window.show_advanced()
             self.assertEqual(window.advanced.windowTitle(), "Settings")
             self.assertEqual({g.title() for g in window.advanced.findChildren(QGroupBox)},
-                             {"영역별 인식", "분석 성능", "화면 탐색", "곡 데이터", "데이터 저장 위치", "진단 로그", "앱 버전"})
+                             {"영역별 인식", "분석 성능", "화면 탐색", "자켓 데이터",
+                              "데이터 저장 위치", "진단 로그", "앱 버전"})
             self.assertEqual(window.follow_clip.parentWidget().title(), "화면 탐색")
             observed = []
             def accept_settings():
@@ -614,7 +640,7 @@ with tempfile.TemporaryDirectory() as name:
         dialog.settings = type('Settings', (), {'setValue': lambda *args: None})()
         QTimer.singleShot(0, dialog.prepare)
     def run():
-        with patch.object(SetupDialog, '__init__', initialize), patch('setup_dialog.catalog_status', return_value=True):
+        with patch.object(SetupDialog, '__init__', initialize), patch('setup_dialog.source_status', return_value=True):
             for _ in range(20):
                 window.configure()
                 assert window.isVisible()
@@ -630,6 +656,20 @@ print('setup cycles passed')
                                    30, env=environment)
         self.assertEqual(code, 0, out + err)
         self.assertIn("setup cycles passed", out)
+
+    def test_closing_a_window_stops_it_watching_the_application(self):
+        # MainWindow and the preview's canvas watch every event the application
+        # delivers, and the application holds each filter installed on it. Left in
+        # place, a window and all it owns stays in memory for the rest of the run.
+        from preview import Preview, VideoCanvas
+        with tempfile.TemporaryDirectory() as name, patch.object(MainWindow, 'refresh_catalog_summary'):
+            window = MainWindow(Path(name))
+            with patch.object(Preview, 'release') as preview_released:
+                window.close()
+            preview_released.assert_called_once_with()
+            with patch.object(VideoCanvas, 'release') as canvas_released:
+                window.preview.release()
+            canvas_released.assert_called_once_with()
 
     def test_the_same_data_folder_reached_another_way_does_not_restart(self):
         # A build machine's TEMP is an 8.3 short path, so the folder the setup dialog
@@ -1376,7 +1416,7 @@ print('setup cycles passed')
         with tempfile.TemporaryDirectory() as name:
             dialog = SetupDialog()
             dialog.directory = Path(name)
-            with patch("setup_dialog.TemporaryFile", side_effect=PermissionError), patch("setup_dialog.catalog_status") as catalog:
+            with patch("setup_dialog.TemporaryFile", side_effect=PermissionError), patch("setup_dialog.source_status") as catalog:
                 with self.assertRaises(PermissionError):
                     dialog._prepare(None, lambda _: None)
                 catalog.assert_not_called()

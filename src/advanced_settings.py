@@ -56,6 +56,12 @@ def show_advanced(window):
     navigation_layout.addWidget(window.follow_clip)
     window.follow_clip.show()
     layout.addWidget(navigation)
+    from jacket_source_ui import fill_catalog_group
+    if not getattr(window, "catalog_ready", False):
+        fill_catalog_group(window, settings)
+        window.catalog_ready = True
+    else:
+        window.catalog_sources()
     layout.addWidget(window.catalog)
     window.catalog.show()
     storage = QGroupBox(tr('데이터 저장 위치'))

@@ -15,6 +15,8 @@ from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QApplication
 
 from preview import Preview, VideoCanvas
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))  # however the suite is started
 from support import run_child
 
 

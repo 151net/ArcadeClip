@@ -95,13 +95,15 @@ if (-not $ytdlpVersion) { throw 'Bundled yt-dlp reported no version.' }
 $extractors = Invoke-Bundled $executable @('--yt-dlp', '--list-extractors')
 if ('youtube' -notin $extractors) { throw 'Bundled YouTube extractor failed to load.' }
 Write-Host "Bundled yt-dlp $ytdlpVersion with $($extractors.Count) extractors."
-$shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $bundle 'ArcadeClip_dbg.lnk'))
-$shortcut.TargetPath = $executable
-$shortcut.Arguments = '--debug'
-$shortcut.WorkingDirectory = $bundle
-$shortcut.IconLocation = "$executable,0"
-$shortcut.Description = 'ArcadeClip with diagnostic logging'
-$shortcut.Save()
-if (-not (Test-Path (Join-Path $bundle 'ArcadeClip_dbg.lnk') -PathType Leaf)) { throw 'Debug shortcut creation failed.' }
+# Not a .lnk: a shortcut stores the absolute path it was built at, which is this
+# machine's, so it breaks wherever the reader unpacks the folder. %~dp0 is the folder
+# the launcher itself sits in, so this one follows the bundle.
+$launcher = Join-Path $bundle 'ArcadeClip_dbg.cmd'
+@(
+    '@echo off'
+    'rem Runs ArcadeClip with diagnostic logging into the data folder.'
+    'start "" "%~dp0ArcadeClip.exe" --debug'
+) | Set-Content -Path $launcher -Encoding ascii
+if (-not (Test-Path $launcher -PathType Leaf)) { throw 'Debug launcher creation failed.' }
 Write-Host "Bundle: $bundle"
 Write-Host 'Verify video playback, seeking, and a bounded YouTube download on a clean Windows machine.'

@@ -5,6 +5,7 @@ import itertools
 import json
 import platform
 import ssl
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -32,15 +33,28 @@ def is_newer(tag, current=VERSION):
     return bool(_numbers(tag)) and _numbers(tag) > _numbers(current)
 
 
+def _read(request, timeout, context):
+    with urllib.request.urlopen(request, timeout=timeout, context=context) as response:
+        if not response.geturl().startswith("https://"):
+            raise ValueError(tr('HTTPS 응답이 아닙니다.'))
+        return response.read(LIMIT)
+
+
 def latest_release(timeout=TIMEOUT):
     """Return the newest published release tag. Raises when the lookup does not succeed."""
     request = urllib.request.Request(RELEASES_API, headers={
         "User-Agent": f"ArcadeClip/{VERSION}",
         "Accept": "application/vnd.github+json"})
-    with urllib.request.urlopen(request, timeout=timeout, context=ssl.create_default_context()) as response:
-        if not response.geturl().startswith("https://"):
-            raise ValueError(tr('HTTPS 응답이 아닙니다.'))
-        payload = json.loads(response.read(LIMIT))
+    try:
+        body = _read(request, timeout, ssl.create_default_context())
+    except urllib.error.URLError as error:
+        # A machine that cannot build any chain would never see a new version at all,
+        # and this lookup only reads a version number.
+        if not isinstance(error.reason, ssl.SSLCertVerificationError):
+            raise
+        from jackets import relaxed_context
+        body = _read(request, timeout, relaxed_context())
+    payload = json.loads(body)
     tag = str(payload.get("tag_name") or "").strip()
     if not tag:
         raise ValueError(tr('공개된 버전을 찾지 못했습니다.'))

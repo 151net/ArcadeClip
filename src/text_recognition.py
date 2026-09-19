@@ -12,7 +12,7 @@ import re
 import threading
 from time import perf_counter
 import numpy as np
-from jackets import _atomic_write, _fetch
+from jackets import _atomic_write, _fetch, relaxed_context
 from media import frame_at
 from analysis_common import DEFAULTS, check_cancel, crop, progress
 
@@ -45,7 +45,9 @@ def make_ocr(directory, cancel, report):
     if not model.is_file() or hashlib.sha256(model.read_bytes()).hexdigest() != checksum:
         report(tr('OCR 모델을 준비하고 있습니다…'))
         url = "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.2/onnx/PP-OCRv5/rec/" + model.name
-        body = _fetch(url, cancel, 64 * 1024 * 1024)
+        # The file is pinned by checksum below, so a chain this machine cannot build
+        # must not stand between the user and a first analysis.
+        body = _fetch(url, cancel, 64 * 1024 * 1024, relaxed_context())
         if hashlib.sha256(body).hexdigest() != checksum:
             raise ValueError(tr('OCR 모델 검증에 실패했습니다. 다시 시도해 주세요.'))
         model.parent.mkdir(parents=True, exist_ok=True)

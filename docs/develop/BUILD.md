@@ -1,6 +1,6 @@
 # Windows 배포본 만들기
 
-`dist/ArcadeClip.dist/` 폴더에 `ArcadeClip.exe`와 실행에 필요한 파일을 함께 만듭니다. 진단 로그를 남기며 실행하는 `ArcadeClip_dbg.lnk` 바로가기도 같이 만듭니다. 배포할 때는 이 폴더 전체를 전달합니다.
+`dist/ArcadeClip.dist/` 폴더에 `ArcadeClip.exe`와 실행에 필요한 파일을 함께 만듭니다. 진단 로그를 남기며 실행하는 `ArcadeClip_dbg.cmd` 실행 파일도 같이 만듭니다. 배포할 때는 이 폴더 전체를 전달합니다.
 
 ## 만들기 전에
 
@@ -30,7 +30,8 @@ Windows에서만 실행됩니다. 빌드에는 시간이 오래 걸립니다. �
 
 | 하고 싶은 일 | 명령 |
 |---|---|
-| 자동 검사 | `uv run --directory src python -m unittest discover -s tests` |
+| 자동 검사 | `uv run python run/run_tests.py` |
+| 자동 검사 · 화면 없이 | `uv run python run/run_tests.py --no-display` |
 | 번역할 문자열 추출 | `uv run python run/extract_messages.py` |
 | 번역 컴파일 | `uv run python run/compile_messages.py` |
 | 설명서 빌드 | `uv run python run/build_manual.py` |

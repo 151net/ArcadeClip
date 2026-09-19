@@ -1,4 +1,12 @@
 """Shared CLI startup and opt-in diagnostics for source and packaged launches."""
+import os
+
+# Before numpy is imported anywhere, including in the analysis workers that inherit
+# this environment. Its linear algebra library reserves a thread buffer per core,
+# which on a 32-core machine commits about 750 MB per process for work this app
+# never asks of it: the heavy lifting is spread across processes, not BLAS threads.
+os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
+
 from i18n import tr, initialize_language
 import argparse
 import faulthandler

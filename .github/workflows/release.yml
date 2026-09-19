@@ -87,10 +87,10 @@ jobs:
             ## 설치 / Install
 
             ZIP을 풀고 `ArcadeClip.exe`를 실행하세요. 폴더 안의 다른 파일도 함께 두세요.
-            진단 로그가 필요하면 `ArcadeClip_dbg.lnk`로 실행하세요.
+            진단 로그가 필요하면 `ArcadeClip_dbg.cmd`로 실행하세요.
 
             Unpack the ZIP and run `ArcadeClip.exe`, keeping the other files beside it.
-            Run `ArcadeClip_dbg.lnk` when you need the diagnostic log.
+            Run `ArcadeClip_dbg.cmd` when you need the diagnostic log.
 
             ## 실행 환경 / Requirements
 

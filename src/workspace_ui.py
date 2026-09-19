@@ -35,10 +35,12 @@ def build_window(w):
     w.button(tr('도움말'), w.show_controls, toolbar, busy=False)
     w.button(tr('Settings'), w.show_advanced, toolbar, busy=False)
     layout.addLayout(toolbar)
-    catalog = w.catalog = QGroupBox(tr('곡 데이터'), w)
+    catalog = w.catalog = QGroupBox(tr('자켓 데이터'), w)
     catalog.setStyleSheet("QGroupBox { border:1px solid #627988; border-radius:8px; margin-top:8px; padding:4px; }"
                          "QGroupBox::title { subcontrol-origin:margin; left:12px; padding:0 5px; }")
-    catalog_row = QHBoxLayout(catalog)
+    # Settings fills the rest of this box: where to fetch from, then these counts, then the button.
+    w.catalog_body = QVBoxLayout(catalog)
+    catalog_row = QHBoxLayout()
     w.catalog_values = []
     for title in (tr('등록된 곡'), tr('보유 자켓'), tr('곡·자켓 용량')):
         column = QHBoxLayout()
@@ -49,7 +51,7 @@ def build_window(w):
         column.addWidget(value)
         catalog_row.addLayout(column, 1)
         w.catalog_values.append(value)
-    w.button(tr('곡 데이터 업데이트'), w.update_jackets, catalog_row)
+    w.catalog_counts = catalog_row
     catalog.hide()
     stages = QHBoxLayout()
     w.stage_group = QButtonGroup(w)

@@ -51,6 +51,18 @@ class VideoCanvas(QWidget):
         self.controls_hint.hide()
         QApplication.instance().installEventFilter(self)
 
+    def release(self):
+        """Stop watching the application's events.
+
+        An application-wide filter is held by the application, which would keep this
+        widget and everything it owns alive for the rest of the run.
+        """
+        QApplication.instance().removeEventFilter(self)
+
+    def closeEvent(self, event):
+        self.release()
+        super().closeEvent(event)
+
     def update_cursor(self, ctrl=None):
         if ctrl is None:
             ctrl = bool(QApplication.keyboardModifiers() & Qt.KeyboardModifier.ControlModifier)
@@ -319,6 +331,10 @@ class Preview(QWidget):
         self.canvas._start = self.canvas._end = None
         self.canvas.update_cursor()
         self.canvas.update()
+
+    def release(self):
+        """Let go of the application-wide filter its canvas installed."""
+        self.canvas.release()
 
     def clear(self):
         self._generation += 1

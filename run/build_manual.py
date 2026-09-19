@@ -35,7 +35,7 @@ groups = {
 }
 centers = {('range', 2): (25, 94), ('range', 3): (50, 75), ('regions', 2): (94, 32), ('regions', 5): (94, 94), ('youtube', 1): (94, 32), ('youtube', 2): (25, 44), ('youtube', 3): (75, 54), ('youtube', 4): (15, 64), ('session', 1): (84, 5), ('recognition', 2): (60, 25)}
 faq = [
-    ('곡 데이터가 없다고 나오는 경우 / 신곡이 나왔을 경우', 'Song data is missing / A new song was released', '{{Settings}} → {{곡 데이터 업데이트}}를 누르세요. 다운로드가 끝나면 다시 곡을 찾으세요.', 'Open {{Settings}} → {{곡 데이터 업데이트}}. When the download finishes, find songs again.'),
+    ('자켓 데이터가 없다고 나오는 경우 / 신곡이 나왔을 경우', 'Jacket data is missing / A new song was released', '{{Settings}} → {{자켓 데이터 업데이트}}를 누르세요. 다운로드가 끝나면 다시 곡을 찾으세요.', 'Open {{Settings}} → {{자켓 데이터 업데이트}}. When the download finishes, find songs again.'),
     ('클립이 안 보여요', 'No clips are visible', '검색어를 지우고 {{곡 미확인 구간 표시}}를 켜세요. {{현재 영상}}이 맞는지 확인하세요.', 'Clear the search and enable {{곡 미확인 구간 표시}}. Check {{현재 영상}}.'),
     ('저장 후 시작·끝이 달라요', 'Exported boundaries shifted', '{{저장 설정}}에서 {{정확한 구간 자르기}}를 고르세요.', 'Choose {{정확한 구간 자르기}} in {{저장 설정}}.'),
     ('이름이 틀리게 나와요', 'Player names are wrong', '{{1P 이름}} 영역이 글자를 정확히 감싸는지 확인하세요. 이름을 고친 뒤 {{수정 적용}}을 누를 수도 있습니다.', 'Check that the {{1P 이름}} region frames the text. You can also edit the name and click {{수정 적용}}.'),
