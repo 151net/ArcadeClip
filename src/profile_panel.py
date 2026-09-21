@@ -414,18 +414,18 @@ class ProfilePanel(QWidget):
         else:
             self.saved_profile = baseline
 
-    def edit_recognition(self):
+    def recognition_groups(self, parent=None):
+        """The recognition settings as two boxes, saved as each value is changed.
+
+        They live in the settings window rather than a dialog of their own, so there
+        is nothing to confirm: a changed value applies to the next analysis.
+        """
         from analysis_common import DEFAULTS
         options = {**DEFAULTS, **self.recognition_options}
-        dialog = QDialog(self)
-        dialog.setWindowTitle(tr('인식 설정'))
-        layout = QVBoxLayout(dialog)
-        jacket = QGroupBox(tr('자켓 영역 · 곡 판독'))
+        jacket = QGroupBox(tr('자켓 영역 · 곡 판독'), parent)
         jacket_form = QFormLayout(jacket)
-        layout.addWidget(jacket)
-        text = QGroupBox(tr('글자 영역 · 이름 및 달성률'))
+        text = QGroupBox(tr('글자 영역 · 이름 및 달성률'), parent)
         text_form = QFormLayout(text)
-        layout.addWidget(text)
         fields = {}
         for key, label, low, high, step in (
             ("location_seconds", tr('자켓 위치 보정 간격 (초)'), 1, 120, 1),
@@ -445,14 +445,13 @@ class ProfilePanel(QWidget):
                 field.setToolTip(tr('높을수록 느슨하게 판독합니다. 비슷한 자켓이 잘못 인식될 수 있습니다.'))
             (text_form if key == "ocr_tail_seconds" else jacket_form).addRow(label, field)
             fields[key] = field
+
+        def keep():
+            self.recognition_options = {key: field.value() for key, field in fields.items()}
+
+        for field in fields.values():
+            field.valueChanged.connect(keep)
         jacket_hint = QLabel(tr('곡 확인 간격이 짧을수록 더 자주 확인합니다.\n자켓 차이 허용값을 높이면 더 느슨하게 인식합니다.\n두 후보의 최소 점수 차이를 높이면 비슷한 자켓을 더 엄격하게 구분합니다.'))
         jacket_hint.setWordWrap(True)
         jacket_form.addRow(jacket_hint)
-        buttons = QDialogButtonBox()
-        buttons.addButton(tr('적용'), QDialogButtonBox.ButtonRole.AcceptRole)
-        buttons.addButton(tr('취소'), QDialogButtonBox.ButtonRole.RejectRole)
-        buttons.accepted.connect(dialog.accept)
-        buttons.rejected.connect(dialog.reject)
-        layout.addWidget(buttons)
-        if dialog.exec():
-            self.recognition_options = {key: field.value() for key, field in fields.items()}
+        return jacket, text

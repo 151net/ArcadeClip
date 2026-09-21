@@ -2602,3 +2602,126 @@ msgstr "Enter an address"
 
 msgid "고급"
 msgstr "Advanced"
+
+msgid "일반"
+msgstr "General"
+
+msgid "인식"
+msgstr "Recognition"
+
+msgid "진단"
+msgstr "Diagnostics"
+
+msgid "받아 둔 자켓 데이터 {size:,} MB를 새 폴더로 가져올까요?"
+msgstr "Bring the {size:,} MB of jacket data you already have to the new folder?"
+
+msgid "가져오지 않으면 새 폴더에서 다시 받습니다."
+msgstr "Without it, the new folder downloads the jackets again."
+
+msgid "옮기기"
+msgstr "Move"
+
+msgid "복사하기"
+msgstr "Copy"
+
+msgid "새로 받기"
+msgstr "Download again"
+
+msgid "자켓 데이터 옮기는 중 {index:,} / {value2:,}"
+msgstr "Moving jacket data {index:,} / {value2:,}"
+
+msgid "자켓 데이터 복사 중 {index:,} / {value2:,}"
+msgstr "Copying jacket data {index:,} / {value2:,}"
+
+msgid "정보"
+msgstr "About"
+
+msgid "오픈소스 라이선스 보기"
+msgstr "View open source licenses"
+
+msgid "아직 공개된 버전이 없습니다. 현재 버전 {name}"
+msgstr "No release has been published yet. This is version {name}"
+
+msgid "클립"
+msgstr "Clips"
+
+msgid "챕터"
+msgstr "Chapters"
+
+msgid "찾은 곡을 이 영상 전체의 챕터로 만듭니다. 클립 파일은 만들지 않습니다."
+msgstr "Turn the songs found here into chapters for the whole recording. No clip files are written."
+
+msgid "YouTube 설명란"
+msgstr "YouTube description"
+
+msgid "YouTube 설명란 챕터"
+msgstr "YouTube description chapters"
+
+msgid "YouTube에 챕터로 표시됩니다."
+msgstr "YouTube will show these as chapters."
+
+msgid "설명란 내용 복사"
+msgstr "Copy the description"
+
+msgid "설명란 내용을 복사했습니다."
+msgstr "Copied the description."
+
+msgid "챕터를 넣은 영상 저장"
+msgstr "Save a video with chapters"
+
+msgid "영상 저장은 다시 인코딩하지 않고 챕터만 넣어 복사합니다."
+msgstr "Saving copies the video and adds the chapters; it does not encode it again."
+
+msgid "이 영상에서 찾은 곡이 없습니다."
+msgstr "No songs were found in this video."
+
+msgid "챕터가 {count}개입니다. YouTube는 {least}개부터 표시합니다."
+msgstr "There are {count} chapters. YouTube shows them from {least} upwards."
+
+msgid "{seconds}초보다 짧은 챕터가 있습니다."
+msgstr "A chapter is shorter than {seconds} seconds."
+
+msgid "챕터를 넣는 중입니다…"
+msgstr "Adding the chapters…"
+
+msgid "챕터를 넣어 저장했습니다: {name}"
+msgstr "Saved with chapters: {name}"
+
+msgid "챕터를 넣은 파일을 만들지 못했습니다."
+msgstr "The file with chapters could not be written."
+
+msgid "영상 길이를 확인하지 못해 챕터를 넣을 수 없습니다."
+msgstr "The video length is unknown, so chapters cannot be added."
+
+msgid "원본과 다른 파일 이름을 지정해 주세요."
+msgstr "Choose a file name other than the source."
+
+msgid "-챕터"
+msgstr "-chapters"
+
+msgid "영상 (*{suffix})"
+msgstr "Video (*{suffix})"
+
+msgid "챕터 형식"
+msgstr "Chapter format"
+
+msgid "공백 챕터 이름"
+msgstr "Gap chapter name"
+
+msgid "곡과 곡 사이에도 챕터 넣기"
+msgstr "Add a chapter between songs too"
+
+msgid "쉬는 시간"
+msgstr "Break"
+
+msgid "쓸 수 있는 항목: "
+msgstr "Available fields: "
+
+msgid "챕터 형식을 확인해 주세요: {error}"
+msgstr "Check the chapter format: {error}"
+
+msgid "선택한 클립이 없습니다."
+msgstr "No clips are selected."
+
+msgid "다운로드가 끝난 뒤에 다른 단계로 갈 수 있습니다."
+msgstr "You can move to another step once the download finishes."

@@ -242,6 +242,53 @@ class JacketTests(unittest.TestCase):
         jackets.select_source(self.directory, jackets.OFFICIAL_SOURCE)
         self.assertTrue(jackets.catalog_status(self.directory))
 
+    def test_jackets_can_be_brought_to_another_folder(self):
+        self.run_download()
+        other = Path(self.temporary.name) / "moved"
+        self.assertEqual(jackets.stored_bytes(self.directory),
+                         sum(p.stat().st_size for p in (self.directory / "jackets").rglob("*") if p.is_file()))
+        quiet = threading.Event()
+        copied = jackets.transfer_data(self.directory, other, False, quiet, lambda _: None)
+        self.assertEqual(copied, 3)
+        self.assertTrue(jackets.catalog_status(other))
+        # A copy leaves the original in place; the reader may still be using it.
+        self.assertTrue(jackets.catalog_status(self.directory))
+        third = Path(self.temporary.name) / "again"
+        jackets.transfer_data(self.directory, third, True, quiet, lambda _: None)
+        self.assertTrue(jackets.catalog_status(third))
+        self.assertFalse((self.directory / "jackets").exists())
+        self.assertEqual(jackets.stored_bytes(self.directory), 0)
+        self.assertEqual(jackets.transfer_data(third, third, True, quiet, lambda _: None), 0)
+
+    def test_a_jacket_is_found_whichever_server_supplied_it(self):
+        # The clip list draws these from the index; they moved under their server's folder.
+        self.run_download()
+        index = jackets.jacket_index(self.directory)
+        self.assertEqual(index["a.png"].parent.name, jackets.OFFICIAL_SOURCE)
+        mirror = {"manifest": "https://mirror.example/songs.json", "images": "https://mirror.example/cover/"}
+        self.bodies[mirror["manifest"]] = json.dumps([{"image_url": "c.png", "title": "C"}]).encode()
+        self.run_download(source=mirror)
+        jackets.select_source(self.directory, jackets.OFFICIAL_SOURCE)
+        index = jackets.jacket_index(self.directory)
+        # The chosen server wins where both have a song, and the other still shows its own.
+        self.assertEqual(index["a.png"].parent.name, jackets.OFFICIAL_SOURCE)
+        self.assertEqual(index["c.png"].parent.name, "mirror.example")
+        self.assertNotIn("missing.png", index)
+        self.assertEqual(jackets.jacket_index(self.directory / "nowhere"), {})
+
+    def test_a_prepared_folder_is_recognised_without_asking_again(self):
+        # The app asks for a data folder only when none is prepared; it must see the
+        # jackets wherever a version of the app put them.
+        self.assertFalse(jackets.has_catalog(self.directory))
+        self.assertFalse(jackets.has_catalog(""))
+        self.run_download()
+        self.assertTrue(jackets.has_catalog(self.directory))
+        self.assertTrue(jackets.has_catalog(str(self.directory)))
+        flat = Path(self.temporary.name) / "old"
+        (flat / "jackets").mkdir(parents=True)
+        (flat / "jackets/_manifest.json").write_bytes(json.dumps(self.songs).encode())
+        self.assertTrue(jackets.has_catalog(flat))
+
     def test_cancel_before_start_and_size_limit(self):
         cancel = threading.Event()
         cancel.set()

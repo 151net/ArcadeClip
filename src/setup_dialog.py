@@ -7,7 +7,7 @@ from PySide6.QtCore import QSettings, QStandardPaths
 from PySide6.QtWidgets import (QDialog, QFileDialog, QHBoxLayout, QLabel, QLineEdit, QMessageBox,
                                QPushButton, QVBoxLayout, QProgressBar)
 
-from jackets import download_jackets, migrate_legacy, source_status
+from jackets import download_jackets, migrate_legacy, source_status, stored_bytes, transfer_data
 from jacket_source_ui import download_controls
 from tasks import Task
 
@@ -20,6 +20,8 @@ class SetupDialog(QDialog):
         self.task = None
         self.directory = None
         self.chosen = None
+        self.previous = Path(current) if current else None
+        self.bring = None
         self.settings = QSettings("ArcadeClip", "ArcadeClip")
         default = Path(QStandardPaths.writableLocation(QStandardPaths.StandardLocation.DocumentsLocation)) / "ArcadeClip"
         self.path = QLineEdit(str(current or self.settings.value("data_directory", str(default))))
@@ -78,6 +80,8 @@ class SetupDialog(QDialog):
         # Settle the addresses on this thread; the worker must not touch widgets.
         self.chosen = self.source.current()
         self.directory = Path(self.path.text()).expanduser().resolve()
+        if self.ask_about_existing_data() is False:
+            return
         self.path.setEnabled(False)
         self.source.setEnabled(False)
         self.start.setEnabled(False)
@@ -89,11 +93,41 @@ class SetupDialog(QDialog):
         self.task.finished.connect(self.complete)
         self.task.start()
 
+    def ask_about_existing_data(self):
+        """Offer to bring the jackets along when the folder changes. False cancels."""
+        self.bring = None
+        size = stored_bytes(self.previous) if self.previous else 0
+        if not size or self.previous.resolve() == self.directory:
+            return True
+        question = QMessageBox(self)
+        question.setWindowTitle(tr('자켓 데이터'))
+        question.setIcon(QMessageBox.Icon.Question)
+        question.setText(tr('받아 둔 자켓 데이터 {size:,} MB를 새 폴더로 가져올까요?',
+                            size=round(size / 1048576)))
+        question.setInformativeText(tr('가져오지 않으면 새 폴더에서 다시 받습니다.'))
+        move = question.addButton(tr('옮기기'), QMessageBox.ButtonRole.AcceptRole)
+        copy = question.addButton(tr('복사하기'), QMessageBox.ButtonRole.AcceptRole)
+        fresh = question.addButton(tr('새로 받기'), QMessageBox.ButtonRole.DestructiveRole)
+        question.addButton(tr('취소'), QMessageBox.ButtonRole.RejectRole)
+        question.setDefaultButton(move)
+        question.exec()
+        picked = question.clickedButton()
+        if picked is move:
+            self.bring = True
+        elif picked is copy:
+            self.bring = False
+        elif picked is not fresh:
+            return False
+        return True
+
     def _prepare(self, cancel, report):
         self.directory.mkdir(parents=True, exist_ok=True)
         with TemporaryFile(dir=self.directory) as probe:
             probe.write(b"1")
             probe.flush()
+        if self.bring is not None:
+            migrate_legacy(self.previous)
+            transfer_data(self.previous, self.directory, self.bring, cancel, report)
         report(tr('자켓 데이터를 확인하고 있습니다.'))
         migrate_legacy(self.directory)
         source = self.chosen

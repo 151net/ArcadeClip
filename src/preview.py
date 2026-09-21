@@ -75,7 +75,9 @@ class VideoCanvas(QWidget):
                 and isinstance(watched, QWidget) and watched.window() is self.window()
                 and event.key() == Qt.Key.Key_Control):
             self.update_cursor(event.type() == QEvent.Type.KeyPress)
-        return super().eventFilter(watched, event)
+        # Not super(): delegating from a filter installed on the application re-enters
+        # the filter chain, and with one canvas per window that nests until it breaks.
+        return False
 
     def enterEvent(self, event):
         self.update_cursor()

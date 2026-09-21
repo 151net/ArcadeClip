@@ -4,6 +4,7 @@ from i18n import tr
 import io
 import json
 import re
+import shutil
 import ssl
 import threading
 import urllib.error
@@ -211,6 +212,69 @@ def select_source(data_dir: Path, use: str) -> None:
     root = Path(data_dir) / "jackets"
     root.mkdir(parents=True, exist_ok=True)
     _atomic_write(root / SELECTION, json.dumps({"use": use}).encode())
+
+
+def has_catalog(data_dir) -> bool:
+    """Whether any server's song list is on disk. Cheap: the jackets stay unread,
+    so starting the app does not walk a folder that may be on a network share."""
+    return bool(data_dir) and bool(catalog_folders(Path(data_dir)))
+
+
+def jacket_index(data_dir: Path) -> dict:
+    """Map every jacket file name to where it sits, whichever server supplied it.
+
+    Built in a worker and looked up afterwards: the clip list must not reach the
+    file system while it draws, since a data folder can be on a network share.
+    """
+    root = Path(data_dir) / "jackets"
+    # The chosen data wins; anything else on disk still shows a picture.
+    folders = [*catalog_folders(data_dir), *(root / source for source in installed_sources(data_dir)), root]
+    index = {}
+    for folder in reversed(folders):
+        try:
+            entries = list(folder.iterdir())
+        except OSError:
+            continue
+        for path in entries:
+            if path.suffix.lower() == ".png":
+                index[path.name] = path
+    return index
+
+
+def stored_bytes(data_dir: Path) -> int:
+    """How much the jacket folders take, for telling the reader what a move involves."""
+    root = Path(data_dir) / "jackets"
+    if not root.is_dir():
+        return 0
+    return sum(path.stat().st_size for path in root.rglob("*") if path.is_file())
+
+
+def transfer_data(source_dir: Path, target_dir: Path, move: bool, cancel: Event,
+                  report: Callable[[str], None]) -> int:
+    """Bring the jacket folders along to a new data folder. Returns the file count.
+
+    Copies first and only then removes, so an interruption leaves the files where
+    they already were rather than in neither place.
+    """
+    source = Path(source_dir) / "jackets"
+    target = Path(target_dir) / "jackets"
+    if not source.is_dir() or source.resolve() == target.resolve():
+        return 0
+    files = [path for path in source.rglob("*") if path.is_file()]
+    for number, path in enumerate(files, 1):
+        _check_cancel(cancel)
+        destination = target / path.relative_to(source)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        if not destination.exists() or destination.stat().st_size != path.stat().st_size:
+            _atomic_write(destination, path.read_bytes())
+        if number == 1 or number % 50 == 0 or number == len(files):
+            report(tr('자켓 데이터 옮기는 중 {index:,} / {value2:,}', index=number, value2=len(files))
+                   if move else
+                   tr('자켓 데이터 복사 중 {index:,} / {value2:,}', index=number, value2=len(files)))
+    if move:
+        _check_cancel(cancel)
+        shutil.rmtree(source, ignore_errors=True)
+    return len(files)
 
 
 def catalog_folders(data_dir: Path) -> list[Path]:

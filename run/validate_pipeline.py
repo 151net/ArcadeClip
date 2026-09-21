@@ -27,13 +27,16 @@ def main():
     if (root / "broadcast.mp4").exists():
         raise SystemExit("Choose a new --output directory; existing demo files are preserved.")
     font = ImageFont.truetype(str(args.font), 40)
-    (root / "jackets").mkdir(exist_ok=True)
+    # Jackets sit under the server that supplied them, as a real data folder does.
+    from jackets import OFFICIAL_SOURCE
+    catalog = root / "jackets" / OFFICIAL_SOURCE
+    catalog.mkdir(parents=True, exist_ok=True)
     images = [Image.fromarray(np.random.default_rng(seed).integers(0, 255, (8, 8, 3), dtype=np.uint8))
               .resize((200, 200), Image.Resampling.NEAREST) for seed in range(2)]
     for index, image in enumerate(images):
-        image.save(root / "jackets" / f"{index}.png")
-    write_json(root / "jackets/_manifest.json", [{"image_url": f"{index}.png", "title": f"Demo {index + 1}"}
-                                                for index in range(2)])
+        image.save(catalog / f"{index}.png")
+    write_json(catalog / "_manifest.json", [{"image_url": f"{index}.png", "title": f"Demo {index + 1}"}
+                                            for index in range(2)])
     video = root / "broadcast.mp4"
     with av.open(str(video), "w") as container:
         stream = container.add_stream("libx264", rate=10)

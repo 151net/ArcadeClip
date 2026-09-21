@@ -12,7 +12,7 @@ from unittest.mock import patch
 from PySide6.QtCore import Qt, QEvent, QPoint, QPointF, QTimer
 from PySide6.QtTest import QTest
 from PySide6.QtGui import QWheelEvent
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication, QFileDialog
 
 from app import MainWindow
 from profiles import load_profile, validate_profile, write_json
@@ -494,7 +494,7 @@ class AppTests(unittest.TestCase):
         from app import source_key
         from analysis_common import DEFAULTS
         from PySide6.QtCore import QTimer
-        from PySide6.QtWidgets import QGroupBox, QDoubleSpinBox, QDialog
+        from PySide6.QtWidgets import QGroupBox, QDoubleSpinBox, QTabWidget
         self.assertEqual(DEFAULTS["hash_distance"], 10)
         with tempfile.TemporaryDirectory() as name:
             window = MainWindow(Path(name))
@@ -512,22 +512,18 @@ class AppTests(unittest.TestCase):
                 self.assertEqual((window.ranges[1]["start"], window.ranges[1]["end"]), (0, 100))
             window.show_advanced()
             self.assertEqual(window.advanced.windowTitle(), "Settings")
+            tabs = window.advanced.findChild(QTabWidget)
+            self.assertEqual([tabs.tabText(index) for index in range(tabs.count())],
+                             ["일반", "자켓 데이터", "인식", "진단", "정보"])
             self.assertEqual({g.title() for g in window.advanced.findChildren(QGroupBox)},
-                             {"영역별 인식", "분석 성능", "화면 탐색", "자켓 데이터",
-                              "데이터 저장 위치", "진단 로그", "앱 버전"})
+                             {"자켓 영역 · 곡 판독", "글자 영역 · 이름 및 달성률", "분석 성능",
+                              "화면 탐색", "자켓 데이터", "데이터 저장 위치", "진단 로그",
+                              "앱 버전", "오픈소스 라이선스"})
             self.assertEqual(window.follow_clip.parentWidget().title(), "화면 탐색")
-            observed = []
-            def accept_settings():
-                dialog = self.application.activeModalWidget()
-                if isinstance(dialog, QDialog):
-                    observed.extend(g.title() for g in dialog.findChildren(QGroupBox))
-                    field = dialog.findChild(QDoubleSpinBox, "hash_distance")
-                    observed.append(field.value())
-                    field.setValue(11)
-                    dialog.accept()
-            QTimer.singleShot(0, accept_settings)
-            window.profile.edit_recognition()
-            self.assertEqual(observed, ["자켓 영역 · 곡 판독", "글자 영역 · 이름 및 달성률", 10])
+            # Recognition settings sit in the window itself, so a change applies at once.
+            field = window.advanced.findChild(QDoubleSpinBox, "hash_distance")
+            self.assertEqual(field.value(), 10)
+            field.setValue(11)
             self.assertEqual(window.profile.recognition_options["hash_distance"], 11)
             window.close()
 
@@ -627,7 +623,7 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 from PySide6.QtCore import QTimer
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication, QFileDialog
 from app import MainWindow
 from setup_dialog import SetupDialog
 application = QApplication([])
@@ -656,6 +652,81 @@ print('setup cycles passed')
                                    30, env=environment)
         self.assertEqual(code, 0, out + err)
         self.assertIn("setup cycles passed", out)
+
+    def test_export_stage_offers_clips_and_chapters(self):
+        from PySide6.QtWidgets import QTabWidget
+        with tempfile.TemporaryDirectory() as name, patch.object(MainWindow, 'refresh_catalog_summary'):
+            window = MainWindow(Path(name))
+            window.path = Path(name) / "recording.mp4"
+            source = str(window.path)
+            rows = [dict(source=source, start=30, end=150, title="Starry Colors",
+                         player="Tirr", achievement=100.7705),
+                    dict(source=source, start=200, end=330, title="GIGANTOMAKHIA",
+                         player="Tirr", achievement=100.8883)]
+            other = dict(source="other.mp4", start=0, end=10, title="Elsewhere")
+            window.ranges = [*rows, other]
+            with patch.object(window.preview, "load"):
+                window.refresh_ranges()
+            tabs = window.export_tabs
+            self.assertEqual([tabs.tabText(i) for i in range(tabs.count())], ["클립", "챕터"])
+            with patch.object(window.preview.player, "duration", return_value=400000):
+                # Chapters follow what was chosen for saving, not every clip in the list.
+                window.prepare_export([rows[0], other])
+                lines = window.chapter_text.toPlainText().splitlines()
+                self.assertEqual(lines, ["0:00 시작", "0:30 Starry Colors · Tirr 100.7705"])
+                self.assertNotIn("Elsewhere", window.chapter_text.toPlainText())
+
+                window.prepare_export(rows)
+                self.assertEqual(window.chapter_text.toPlainText().splitlines(),
+                                 ["0:00 시작", "0:30 Starry Colors · Tirr 100.7705",
+                                  "3:20 GIGANTOMAKHIA · Tirr 100.8883"])
+
+                # A template names what it wants; a missing field leaves no hole behind.
+                window.chapter_format.setText("{index}. {title} [{player1_name}]")
+                self.assertEqual(window.chapter_text.toPlainText().splitlines()[1],
+                                 "0:30 1. Starry Colors [Tirr]")
+                window.chapter_format.setText("{nothing}")
+                self.assertEqual(window.chapter_text.toPlainText(), "")
+                self.assertIn("nothing", window.chapter_notes.text())
+                window.chapter_format.setText("")
+
+                # The pause between two songs becomes a chapter of its own on request.
+                window.chapter_gap_name.setText("쉬는 시간")
+                window.chapter_gap.setChecked(True)
+                self.assertEqual(window.chapter_text.toPlainText().splitlines(),
+                                 ["0:00 쉬는 시간", "0:30 Starry Colors · Tirr 100.7705",
+                                  "2:30 쉬는 시간", "3:20 GIGANTOMAKHIA · Tirr 100.8883"])
+                window.chapter_gap.setChecked(False)
+
+                window.copy_chapters()
+                self.assertEqual(self.application.clipboard().text(),
+                                 window.chapter_text.toPlainText())
+            # Without a duration there is nothing to close the last chapter against.
+            observed = []
+            with patch.object(window.preview.player, "duration", return_value=0), \
+                 patch.object(window, "fail", side_effect=lambda error: observed.append(error)), \
+                 patch.object(QFileDialog, "getSaveFileName") as chooser:
+                window.export_chapter_video()
+                chooser.assert_not_called()
+            self.assertIsInstance(observed[0], ValueError)
+            window.close()
+
+    def test_a_running_download_keeps_its_own_page(self):
+        with tempfile.TemporaryDirectory() as name, patch.object(MainWindow, 'refresh_catalog_summary'):
+            window = MainWindow(Path(name))
+            window.remote = {"url": "https://youtu.be/x", "title": "t", "duration": 100}
+            window.stage = 5
+            window.task = object()
+            try:
+                window.set_stage(0)
+                # Leaving would hide the progress of the download that is still running.
+                self.assertEqual(window.stage, 5)
+                self.assertIn("다운로드", window.status.text())
+            finally:
+                window.task = None
+            window.set_stage(0)
+            self.assertEqual(window.stage, 0)
+            window.close()
 
     def test_closing_a_window_stops_it_watching_the_application(self):
         # MainWindow and the preview's canvas watch every event the application

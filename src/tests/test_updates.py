@@ -65,12 +65,32 @@ class LookupTests(unittest.TestCase):
             self.assertTrue(url.startswith('https://'))
 
 
+class MissingReleaseTests(unittest.TestCase):
+    def test_a_draft_release_reads_as_nothing_published_not_a_failure(self):
+        import urllib.error
+        missing = urllib.error.HTTPError(updates.RELEASES_API, 404, 'Not Found', {}, None)
+        with patch.object(updates.urllib.request, 'urlopen', side_effect=missing):
+            self.assertIsNone(updates.latest_release())
+
+    def test_other_http_errors_still_raise(self):
+        import urllib.error
+        refused = urllib.error.HTTPError(updates.RELEASES_API, 403, 'rate limited', {}, None)
+        with patch.object(updates.urllib.request, 'urlopen', side_effect=refused):
+            with self.assertRaises(urllib.error.HTTPError):
+                updates.latest_release()
+
+
 class ReportTests(unittest.TestCase):
-    def test_report_link_carries_the_version_and_system_only(self):
+    def test_report_link_opens_the_projects_own_form(self):
         url = updates.report_url()
         self.assertTrue(url.startswith(updates.NEW_ISSUE + '?'))
-        body = parse_qs(urlparse(url).query)['body'][0]
-        self.assertIn(updates.VERSION, body)
-        # The report must not ship logs, paths, or player names; the reader attaches those.
-        for leaked in ('debug.log', 'crash.log', 'C:\\', '/Users/'):
-            self.assertNotIn(leaked, body)
+        query = parse_qs(urlparse(url).query)
+        self.assertEqual(query['template'], [updates.TEMPLATE])
+        # The form asks its own questions; nothing about this machine rides along.
+        self.assertEqual(set(query), {'template'})
+        for leaked in ('debug.log', 'crash.log', 'C:' + chr(92), '/Users/'):
+            self.assertNotIn(leaked, url)
+
+    def test_the_form_the_link_names_is_in_the_repository(self):
+        template = Path(__file__).resolve().parents[2] / '.github/ISSUE_TEMPLATE' / updates.TEMPLATE
+        self.assertTrue(template.is_file(), template)

@@ -18,7 +18,8 @@ from PySide6.QtWidgets import QAbstractSpinBox, QApplication, QComboBox, QFileDi
 
 from clips import label as clip_label, validate_clip, achievement_text, offset_bounds, merge_rows, apply_offsets
 from export import export_clips
-from jackets import download_jackets, catalog_summary, migrate_legacy, source_from
+from jackets import (catalog_summary, download_jackets, has_catalog, jacket_index,
+                     migrate_legacy, source_from)
 from media import format_time, parse_time, adjacent_frame
 from preview import Preview
 from profiles import validate_profile, write_json, load_profile, require_regions
@@ -93,6 +94,7 @@ class MainWindow(QMainWindow):
         self.preview.play_button.clicked.connect(self.stop_reverse)
         QApplication.instance().installEventFilter(self)
         self.catalog_task = None
+        self.jackets = {}
         # Older data folders keep every jacket together; move them under their server.
         migrate_legacy(self.directory)
         self.refresh_catalog_summary()
@@ -118,6 +120,10 @@ class MainWindow(QMainWindow):
     def set_stage(self, index):
         if index == 1 and self.remote:
             index = 5
+        if self.stage == 5 and index != 5 and self.task and self.remote:
+            self.status.setText(tr('다운로드가 끝난 뒤에 다른 단계로 갈 수 있습니다.'))
+            self.stage_group.button(self.stage).setChecked(True)
+            return
         if ((index == 1 and not self.path) or (index == 2 and not self.path)
                 or (index in (3, 4) and not self.ranges and not self.path) or (index == 5 and not self.remote)):
             self.status.setText(tr('먼저 영상을 열고 작업할 구간을 준비해 주세요.'))
@@ -436,6 +442,71 @@ class MainWindow(QMainWindow):
         self.output_names.addItems([_filename(row) + "." + extension for row in rows])
         self.execute_export_button.setText(trn('파일 {count}개 저장 시작', '파일 {count}개 저장 시작', len(rows)))
         self.execute_export_button.setEnabled(bool(rows) and not self.task)
+        self.refresh_chapters()
+
+    def chapter_rows(self):
+        """The clips chosen for saving that belong to the video on screen.
+
+        Chapters mark one recording, and they mark what the reader picked: the
+        clip list and the chapter list must not disagree.
+        """
+        if not self.path:
+            return []
+        key = source_key(self.path)
+        return [row for row in self.pending_exports if source_key(row["source"]) == key]
+
+    def chapter_style(self):
+        """The template and the gap label the chapter controls currently hold."""
+        from chapters import FORMAT
+        template = self.chapter_format.text().strip() or FORMAT
+        gap = self.chapter_gap_name.text().strip() if self.chapter_gap.isChecked() else None
+        return template, gap
+
+    def refresh_chapters(self):
+        from chapters import check_format, description, refused
+        rows = self.chapter_rows()
+        template, gap = self.chapter_style()
+        duration = self.preview.player.duration() / 1000 if self.path else 0
+        problem = check_format(template)
+        if problem:
+            self.chapter_text.setPlainText("")
+            self.chapter_notes.setText(problem)
+            return
+        self.chapter_text.setPlainText(description(rows, template, gap) if rows else "")
+        if not rows:
+            self.chapter_notes.setText(tr('저장할 클립을 선택하세요.'))
+        else:
+            reasons = refused(rows, duration or None, template, gap)
+            self.chapter_notes.setText("\n".join(reasons) if reasons else
+                                       tr('YouTube에 챕터로 표시됩니다.'))
+
+    def copy_chapters(self):
+        text = self.chapter_text.toPlainText()
+        if not text:
+            return
+        QApplication.clipboard().setText(text)
+        self.status.setText(tr('설명란 내용을 복사했습니다.'))
+
+    def export_chapter_video(self):
+        from chapters import write_chapters
+        rows = self.chapter_rows()
+        duration = self.preview.player.duration() / 1000 if self.path else 0
+        if not rows or self.task:
+            return
+        if not duration:
+            self.fail(ValueError(tr('영상 길이를 확인하지 못해 챕터를 넣을 수 없습니다.')))
+            return
+        suggested = self.path.with_name(self.path.stem + tr('-챕터') + self.path.suffix)
+        name, _ = QFileDialog.getSaveFileName(self, tr('챕터를 넣은 영상 저장'), str(suggested),
+                                              tr('영상 (*{suffix})', suffix=self.path.suffix))
+        if not name:
+            return
+        template, gap = self.chapter_style()
+
+        def complete(result):
+            self.status.setText(tr('챕터를 넣어 저장했습니다: {name}', name=Path(result).name))
+        self.run_task(lambda cancel, report: write_chapters(self.path, Path(name), rows, duration,
+                                                            cancel, report, template, gap), complete)
 
     def execute_export(self):
         if not self.pending_exports or self.task:
@@ -619,8 +690,9 @@ class MainWindow(QMainWindow):
             item.setData(Qt.ItemDataRole.UserRole, row["clip_id"])
             item.setFlags(item.flags() | Qt.ItemFlag.ItemIsUserCheckable)
             item.setCheckState(Qt.CheckState.Checked if row.get("selected", False) else Qt.CheckState.Unchecked)
-            if row.get("image_url"):
-                item.setIcon(QIcon(str(self.directory / "jackets" / row["image_url"])))
+            found = self.jackets.get(row.get("image_url"))
+            if found is not None:
+                item.setIcon(QIcon(str(found)))
             self.range_list.addItem(item)
         self.filter_ranges()
         if 0 <= current < len(self.ranges) and not self.range_list.item(current).isHidden():
@@ -1194,7 +1266,9 @@ class MainWindow(QMainWindow):
     def refresh_catalog_summary(self):
         if self.catalog_task:
             return
-        self.catalog_task = Task(lambda cancel, report: catalog_summary(self.directory, cancel, report), self)
+        def survey(cancel, report):
+            return catalog_summary(self.directory, cancel, report), jacket_index(self.directory)
+        self.catalog_task = Task(survey, self)
         def complete():
             task, self.catalog_task = self.catalog_task, None
             task.wait()
@@ -1203,7 +1277,7 @@ class MainWindow(QMainWindow):
                     value.setText(tr('확인 실패'))
                     value.setToolTip(str(task.error))
             elif not task.cancel.is_set():
-                songs, jackets, size = task.result
+                (songs, jackets, size), self.jackets = task.result
                 amount = f"{size / 1024 ** 3:.2f} GB" if size >= 1024 ** 3 else f"{size / 1024 ** 2:.1f} MB"
                 for value, text in zip(self.catalog_values, (trn(
                     '{count:,}곡',
@@ -1424,7 +1498,8 @@ class MainWindow(QMainWindow):
 
     def eventFilter(self, watched, event):
         if event.type() != QEvent.Type.KeyPress or not isinstance(watched, QWidget) or watched.window() is not self:
-            return super().eventFilter(watched, event)
+            # False, not super(): see VideoCanvas.eventFilter.
+            return False
         focus = self.focusWidget()
         if isinstance(focus, (QLineEdit, QPlainTextEdit, QComboBox, QAbstractSpinBox)):
             return False
@@ -1512,7 +1587,9 @@ def main():
     application.setApplicationName("ArcadeClip")
     application.setWindowIcon(QIcon(str(Path(__file__).parent / "assets" / "icon.ico")))
     directory = QSettings("ArcadeClip", "ArcadeClip").value("data_directory", "")
-    if not directory or not (Path(directory) / "jackets" / "_manifest.json").is_file():
+    if directory:
+        migrate_legacy(Path(directory))
+    if not has_catalog(directory):
         setup = SetupDialog()
         if not setup.exec():
             return 0

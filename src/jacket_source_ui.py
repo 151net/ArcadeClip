@@ -1,8 +1,8 @@
 """Where song artwork comes from, shared by the welcome and settings screens."""
 from i18n import tr
 
-from PySide6.QtWidgets import (QCheckBox, QComboBox, QFormLayout, QHBoxLayout, QLabel,
-                               QLineEdit, QPushButton, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QCheckBox, QComboBox, QFormLayout, QFrame, QHBoxLayout,
+                               QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget)
 
 from jackets import (ALL_SOURCES, IMAGE_BASE, MANIFEST_URL, PRESETS, installed_sources,
                      normalize_source, save_source, select_source, selected_source,
@@ -98,15 +98,20 @@ def download_controls(settings, parent=None):
 
 
 def fill_catalog_group(window, settings):
-    """Complete the jacket data box: which data to use, where to fetch it, counts, update."""
+    """Fill the jacket data box in the order the reader works through it: where to
+    fetch from, which of the fetched data to use, what is on disk, then update."""
     layout = window.catalog_body
+    controls = download_controls(settings, window.catalog)
+    layout.insertWidget(0, controls)
+    line = QFrame()
+    line.setFrameShape(QFrame.Shape.HLine)
+    line.setFrameShadow(QFrame.Shadow.Sunken)
+    layout.insertWidget(1, line)
     picker = QComboBox()
     picker.setAccessibleName(tr('다음 데이터 사용'))
-    top = QFormLayout()
-    top.addRow(tr('다음 데이터 사용'), picker)
-    layout.insertLayout(0, top)
-    controls = download_controls(settings, window.catalog)
-    layout.insertWidget(1, controls)
+    use = QFormLayout()
+    use.addRow(tr('다음 데이터 사용'), picker)
+    layout.insertLayout(2, use)
     layout.addLayout(window.catalog_counts)
     row = QHBoxLayout()
     row.addStretch()

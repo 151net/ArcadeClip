@@ -2,7 +2,7 @@
 from i18n import tr
 from PySide6.QtCore import Qt, QSize, QSettings
 from PySide6.QtWidgets import (QAbstractItemView, QDoubleSpinBox, QGroupBox, QButtonGroup, QCheckBox, QComboBox, QFormLayout, QHBoxLayout, QLabel,
-    QLineEdit, QListWidget, QPlainTextEdit, QScrollArea, QProgressBar, QSlider, QSpinBox, QScrollBar, QPushButton, QSplitter, QStackedWidget, QVBoxLayout, QWidget)
+    QLineEdit, QListWidget, QPlainTextEdit, QScrollArea, QProgressBar, QSlider, QSpinBox, QScrollBar, QPushButton, QSplitter, QStackedWidget, QTabWidget, QVBoxLayout, QWidget)
 from profile_panel import ProfilePanel
 from timeline import RangeTimeline
 
@@ -358,6 +358,11 @@ def build_window(w):
     w.encoder_preset.addItems(["ultrafast", "fast", "medium", "slow"])
     w.encoder_preset.setCurrentText("fast")
     w.encoder_preset.hide()
+    w.export_tabs = QTabWidget()
+    body.addWidget(w.export_tabs, 1)
+    clips_page = QWidget()
+    body = QVBoxLayout(clips_page)
+    w.export_tabs.addTab(clips_page, tr('클립'))
     w.export_summary = QLabel(tr('저장할 클립을 선택하세요.'))
     w.export_summary.setWordWrap(True)
     body.addWidget(w.export_summary)
@@ -382,6 +387,41 @@ def build_window(w):
     w.execute_export_button = w.button(tr('파일 저장 시작'), w.execute_export, export_actions)
     w.execute_export_button.setProperty("primary", True)
     body.addLayout(export_actions)
+
+    chapters_page = QWidget()
+    body = QVBoxLayout(chapters_page)
+    w.export_tabs.addTab(chapters_page, tr('챕터'))
+    body.addWidget(QLabel(tr('찾은 곡을 이 영상 전체의 챕터로 만듭니다. 클립 파일은 만들지 않습니다.')))
+    w.chapter_notes = QLabel()
+    w.chapter_notes.setWordWrap(True)
+    body.addWidget(w.chapter_notes)
+    from chapters import FIELDS, FORMAT, GAP
+    chapter_form = QFormLayout()
+    w.chapter_format = QLineEdit(FORMAT)
+    w.chapter_format.setAccessibleName(tr('챕터 형식'))
+    w.chapter_format.setToolTip(" ".join("{" + name + "}" for name in FIELDS))
+    chapter_form.addRow(tr('챕터 형식'), w.chapter_format)
+    w.chapter_gap_name = QLineEdit(GAP)
+    w.chapter_gap_name.setAccessibleName(tr('공백 챕터 이름'))
+    chapter_form.addRow(tr('공백 챕터 이름'), w.chapter_gap_name)
+    body.addLayout(chapter_form)
+    w.chapter_gap = QCheckBox(tr('곡과 곡 사이에도 챕터 넣기'))
+    body.addWidget(w.chapter_gap)
+    for control in (w.chapter_format, w.chapter_gap_name):
+        control.textChanged.connect(w.refresh_chapters)
+    w.chapter_gap.toggled.connect(w.refresh_chapters)
+    body.addWidget(QLabel(tr('쓸 수 있는 항목: ') + " ".join("{" + name + "}" for name in FIELDS)))
+    body.addWidget(QLabel(tr('YouTube 설명란')))
+    w.chapter_text = QPlainTextEdit()
+    w.chapter_text.setReadOnly(True)
+    w.chapter_text.setAccessibleName(tr('YouTube 설명란 챕터'))
+    body.addWidget(w.chapter_text, 1)
+    chapter_actions = QHBoxLayout()
+    w.button(tr('설명란 내용 복사'), w.copy_chapters, chapter_actions, busy=False)
+    w.button(tr('챕터를 넣은 영상 저장'), w.export_chapter_video, chapter_actions)
+    body.addLayout(chapter_actions)
+    body.addWidget(QLabel(tr('영상 저장은 다시 인코딩하지 않고 챕터만 넣어 복사합니다.')))
+
     body = page(tr('YouTube · 선택 구간 다운로드'))
     w.youtube_info = QLabel()
     w.youtube_info.setTextFormat(Qt.TextFormat.PlainText)
