@@ -55,6 +55,9 @@ if ($buildExitCode -ne 0) { throw 'Build failed.' }
 $executable = Join-Path $bundle 'ArcadeClip.exe'
 # pyside6-deploy catches some build errors, so its exit status alone is insufficient.
 if (-not (Test-Path $executable -PathType Leaf)) { throw "Built executable missing: $executable" }
+Copy-Item -LiteralPath (Join-Path $projectRoot 'LICENSE') -Destination (Join-Path $bundle 'LICENSE')
+Copy-Item -LiteralPath (Join-Path $projectRoot 'DISTRIBUTION.md') -Destination (Join-Path $bundle 'DISTRIBUTION.md')
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'license_sources/COPYING.GPLv3') -Destination (Join-Path $bundle 'COPYING.GPLv3')
 foreach ($asset in (Get-ChildItem -LiteralPath (Join-Path $projectRoot 'src/assets') -File)) {
     $bundledAsset = Join-Path $bundle (Join-Path 'assets' $asset.Name)
     if (-not (Test-Path -LiteralPath $bundledAsset -PathType Leaf)) { throw "Bundle missing asset: $($asset.Name)" }

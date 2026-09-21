@@ -99,11 +99,20 @@ jobs:
 
             ## 라이선스 / License
 
-            GNU General Public License v3.0. 함께 배포하는 FFmpeg는 GPL 빌드이며,
-            소스는 https://github.com/FFmpeg/FFmpeg/tree/n9.0.1 에서 받을 수 있습니다.
+            ArcadeClip 자체 소스코드는 MIT License입니다. GPL 구성 요소를 포함한
+            Windows 결합 배포물은 GNU GPL v3.0 조건으로 배포하며, 보증을 제공하지 않습니다.
+            ZIP 안의 DISTRIBUTION.md, LICENSE(MIT), COPYING.GPLv3를 확인하세요.
+            외부 구성 요소와 제3자 자산의 기존 라이선스 및 권리는 유지됩니다.
 
-            GPLv3. The bundled FFmpeg is a GPL build; its source is at
-            https://github.com/FFmpeg/FFmpeg/tree/n9.0.1
+            Original ArcadeClip source: MIT License. The combined Windows distribution
+            containing GPL components is distributed under GNU GPL v3.0, WITHOUT ANY WARRANTY.
+            See DISTRIBUTION.md, LICENSE (MIT) and COPYING.GPLv3 in the ZIP.
+            Existing third-party component licenses and artwork rights remain in effect.
+
+            ArcadeClip source / 소스: https://github.com/151net/ArcadeClip/tree/${{ github.ref_name }}
+            배포자는 공개 전에 포함된 GPL/LGPL 구성 요소의 대응 소스 접근 방법도 추가해야 합니다.
+            Before publishing, distributors must also add access instructions for the
+            Corresponding Source of the included GPL/LGPL components.
 
       # The upload is the one step whose result the release page depends on, so read it back.
       - name: Check the release carries the bundle

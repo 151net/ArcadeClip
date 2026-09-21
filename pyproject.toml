@@ -2,7 +2,7 @@
 name = "arcade-clip"
 version = "0.1.0"
 description = "Desktop tools for selecting arcade video clips"
-license = "GPL-3.0-only"
+license = "MIT"
 requires-python = ">=3.11"
 dependencies = [
     "PySide6==6.11.2",

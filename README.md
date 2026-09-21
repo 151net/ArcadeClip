@@ -79,9 +79,9 @@ uv run start.py
 
 ## 라이선스
 
-이 프로젝트의 소스코드는 **GNU General Public License v3.0**을 따릅니다. 전문은 [LICENSE](LICENSE)에 있습니다.
+ArcadeClip에서 직접 작성한 소스코드는 **MIT License**를 따릅니다. 전문은 [LICENSE](LICENSE)에 있습니다. 외부 라이브러리와 자산에는 각각의 라이선스가 적용됩니다.
 
-FFmpeg를 GPL 빌드로 포함해 배포하고 Qt와 yt-dlp를 함께 쓰기 때문에, 전체가 GPLv3를 따릅니다. 함께 배포하는 FFmpeg의 소스는 [FFmpeg 9.0.1](https://github.com/FFmpeg/FFmpeg/tree/n9.0.1)에서 받을 수 있습니다.
+GPL 구성 요소를 포함한 **Windows 결합 배포물은 GNU GPL v3.0 조건으로 배포합니다.** 자체 소스코드에 부여된 MIT 권한은 유지되며, 이를 외부 구성 요소까지 MIT로 제공한다는 뜻으로 해석해서는 안 됩니다. 자세한 적용 범위는 [배포물 고지](DISTRIBUTION.md), GPLv3 전문은 [COPYING.GPLv3](run/license_sources/COPYING.GPLv3)에 있습니다.
 
 라이브러리와 도구의 고지문은 앱의 **Settings → 오픈소스 라이선스**에서 볼 수 있습니다.
 
