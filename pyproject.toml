@@ -1,6 +1,6 @@
 [project]
 name = "arcade-clip"
-version = "0.1.0"
+version = "0.2.0"
 description = "Desktop tools for selecting arcade video clips"
 license = "MIT"
 requires-python = ">=3.11"

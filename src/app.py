@@ -153,8 +153,9 @@ class MainWindow(QMainWindow):
         self.time_controls.setVisible(index == 1)
         self.export_footer.setVisible(index == 3)
         self.list_stack.setVisible(index in (0, 3))
-        self.preview_panel.setVisible(index != 5 and (bool(self.path) or index == 1))
-        self.preview.setVisible(bool(self.path))
+        self.preview_panel.setVisible(index == 5 or bool(self.path) or index == 1)
+        self.preview.setVisible(index != 5 and bool(self.path))
+        self.youtube_preview.setVisible(index == 5)
         self.detail_stack.setVisible(index != 1)
         self.current_clip_label.setVisible(index == 3)
         self.preview.slider.setVisible(index not in (1, 3))
@@ -167,7 +168,7 @@ class MainWindow(QMainWindow):
         self.detail_stack.setCurrentIndex(index)
         self.workspace_splitter.setSizes({0: [550, 650, 320], 1: [0, 1000, 0],
                                          2: [0, 850, 330], 3: [300, 700, 300],
-                                         4: [0, 650, 520], 5: [0, 0, 1000]}[index])
+                                         4: [0, 650, 520], 5: [0, 800, 360]}[index])
         self.source_context.setText(str(self.path) if self.path else
                                     (self.remote or {}).get("title", tr('영상 선택 → 구간 지정 → 곡 확인 → 파일 저장')))
         self.stage_hint.setText((
@@ -1065,8 +1066,7 @@ class MainWindow(QMainWindow):
         self.profile.restore_after_load(regions)
         self.start_time.setText(format_time(0))
         self.end_time.setText(format_time(metadata.get("duration") or 0))
-        self.youtube_start.setText(format_time(0))
-        self.youtube_end.setText(format_time(metadata.get("duration") or 0))
+        self.youtube_preview.load(metadata)
         self.download_progress.setRange(0, 100)
         self.download_progress.setValue(0)
         self.download_detail.setText(tr('다운로드 대기'))
@@ -1092,15 +1092,15 @@ class MainWindow(QMainWindow):
             from datetime import datetime
             stamp = metadata["window"].get("start_utc")
             origin = datetime.fromtimestamp(stamp).astimezone().strftime("%m-%d %H:%M:%S") if stamp else tr('조회 구간 첫 장면')
-            self.status.setText(tr('라이브 · 00:00:00 기준: {origin} · 접근 가능 {value2}', origin=origin, value2=format_time(metadata['duration'])))
-            self.youtube_info.setText(self.youtube_info.text() + tr('\n라이브 00:00:00 기준: {origin}', origin=origin))
+            self.status.setText(tr('라이브 · 조회 구간 시작: {origin} · 접근 가능 {value2}', origin=origin, value2=format_time(metadata['duration'])))
+            self.youtube_info.setText(self.youtube_info.text() + tr('\n라이브 조회 구간 시작: {origin}', origin=origin))
 
     def download_range(self):
         if not self.remote:
             self.status.setText(tr('YouTube 링크의 정보를 먼저 확인해 주세요.'))
             return
         try:
-            start, end = parse_time(self.youtube_start.text()), parse_time(self.youtube_end.text())
+            start, end = (self.youtube_preview.read_time(field.text()) for field in (self.youtube_start, self.youtube_end))
             if not 0 <= start < end <= self.remote.get("duration", 0):
                 raise ValueError(tr('다운로드할 시작·끝을 영상 길이 안에서 지정해 주세요.'))
             url = self.remote["url"]
@@ -1112,7 +1112,7 @@ class MainWindow(QMainWindow):
             self.download_detail.setText(tr('다운로드 준비 중'))
             self.download_mode.clear()
             self.download_eta.setText(tr('예상 남은 시간 계산 중…'))
-            self.download_log.appendPlainText(f"{snapshot['title']}\n{format_time(start)} – {format_time(end)} · {format_time(end-start)}\n{directory}")
+            self.download_log.appendPlainText(f"{snapshot['title']}\n{self.youtube_start.text()} – {self.youtube_end.text()} · {format_time(end-start)}\n{directory}")
             def download(cancel, report):
                 path = download_section(url, start, end, directory, cancel, report, snapshot=snapshot, workers=workers)
                 return {"path": path, "metadata": snapshot, "start": start, "end": end}
@@ -1504,6 +1504,9 @@ class MainWindow(QMainWindow):
         if isinstance(focus, (QLineEdit, QPlainTextEdit, QComboBox, QAbstractSpinBox)):
             return False
         key, mods = event.key(), event.modifiers()
+        if self.stage == 5 and self.youtube_preview.handle_key(key, mods):
+            event.accept()
+            return True
         ctrl, shift, alt = (bool(mods & flag) for flag in (Qt.KeyboardModifier.ControlModifier, Qt.KeyboardModifier.ShiftModifier, Qt.KeyboardModifier.AltModifier))
         if self.stage == 2 and ctrl and key in (Qt.Key.Key_Plus, Qt.Key.Key_Equal, Qt.Key.Key_Minus, Qt.Key.Key_0):
             if key == Qt.Key.Key_0:
@@ -1559,6 +1562,7 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event):
         self.pause_transport()
+        self.youtube_preview.release()
         if self.catalog_task:
             self.catalog_task.cancel.set()
             self.catalog_task.wait()

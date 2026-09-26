@@ -17,7 +17,7 @@ os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
 
 TESTS = Path(__file__).resolve().parents[1] / "src/tests"
 # The only modules that open a window or play media; the rest are plain logic.
-DISPLAY = ("test_app", "test_preview")
+DISPLAY = ("test_app", "test_preview", "test_youtube_preview")
 TIMEOUT = float(os.environ.get("ARCADECLIP_TEST_TIMEOUT", 600))
 
 

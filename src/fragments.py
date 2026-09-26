@@ -142,10 +142,27 @@ def download_vod(metadata, tracks, start, end, directory, cancel, report, worker
             if track['format'].get('acodec') not in (None, 'none'):
                 maps += ['-map', f'{index}:a:0']
         download_files(jobs, workers, cancel, report)
+        checked = 0
+        total = sum(len(track['segments']) for track in tracks if 'time_origin' in track)
         for track, path in zip(tracks, inputs):
+            if 'time_origin' in track:
+                from live_dvr import fragment_times
+                kind = 'video' if track['format'].get('vcodec') not in (None, 'none') else 'audio'
+                previous = None
+                for segment, name in zip(track['segments'], track['local_parts']):
+                    report({'kind': 'download', 'step': 3, 'percent': round(100 * checked / total),
+                            'message': tr('STEP 3/4 · 조각 시각 검증 {done} / {total}', done=checked, total=total)})
+                    first, last = fragment_times(str(work / name), cancel, kind)
+                    if previous is not None and abs(first - previous) > .1:
+                        raise ValueError(tr('방송 단절 경계를 포함한 구간입니다. 경계 앞뒤로 나눠 선택해 주세요.'))
+                    segment.update(start=first - track['time_origin'], duration=last - first)
+                    previous = last
+                    checked += 1
             if track['kind'] == 'dash':
                 with path.open('wb') as output:
                     for name in track['local_parts']:
+                        if cancel.is_set():
+                            raise InterruptedError(tr('다운로드를 취소했습니다.'))
                         with (work / name).open('rb') as fragment:
                             shutil.copyfileobj(fragment, output)
         report({'kind': 'download', 'step': 3, 'message': tr('STEP 3/4 · 원본 영상·음성 병합 및 길이 검증')})

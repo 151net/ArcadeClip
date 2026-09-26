@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QDoubleSpinBox, QGroupBox, QBu
     QLineEdit, QListWidget, QPlainTextEdit, QScrollArea, QProgressBar, QSlider, QSpinBox, QScrollBar, QPushButton, QSplitter, QStackedWidget, QTabWidget, QVBoxLayout, QWidget)
 from profile_panel import ProfilePanel
 from timeline import RangeTimeline
+from youtube_preview import YouTubePreview
 
 
 def build_window(w):
@@ -158,6 +159,10 @@ def build_window(w):
     w.current_clip_label.setWordWrap(True)
     center_layout.addWidget(w.current_clip_label)
     center_layout.addWidget(w.preview, 1)
+    w.youtube_preview = YouTubePreview()
+    w.youtube_preview.hide()
+    center_layout.addWidget(w.youtube_preview, 1)
+    w.busy_controls.append(w.youtube_preview)
     w.timeline_panel = QWidget()
     timeline_layout = QVBoxLayout(w.timeline_panel)
     timeline_layout.setContentsMargins(0, 0, 0, 0)
@@ -427,11 +432,8 @@ def build_window(w):
     w.youtube_info.setTextFormat(Qt.TextFormat.PlainText)
     w.youtube_info.setWordWrap(True)
     body.addWidget(w.youtube_info)
-    remote_form = QFormLayout()
-    w.youtube_start, w.youtube_end = QLineEdit(), QLineEdit()
-    remote_form.addRow(tr('시작'), w.youtube_start)
-    remote_form.addRow(tr('끝'), w.youtube_end)
-    body.addLayout(remote_form)
+    w.youtube_start, w.youtube_end = w.youtube_preview.start, w.youtube_preview.end
+    w.button(tr('정보 새로고침'), w.inspect_link, body)
     body.addWidget(QLabel(tr('동시 다운로드 수')))
     w.download_workers = QSlider(Qt.Orientation.Horizontal)
     w.download_workers.setObjectName('download_workers')

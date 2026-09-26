@@ -2725,3 +2725,57 @@ msgstr "No clips are selected."
 
 msgid "다운로드가 끝난 뒤에 다른 단계로 갈 수 있습니다."
 msgstr "You can move to another step once the download finishes."
+
+msgid "라이브 · 조회 구간 시작: {origin} · 접근 가능 {value2}"
+msgstr "Live · Available window starts at {origin} · Available duration {value2}"
+
+msgid "\n라이브 조회 구간 시작: {origin}"
+msgstr "\nLive window starts at {origin}"
+
+msgid "정보 새로고침"
+msgstr "Refresh info"
+
+msgid "미리보기용 영상 형식을 찾을 수 없습니다. 정보를 다시 확인해 주세요."
+msgstr "No preview video format is available. Refresh the video info."
+
+msgid "위치를 옮긴 뒤 1초 기다리면 미리보기를 가져옵니다."
+msgstr "Pause for one second after seeking to load a preview."
+
+msgid "양끝 핸들: 시작·끝 조절 | 클릭: 미리보기 위치 | Ctrl+휠: 확대"
+msgstr "Drag the end handles to trim | Click to preview | Ctrl+wheel to zoom"
+
+msgid "선택 길이: {time}"
+msgstr "Selected duration: {time}"
+
+msgid "{time} · 1초 후 미리보기"
+msgstr "{time} · Preview in one second"
+
+msgid "{time} · 미리보기 가져오는 중…"
+msgstr "{time} · Loading preview…"
+
+msgid "아직 처리 중인 방송입니다. 처리가 끝난 뒤 정보를 다시 확인해 주세요."
+msgstr "This broadcast is still being processed. Refresh its info after processing finishes."
+
+msgid "영상 정보를 다시 확인해 주세요."
+msgstr "Refresh the video info."
+
+msgid "라이브 시각은 -MM:SS 또는 -HH:MM:SS 형식으로 입력해 주세요."
+msgstr "Enter live times as -MM:SS or -HH:MM:SS."
+
+msgid "라이브 음수 시각은 조회한 최신 지점 기준입니다. 최신 구간은 정보 새로고침을 누르세요."
+msgstr "Negative live times are relative to the latest point at lookup. Refresh info to get newer segments."
+
+msgid "미리보기 실패: {error}"
+msgstr "Preview failed: {error}"
+
+msgid "{time} · 저해상도 미리보기"
+msgstr "{time} · Low-resolution preview"
+
+msgid "다운로드 주소를 갱신하고 같은 구간을 다시 시도합니다."
+msgstr "Refreshing download URLs and retrying the same range."
+
+msgid "다운로드할 구간의 시작·끝 조각을 확인하고 있습니다."
+msgstr "Checking the first and last fragments of the selected range."
+
+msgid "STEP 3/4 · 조각 시각 검증 {done} / {total}"
+msgstr "STEP 3/4 · Checking fragment timestamps {done} / {total}"

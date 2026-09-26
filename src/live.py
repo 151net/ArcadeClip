@@ -1,17 +1,12 @@
 """Frozen HLS windows: only selected media segments are fetched, never the full live stream."""
 from i18n import tr
 from datetime import datetime
-import json
 import math
-from pathlib import Path
 import re
-import tempfile
 from urllib.parse import urljoin, urlsplit
-import uuid
 import urllib.error
 
 from jackets import _fetch
-from sources import _media_duration, find_tool, run_command
 
 
 def _https(base, value):
@@ -77,17 +72,38 @@ def parse_window(body, url):
 
 
 def inspect_window(formats, cancel):
-    # Choose a muxed HLS rendition so the selected audio/video share one timeline.
     choices = [item for item in formats if item.get("protocol") in {"m3u8", "m3u8_native"}
-               and item.get("vcodec") not in {None, "none"} and item.get("acodec") not in {None, "none"}
+               and not item.get("has_drm")
                and item.get("url", "").startswith("https://")]
-    if not choices:
+    videos = [item for item in choices if item.get("vcodec") not in {None, "none"}]
+    if not videos:
         raise ValueError(tr('이 라이브에서 접근 가능한 과거 구간을 확인할 수 없습니다.'))
-    selected = max(choices, key=lambda item: (item.get("height") or 0, item.get("tbr") or 0))
-    url = selected["url"]
-    window = parse_window(_segment(url, cancel, 8 * 1024 * 1024, selected.get('http_headers')), url)
-    window["height"] = selected.get("height")
-    window['headers'] = selected.get('http_headers')
+    video = max(videos, key=lambda item: (item.get("height") or 0, item.get("fps") or 0, item.get("tbr") or 0))
+    selected = [video]
+    if video.get("acodec") in {None, "none"}:
+        # yt-dlp orders formats by preference; audio-only HLS may omit its codec name.
+        audio = next((item for item in reversed(choices)
+                      if item.get("vcodec") == "none" and item.get("acodec") != "none"), None)
+        if audio is None:
+            raise ValueError(tr('이 라이브에서 접근 가능한 과거 구간을 확인할 수 없습니다.'))
+        selected.append({**audio, "acodec": audio.get("acodec") or "unknown"})
+    tracks = []
+    for fmt in selected:
+        url, headers = fmt["url"], fmt.get("http_headers")
+        track = parse_window(_segment(url, cancel, 8 * 1024 * 1024, headers), url)
+        tracks.append({**track, "kind": "hls", "format": fmt, "headers": headers})
+    window = {**tracks[0], "height": video.get("height"), "tracks": tracks}
+    if len(tracks) > 1:
+        if any(track["start_utc"] is None for track in tracks):
+            raise ValueError(tr('라이브 시각의 시간대를 확인할 수 없습니다.'))
+        origin = max(track["start_utc"] for track in tracks)
+        for track in tracks:
+            for segment in track["segments"]:
+                segment["start"] = segment["start_utc"] - origin
+        duration = min(track["segments"][-1]["start"] + track["segments"][-1]["duration"] for track in tracks)
+        if duration <= 0:
+            raise ValueError(tr('현재 접근 가능한 라이브 구간이 없습니다.'))
+        window.update(start_utc=origin, duration=duration)
     return window
 
 
@@ -107,62 +123,24 @@ def download_window(metadata, start, end, directory, cancel, report, workers=4):
     window = metadata.get("window")
     if not window or not 0 <= start < end <= window["duration"]:
         raise ValueError(tr('조회한 라이브 구간 안에서 시작과 끝을 선택해 주세요.'))
-    chosen = [segment for segment in window["segments"]
-              if segment["start"] < end and segment["start"] + segment["duration"] > start]
-    if not chosen or any(segment["discontinuity"] for segment in chosen[1:]):
-        raise ValueError(tr('방송 단절 경계를 포함한 구간입니다. 경계 앞뒤로 나눠 선택해 주세요.'))
-    if len({segment["init"] for segment in chosen}) > 1:
-        raise ValueError(tr('영상 형식이 바뀐 구간입니다. 앞뒤로 나눠 선택해 주세요.'))
-    if cancel.is_set():
-        raise InterruptedError(tr('다운로드를 취소했습니다.'))
-    directory = Path(directory)
-    directory.mkdir(parents=True, exist_ok=True)
-    ffmpeg = find_tool("ffmpeg")
-    with tempfile.TemporaryDirectory(prefix=".live-", dir=directory) as temporary:
-        work = Path(temporary)
-        lines = ["#EXTM3U", "#EXT-X-VERSION:7", "#EXT-X-PLAYLIST-TYPE:VOD",
-                 f"#EXT-X-TARGETDURATION:{math.ceil(max(segment['duration'] for segment in chosen))}",
-                 "#EXT-X-MEDIA-SEQUENCE:0"]
-        if chosen[0]["init"]:
-            (work / "init.mp4").write_bytes(_segment(chosen[0]["init"], cancel, 16 * 1024 * 1024, window.get('headers')))
-            lines.append('#EXT-X-MAP:URI="init.mp4"')
-        from fragments import download_files
-        jobs = []
-        for index, segment in enumerate(chosen):
-            name = f"segment-{index}." + ("m4s" if segment['init'] else "ts")
-            jobs.append((segment['url'], work / name, window.get('headers')))
-            lines.extend([f"#EXTINF:{segment['duration']},", name])
-        download_files(jobs, workers, cancel, report)
-        lines.append("#EXT-X-ENDLIST")
-        playlist = work / "selected.m3u8"
-        playlist.write_text("\n".join(lines) + "\n", encoding="utf-8")
-        output = work / "video.mkv"
-        report({"kind": "download", "step": 3, "message": tr('STEP 3/4 · 라이브 원본 병합 및 길이 검증')})
-        from sources import download_progress
-        run_command([ffmpeg, "-v", "error", "-nostdin", "-n", "-protocol_whitelist", "file,crypto,data",
-                     "-i", str(playlist), "-map", "0:v:0", "-map", "0:a:0?", "-c", "copy",
-                     "-progress", "pipe:2", "-nostats", str(output)],
-                    cancel, report, on_line=download_progress(end - start, report, step=3))
-        duration = _media_duration(output)
-        selected_duration = sum(segment["duration"] for segment in chosen)
-        if not math.isfinite(duration) or duration <= 0 or abs(duration - selected_duration) > 1:
-            raise ValueError(tr('확보한 라이브 구간 길이가 선택과 다릅니다.'))
-        if cancel.is_set():
-            raise InterruptedError(tr('다운로드를 취소했습니다.'))
-        # Persist timing and public source identity, never expiring signed media URLs.
-        source = {key: metadata.get(key) for key in ("url", "id", "title", "is_live", "live_status", "was_live", "uploader", "video_date")}
-        source.update(requested_start=start, requested_end=end, local_duration=duration,
-                      acquired_start=chosen[0]["start"], acquired_end=chosen[-1]["start"] + chosen[-1]["duration"],
-                      time_basis="hls_snapshot", snapshot_start_utc=window["start_utc"],
-                      first_sequence=chosen[0]["sequence"],
-                      selected_start_utc=(chosen[0]["start_utc"] + start - chosen[0]["start"]
-                                          if chosen[0]["start_utc"] is not None else None), alignment_verified=False)
-        (work / "source.json").write_text(json.dumps(source, ensure_ascii=False, indent=2), encoding="utf-8")
-        for path in work.iterdir():
-            if path.name not in {"video.mkv", "source.json"}:
-                path.unlink()
-        destination = directory / ("youtube-" + uuid.uuid4().hex)
-        work.rename(destination)
-        report({"kind": "download", "step": 4, "percent": 100,
-                "message": tr('STEP 4/4 · 라이브 다운로드 완료 · {value1}', value1=destination / 'video.mkv')})
-        return destination / "video.mkv"
+    if 'dvr' in window:
+        from live_dvr import download_dvr
+        return download_dvr(metadata, start, end, directory, cancel, report, workers)
+    tracks = []
+    for track in window.get("tracks") or [{**window, "kind": "hls", "format": {"vcodec": "unknown", "acodec": "unknown"}}]:
+        chosen = [segment for segment in track["segments"]
+                  if segment["start"] < end and segment["start"] + segment["duration"] > start]
+        if not chosen or any(segment["discontinuity"] for segment in chosen[1:]):
+            raise ValueError(tr('방송 단절 경계를 포함한 구간입니다. 경계 앞뒤로 나눠 선택해 주세요.'))
+        if chosen[0]["start"] > start or chosen[-1]["start"] + chosen[-1]["duration"] < end - .001:
+            raise ValueError(tr('조회한 라이브 구간 안에서 시작과 끝을 선택해 주세요.'))
+        if len({segment["init"] for segment in chosen}) > 1:
+            raise ValueError(tr('영상 형식이 바뀐 구간입니다. 앞뒤로 나눠 선택해 주세요.'))
+        tracks.append({**track, "segments": chosen, "headers": track.get("headers")})
+    source = {key: metadata.get(key) for key in ("url", "id", "title", "is_live", "live_status", "was_live", "uploader", "video_date")}
+    first = tracks[0]["segments"][0]
+    source.update(time_basis="hls_snapshot", snapshot_start_utc=window["start_utc"],
+                  first_sequence=first["sequence"],
+                  selected_start_utc=first["start_utc"] + start - first["start"] if first["start_utc"] is not None else None)
+    from fragments import download_vod
+    return download_vod(source, tracks, start, end, directory, cancel, report, workers)

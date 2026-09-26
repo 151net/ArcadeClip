@@ -8,11 +8,32 @@ import urllib.error
 from urllib.parse import urlsplit
 from unittest.mock import patch
 
-from live import download_window, parse_window
+from live import download_window, inspect_window, parse_window
 from sources import download_section, find_tool, run_command
 
 
 class LiveTests(unittest.TestCase):
+    def test_separate_live_playlists_share_only_the_available_utc_window(self):
+        formats = [dict(protocol="m3u8_native", url="https://media.example/audio", vcodec="none", acodec=None),
+                   dict(protocol="m3u8_native", url="https://media.example/video", vcodec="h264", acodec="none", height=1080)]
+        video = b"#EXTM3U\n#EXT-X-PROGRAM-DATE-TIME:2026-09-26T00:00:02Z\n#EXTINF:2,\nv1.ts\n#EXTINF:2,\nv2.ts\n"
+        audio = b"#EXTM3U\n#EXT-X-PROGRAM-DATE-TIME:2026-09-26T00:00:00Z\n#EXTINF:2,\na0.ts\n#EXTINF:2,\na1.ts\n"
+        cancel = threading.Event()
+        with patch("live._segment", side_effect=[video, audio]):
+            window = inspect_window(formats, cancel)
+        self.assertEqual(window["duration"], 2)
+        self.assertEqual([t["segments"][0]["start"] for t in window["tracks"]], [0, -2])
+        with patch("fragments.download_vod") as download:
+            download_window({"window": window}, 0, 2, ".", cancel, lambda _: None)
+            source, tracks = download.call_args.args[:2]
+            self.assertEqual([len(t["segments"]) for t in tracks], [1, 1])
+            self.assertEqual(source["selected_start_utc"], window["start_utc"])
+            self.assertEqual(tracks[1]["format"]["acodec"], "unknown")
+        for invalid in (audio.replace(b"00:00:00Z", b"00:00:06Z"),
+                        b"#EXTM3U\n#EXTINF:2,\na.ts\n"):
+            with patch("live._segment", side_effect=[video, invalid]), self.assertRaises(ValueError):
+                inspect_window(formats, cancel)
+
     def test_window_timing_and_discontinuities(self):
         body = b"#EXTM3U\n#EXT-X-MEDIA-SEQUENCE:50\n#EXT-X-PROGRAM-DATE-TIME:2026-09-14T10:00:00Z\n#EXTINF:2,\na.ts\n#EXT-X-PROGRAM-DATE-TIME:2026-09-14T10:00:05Z\n#EXTINF:2,\nb.ts\n"
         window = parse_window(body, "https://media.example/live.m3u8")
@@ -95,7 +116,7 @@ class LiveTests(unittest.TestCase):
                 self.assertTrue(any(original_audio[i:i+len(copied_audio)] == copied_audio
                                     for i in range(len(original_audio))))
                 with patch("live._fetch", side_effect=urllib.error.HTTPError("url", 403, "expired", {}, None)), \
-                     patch("live.run_command") as run:
+                     patch("sources.run_command") as run:
                     with self.assertRaisesRegex(ValueError, "접근"):
                         download_window(metadata, 2.2, 4.4, root / "cache", cancel, lambda _: None)
                     run.assert_not_called()

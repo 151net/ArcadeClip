@@ -391,6 +391,24 @@ class AppTests(unittest.TestCase):
                 self.assertIn("2026-09-15 22시", window.files.item(0).text())
             window.close()
 
+    def test_live_slider_negative_times_reach_download_as_snapshot_offsets(self):
+        with tempfile.TemporaryDirectory() as name, patch.object(MainWindow, 'refresh_catalog_summary'):
+            window = MainWindow(Path(name))
+            metadata = dict(url='https://www.youtube.com/watch?v=abcdefghijk', title='live',
+                            duration=3600, is_live=True, window={'start_utc': 1790396285.969})
+            window.link_ready(metadata)
+            self.assertFalse(window.youtube_preview.isHidden())
+            window.youtube_preview.timeline.changed.emit(3000, 3540)
+            self.assertEqual(window.youtube_start.text(), '-10:00.000')
+            self.assertEqual(window.youtube_end.text(), '-01:00.000')
+            with patch.object(window, 'run_task') as run, patch('app.download_section', return_value=Path(name) / 'video.mkv') as download:
+                window.download_range()
+                import threading
+                run.call_args.args[0](threading.Event(), lambda _: None)
+                self.assertEqual(download.call_args.args[1:3], (3000, 3540))
+                self.assertEqual(download.call_args.kwargs['snapshot']['window'], metadata['window'])
+            window.close()
+
     def test_export_date_folder_toggle(self):
         from datetime import datetime
         with tempfile.TemporaryDirectory() as name:

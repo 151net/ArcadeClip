@@ -1,6 +1,7 @@
 """One cancellable background operation at a time for desktop dialogs."""
 import logging
 import threading
+from concurrent.futures import CancelledError
 
 from PySide6.QtCore import QThread, Signal
 
@@ -28,6 +29,10 @@ class Task(QThread):
         logging.debug("Background task started")
         try:
             self.result = self.operation(self.cancel, self.report)
+        except (CancelledError, InterruptedError) as error:
+            self.cancel.set()
+            self.error = error.with_traceback(None)
+            logging.debug("Background task cancelled")
         except Exception as error:
             logging.exception("Background task failed")
             self.error = error.with_traceback(None)

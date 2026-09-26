@@ -33,7 +33,7 @@ groups = {
     'regions': [(3, ('프로필 고르기 또는 새 프로필 만들기', 'Choose or create a profile'), [1]), (4, ('새 프로필 만들기', 'Create a new profile'), [2, 3]), (3, ('인식 확인과 곡 찾기', 'Test recognition and find songs'), [4, 5])],
     'review': [(3, ('저장할 클립 선택하기', 'Select clips to save'), [1, 2, 3]), (3, ('클립 수정하기 · 선택 사항', 'Edit clips · Optional'), [4, 5, 6])],
 }
-centers = {('range', 2): (25, 94), ('range', 3): (50, 75), ('regions', 2): (94, 32), ('regions', 5): (94, 94), ('youtube', 1): (94, 32), ('youtube', 2): (25, 44), ('youtube', 3): (75, 54), ('youtube', 4): (15, 64), ('session', 1): (84, 5), ('recognition', 2): (60, 25)}
+centers = {('range', 2): (25, 94), ('range', 3): (50, 75), ('regions', 2): (94, 32), ('regions', 5): (94, 94), ('youtube', 1): (35, 80), ('youtube', 2): (76, 39), ('youtube', 3): (95, 54), ('youtube', 4): (77, 72), ('session', 1): (84, 5), ('recognition', 2): (60, 25)}
 faq = [
     ('자켓 데이터가 없다고 나오는 경우 / 신곡이 나왔을 경우', 'Jacket data is missing / A new song was released', '{{Settings}} → {{자켓 데이터 업데이트}}를 누르세요. 다운로드가 끝나면 다시 곡을 찾으세요.', 'Open {{Settings}} → {{자켓 데이터 업데이트}}. When the download finishes, find songs again.'),
     ('클립이 안 보여요', 'No clips are visible', '검색어를 지우고 {{곡 미확인 구간 표시}}를 켜세요. {{현재 영상}}이 맞는지 확인하세요.', 'Clear the search and enable {{곡 미확인 구간 표시}}. Check {{현재 영상}}.'),

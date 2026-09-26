@@ -12,7 +12,7 @@ from urllib.parse import urlsplit
 
 import av
 from fragments import download_files, selected_tracks
-from live import parse_window
+from live import inspect_window, parse_window
 from sources import download_section, find_tool, run_command
 
 
@@ -90,13 +90,15 @@ class FragmentTests(unittest.TestCase):
                     return [(hashlib.sha256(bytes(p)).digest(), float(p.pts * p.time_base))
                             for p in container.demux(stream) if p.size and p.pts is not None]
             originals = {kind: packets(root / f'{prefix}.m3u8', kind) for prefix, kind in [('v', 'video'), ('a', 'audio')]}
-            for protocol in ('m3u8_native', 'http_dash_segments'):
+            for protocol in ('m3u8_native', 'http_dash_segments', 'live'):
                 with self.subTest(protocol=protocol):
                     formats = []
                     for prefix in ('v', 'a'):
                         url = f'https://media.example/{prefix}.m3u8?secret=private'
-                        fmt = dict(url=url, protocol=protocol, vcodec='h264' if prefix == 'v' else 'none',
-                                   acodec='aac' if prefix == 'a' else 'none', http_headers={'X-Test': 'keep'})
+                        fmt = dict(url=url, protocol='m3u8_native' if protocol == 'live' else protocol,
+                                   vcodec='h264' if prefix == 'v' else 'none',
+                                   acodec=(None if protocol == 'live' else 'aac') if prefix == 'a' else 'none',
+                                   http_headers={'X-Test': 'keep'})
                         if protocol == 'http_dash_segments':
                             window = parse_window((root / f'{prefix}.m3u8').read_bytes(), url)
                             fmt['fragments'] = [{'url': window['segments'][0]['init']}] + [
@@ -109,10 +111,19 @@ class FragmentTests(unittest.TestCase):
                         self.assertEqual(args[-1], {'X-Test': 'keep'})
                         name = Path(urlsplit(url).path).name
                         fetched.append(name)
-                        return (root / name).read_bytes()
+                        body = (root / name).read_bytes()
+                        if protocol == 'live' and name.endswith('.m3u8'):
+                            body = body.replace(b'#EXT-X-ENDLIST', b'').replace(
+                                b'#EXTM3U', b'#EXTM3U\n#EXT-X-PROGRAM-DATE-TIME:2026-09-26T00:00:00Z')
+                        return body
                     with patch('live._fetch', side_effect=fetch):
+                        if protocol == 'live':
+                            metadata.update(is_live=True, live_status='is_live', window=inspect_window(formats, cancel))
+                            fetched.clear()
                         result = download_section(metadata['url'], 2.2, 4.4, root / 'cache', cancel,
                                                   lambda _: None, snapshot=metadata, workers=3)
+                    if protocol == 'live':
+                        self.assertFalse(any(name.endswith('.m3u8') for name in fetched))
                     self.assertNotIn('v0.m4s', fetched)
                     self.assertNotIn('v5.m4s', fetched)
                     shifts = []

@@ -26,6 +26,7 @@ class RangeTimeline(QWidget):
         self.custom_ids = set()
         self.active_clip = -1
         self.viewport = None
+        self.time_label = format_time
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.setMouseTracking(True)
         self.setMinimumHeight(88)
@@ -95,8 +96,8 @@ class RangeTimeline(QWidget):
             painter.setPen(QPen(QColor("#9255c9"), 2, Qt.PenStyle.DashLine))
             painter.drawRect(a, 1, max(1, b - a), 29)
         painter.setPen(self.palette().text().color())
-        painter.drawText(12, 85, format_time(self.bounds[0]))
-        text = format_time(self.bounds[1])
+        painter.drawText(12, 85, self.time_label(self.bounds[0]))
+        text = self.time_label(self.bounds[1])
         painter.drawText(self.width() - 12 - painter.fontMetrics().horizontalAdvance(text), 85, text)
 
     def clip_at(self, x, y):

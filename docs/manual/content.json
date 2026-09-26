@@ -618,25 +618,25 @@
       [
         [
           1,
-          30,
-          98,
-          9
+          70,
+          69,
+          23
         ],
         [
           "받을 구간 입력",
           "Enter the range"
         ],
         [
-          "{{시작}}·{{끝}}에 필요한 구간을 입력하세요. 정확한 경계는 다운로드 후 다음 단계에서 조정할 수 있습니다.",
-          "Enter the range in {{시작}} and {{끝}}. You can adjust the exact boundaries in the next step after downloading."
+          "슬라이더의 양끝 핸들을 끌어 구간을 정하거나 {{시작}}·{{끝}}에 시각을 입력하세요. 시간축을 클릭한 뒤 1초 기다리면 저해상도 미리보기를 가져옵니다. {{현재 위치를 시작으로}}·{{현재 위치를 끝으로}}도 사용할 수 있습니다. 정확한 경계는 다운로드 후 조정하세요.",
+          "Drag the slider's end handles or enter times in {{시작}} and {{끝}}. Click the timeline and pause for one second to load a low-resolution preview. You can also use {{현재 위치를 시작으로}} and {{현재 위치를 끝으로}}. Fine-tune the exact boundaries after downloading."
         ]
       ],
       [
         [
-          1,
-          40,
-          98,
-          8
+          72,
+          35,
+          26,
+          17
         ],
         [
           "동시 다운로드 수 확인",
@@ -649,9 +649,9 @@
       ],
       [
         [
-          1,
-          51,
-          98,
+          72,
+          52,
+          26,
           5
         ],
         [
@@ -665,10 +665,10 @@
       ],
       [
         [
-          1,
-          56,
-          98,
-          15
+          72,
+          57,
+          26,
+          37
         ],
         [
           "진행 상태 확인",
@@ -683,8 +683,8 @@
     [
       "라이브 시간 입력",
       "Entering live stream times",
-      "라이브는 화면에 표시된 00:00:00 기준 시각을 확인한 뒤 구간을 입력하세요.",
-      "For live streams, check the displayed origin for 00:00:00 before entering the range."
+      "진행 중인 라이브는 조회한 최신 지점 기준으로 음수 시각을 표시합니다. 예: -10:00부터 -01:00까지는 10분 전부터 1분 전까지입니다. 구간은 조회 시점에 고정됩니다. 더 최신 구간은 {{정보 새로고침}}을 누르세요. 일반 영상과 처리 완료된 라이브는 영상 시작부터의 시각을 사용합니다.",
+      "Ongoing live streams show negative times relative to the latest point at lookup. For example, -10:00 to -01:00 selects ten minutes ago to one minute ago. The window stays fixed until you click {{정보 새로고침}}. Regular videos and processed past broadcasts use elapsed time from the video start."
     ]
   ],
   [
@@ -779,8 +779,8 @@
           "Open recognition settings"
         ],
         [
-          "{{자켓 · 글자 인식 설정…}}에서 곡과 글자 인식 옵션을 조절하세요.",
-          "Open {{자켓 · 글자 인식 설정…}} to adjust song and text recognition."
+          "{{인식}} 탭에서 곡과 글자 인식 옵션을 조절하세요.",
+          "Open the {{인식}} tab to adjust song and text recognition."
         ]
       ],
       [

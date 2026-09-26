@@ -195,10 +195,26 @@ def inspect_source(url: str, cancel: threading.Event,
                                 datetime.strptime(data.get("upload_date") or "", "%Y%m%d").strftime("%Y-%m-%d"))
     except (ValueError, TypeError, OverflowError, OSError):
         result["video_date"] = tr('날짜 미제공')
+    previews = [fmt for fmt in data.get('formats', []) if fmt.get('vcodec') not in (None, 'none', 'images')
+                and fmt.get('protocol') in ('https', 'http', 'm3u8', 'm3u8_native', 'http_dash_segments')
+                and (not result['is_live'] or fmt.get('protocol') in ('m3u8', 'm3u8_native'))
+                and not fmt.get('has_drm') and fmt.get('url', '').startswith('https://')]
+    if previews:
+        preview = min(previews, key=lambda fmt: (fmt.get('height') or float('inf'), fmt.get('tbr') or float('inf')))
+        result['_preview_format'] = {key: preview[key] for key in
+                                    ('url', 'protocol', 'vcodec', 'acodec', 'http_headers', 'fragments', 'fragment_base_url') if key in preview}
     if result["is_live"]:
         from live import inspect_window
+        from live_dvr import inspect_dvr
         report(tr('접근 가능한 라이브 구간을 확인하고 있습니다.'))
-        result["window"] = inspect_window(data.get("formats", []), cancel)
+        try:
+            dvr_data = json.loads(run_command(_command() + ['--live-from-start', '--skip-download', '--format', 'bv*+ba/b',
+                                                           '--dump-single-json', '--', url], cancel, report))
+        except RuntimeError:
+            dvr_data = {}
+        result["window"] = inspect_dvr(dvr_data, cancel) or inspect_window(data.get("formats", []), cancel)
+        if 'dvr' in result['window']:
+            result['window']['dvr']['source_url'] = url
         result["duration"] = result["window"]["duration"]
     else:
         # Signed media URLs stay in memory, never in logs, saved sessions or source.json.
