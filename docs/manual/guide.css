@@ -6,8 +6,8 @@ p { max-width: 65ch; }
 button, select { font: inherit; }
 button, select { min-height: 2.5rem; }
 #tools, #navigation { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin: 1rem 0; }
-#tools label { display: inline-flex; align-items: center; gap: .35rem; }
-#topic { max-width: min(22rem, 78vw); }
+#tools label { display: inline-flex; align-items: center; gap: .35rem; max-width: 100%; }
+#topic { max-width: min(22rem, 78vw); min-width: 0; }
 [hidden] { display: none !important; }
 article { margin-bottom: 2rem; }
 figure { margin: 0; min-width: 0; }

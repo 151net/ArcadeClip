@@ -33,9 +33,30 @@ groups = {
     'regions': [(3, ('프로필 고르기 또는 새 프로필 만들기', 'Choose or create a profile'), [1]), (4, ('새 프로필 만들기', 'Create a new profile'), [2, 3]), (3, ('인식 확인과 곡 찾기', 'Test recognition and find songs'), [4, 5])],
     'review': [(3, ('저장할 클립 선택하기', 'Select clips to save'), [1, 2, 3]), (3, ('클립 수정하기 · 선택 사항', 'Edit clips · Optional'), [4, 5, 6])],
 }
-centers = {('range', 2): (25, 94), ('range', 3): (50, 75), ('regions', 2): (94, 32), ('regions', 5): (94, 94), ('youtube', 1): (35, 80), ('youtube', 2): (76, 39), ('youtube', 3): (95, 54), ('youtube', 4): (77, 72), ('session', 1): (84, 5), ('recognition', 2): (60, 25)}
+centers = {
+    ('video', 1): (4, 17), ('video', 2): (30, 17), ('video', 3): (42, 3),
+    ('range', 1): (4, 89), ('range', 2): (25, 94), ('range', 3): (50, 77),
+    ('regions', 1): (79, 22), ('regions', 2): (97, 30),
+    ('regions', 4): (79, 89), ('regions', 5): (97, 94),
+    ('review', 1): (4, 39), ('review', 2): (18, 19), ('review', 3): (4, 89),
+    ('export', 1): (67, 30), ('export', 2): (95, 45),
+    ('export', 3): (67, 92), ('export', 4): (95, 92),
+    ('encoding', 2): (6, 31), ('encoding', 3): (50, 44),
+    ('encoding', 4): (6, 72), ('encoding', 5): (93, 58),
+    ('chapters', 1): (67, 32), ('chapters', 2): (95, 49),
+    ('chapters', 3): (67, 90), ('chapters', 4): (95, 90),
+    ('youtube', 1): (35, 80), ('youtube', 2): (78, 36),
+    ('youtube', 3): (96, 48), ('youtube', 4): (78, 63),
+    ('youtube-progress', 1): (78, 51), ('youtube-progress', 2): (96, 68),
+    ('session', 1): (90, 3), ('session', 2): (78, 16),
+    ('settings', 1): (7, 8), ('settings', 2): (60, 20), ('settings', 3): (7, 32),
+    ('catalog', 1): (7, 11), ('catalog', 2): (90, 43), ('catalog', 3): (7, 34),
+    ('recognition', 1): (6, 12), ('recognition', 2): (62, 24),
+    ('recognition', 4): (70, 62),
+    ('diagnostics', 2): (7, 86), ('diagnostics', 3): (94, 86),
+}
 faq = [
-    ('자켓 데이터가 없다고 나오는 경우 / 신곡이 나왔을 경우', 'Jacket data is missing / A new song was released', '{{Settings}} → {{자켓 데이터 업데이트}}를 누르세요. 다운로드가 끝나면 다시 곡을 찾으세요.', 'Open {{Settings}} → {{자켓 데이터 업데이트}}. When the download finishes, find songs again.'),
+    ('자켓 데이터가 없다고 나오는 경우 / 신곡이 나왔을 경우', 'Jacket data is missing / A new song was released', '{{Settings}} → {{자켓 데이터}} → {{자켓 데이터 업데이트}}를 누르세요. 다운로드가 끝나면 다시 곡을 찾으세요.', 'Open {{Settings}} → {{자켓 데이터}} → {{자켓 데이터 업데이트}}. When the download finishes, find songs again.'),
     ('클립이 안 보여요', 'No clips are visible', '검색어를 지우고 {{곡 미확인 구간 표시}}를 켜세요. {{현재 영상}}이 맞는지 확인하세요.', 'Clear the search and enable {{곡 미확인 구간 표시}}. Check {{현재 영상}}.'),
     ('저장 후 시작·끝이 달라요', 'Exported boundaries shifted', '{{저장 설정}}에서 {{정확한 구간 자르기}}를 고르세요.', 'Choose {{정확한 구간 자르기}} in {{저장 설정}}.'),
     ('이름이 틀리게 나와요', 'Player names are wrong', '{{1P 이름}} 영역이 글자를 정확히 감싸는지 확인하세요. 이름을 고친 뒤 {{수정 적용}}을 누를 수도 있습니다.', 'Check that the {{1P 이름}} region frames the text. You can also edit the name and click {{수정 적용}}.'),
@@ -103,7 +124,7 @@ def build():
         parts.append('</ul></article>')
         for topic, img, title, intro, points, info in chapters:
             root = f'{lang}-{topic}'
-            labels = (['A', 'B', 'C', '1'] if topic == 'range' else
+            labels = (['A', 'B', 'C', '1'] if topic == 'range' else ['1', '2', 'A', 'B'] if topic == 'chapters' else
                       [str(n) if topic != 'review' or n <= 3 else chr(ord('A') + n - 4) for n in range(1, len(points)+1)])
             width, height = struct.unpack('>II', (MANUAL / 'images' / img).read_bytes()[16:24])
             parts.append(f'<article id="{root}" data-topic="{topic}"><h2 tabindex="-1">{text(title)}</h2><p>{text(intro)}</p><div class="walkthrough"><figure><div class="shot" style="max-width:{width}px"><img src="images/{img}" width="{width}" height="{height}" alt="{escape(title[idx])} — English UI"><div class="highlight" hidden aria-hidden="true"></div>')
@@ -126,14 +147,14 @@ def build():
         parts.append('<table><caption>'+text(('앱에서 사용하는 키','Keys used in the app'))+'</caption><thead><tr><th>'+text(('키','Key'))+'</th><th>'+text(('동작','Action'))+'</th></tr></thead><tbody>')
         for key, ko, en in [
             ('F1','도움말 열기','Open Help'),
-            ('Space / K','재생·일시정지 / 일시정지','Play/pause / pause'),
-            ('← / →','재생 중 1초 이동 · 일시정지 중 한 프레임 이동','Seek 1 second while playing; step one frame while paused'),
+            ('Space / K','로컬 영상 재생·일시정지 / 일시정지','Local video: play/pause / pause'),
+            ('← / →','로컬: 재생 중 1초·일시정지 중 한 프레임 이동. YouTube: 미리보기 위치 1초 이동','Local: seek 1 second while playing or one frame while paused. YouTube: seek the preview by 1 second'),
             ('Shift + ← / →','1초 이동','Seek 1 second'),
             ('Ctrl + ← / →','5초 이동','Seek 5 seconds'),
-            ('J / L','뒤로 탐색 / 앞으로 재생 · 반복하면 속도 증가','Seek backward / play forward; repeat to increase speed'),
-            ('Home / End','영상 처음 / 끝으로','Go to the start / end of the video'),
+            ('J / L','로컬 영상 뒤로 탐색 / 앞으로 재생 · 반복하면 속도 증가','Local video: seek backward / play forward; repeat to increase speed'),
+            ('Home / End','영상 처음 / 끝으로 · 라이브는 조회한 구간 처음 / 최신 지점','Go to the start / end; for live streams, the oldest / latest point in the fetched window'),
             ('I / O','현재 위치를 구간 시작 / 끝으로','Set selection start / end to the playhead'),
-            ('Alt + ← / →','구간 시작 / 끝으로 이동','Go to the selection start / end'),
+            ('Alt + ← / →','로컬 영상의 구간 시작 / 끝으로 이동','Local video: go to the selection start / end'),
             ('Ctrl + drag','시간축: 구간 길이를 유지하며 이동 · 영상: 화면 이동','Timeline: move the selection without changing its length; video: pan'),
             ('Alt + drag','다른 경계에 맞추지 않고 구간 조정','Adjust the selection without snapping to other boundaries'),
             ('Ctrl / Shift + click','클립 개별 / 연속 선택','Select individual clips / a range of clips'),
@@ -142,7 +163,7 @@ def build():
             ('wheel / Shift + wheel','시간축 가로 이동 / 빠르게 이동','Scroll the timeline / scroll faster'),
             ('Ctrl + wheel','앱 영상·시간축 확대·축소','Zoom the video or timeline in the app'),
             ('Ctrl + + / −','인식 영역 화면의 영상 확대·축소','Zoom the video in Recognition regions'),
-            ('Ctrl + 0 / middle click','인식 영역 화면의 영상 맞춤','Fit the video in Recognition regions'),
+            ('Ctrl + 0 / Ctrl + middle click','인식 영역 화면의 영상 맞춤','Fit the video in Recognition regions'),
             ('Ctrl + S','작업 JSON 저장','Save the session JSON'),
             ('Ctrl + E','체크한 클립의 저장 설정 열기','Open export settings for checked clips'),
             ('Ctrl + Z','직전 클립 편집 되돌리기','Undo the last clip edit'),

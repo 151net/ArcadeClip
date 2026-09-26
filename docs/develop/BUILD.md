@@ -39,7 +39,7 @@ Windows에서만 실행됩니다. 빌드에는 시간이 오래 걸립니다. �
 | 도구 해시 확인 | `uv run python run/verify_tools.py tools` |
 | 라이선스 수집 | `uv run python run/collect_licenses.py --tools-directory tools` |
 
-수집한 라이선스는 앱의 **Settings → 오픈소스 라이선스**에서 보입니다. 다른 운영체제로 배포한다면 해당 바이너리와 Python 런타임의 고지문을 그 환경에서 다시 수집해야 합니다.
+수집한 라이선스는 앱의 **Settings → 정보 → 오픈소스 라이선스 보기**에서 보입니다. 다른 운영체제로 배포한다면 해당 바이너리와 Python 런타임의 고지문을 그 환경에서 다시 수집해야 합니다.
 
 자체 소스코드는 MIT이며, GPL 구성 요소를 포함한 Windows 결합 배포물은 GPLv3 조건으로 배포합니다. 빌드 스크립트는 배포 폴더에 `LICENSE`(MIT), `COPYING.GPLv3`, `DISTRIBUTION.md`를 복사합니다. 외부 구성 요소의 기존 라이선스와 제3자 자산의 권리는 유지됩니다.
 
@@ -48,17 +48,17 @@ Windows에서만 실행됩니다. 빌드에는 시간이 오래 걸립니다. �
 `.github/workflows/release.yml`이 **`v`로 시작하는 태그를 밀면** Windows 배포본을 만들고 릴리스 초안에 올립니다. Actions 탭의 **Run workflow**로 직접 실행하면 빌드만 하고 결과물을 아티팩트로 남깁니다.
 
 ```sh
-git tag v0.1.0
-git push origin v0.1.0
+git tag -a v<버전> -m "ArcadeClip <버전>"
+git push origin v<버전>
 ```
 
-태그 이름은 `src/updates.py`의 `VERSION`과 맞아야 합니다. 앱의 **새 버전 확인**이 릴리스 태그를 이 값과 비교하므로, 어긋나면 워크플로가 먼저 중단됩니다.
+`<버전>`을 새 버전 번호로 바꾸세요. `src/updates.py`의 `VERSION`, `pyproject.toml`의 버전과 `uv.lock`의 프로젝트 버전을 함께 올린 뒤 커밋하세요. 태그는 그 커밋에 붙입니다. 앱의 **새 버전 확인**이 릴리스 태그를 `VERSION`과 비교하므로, 어긋나면 워크플로가 먼저 중단됩니다.
 
 워크플로가 하는 일은 로컬 빌드와 같은 순서입니다. 다른 점은 셋입니다.
 
 - `run/fetch_tools.py`로 `tools/`를 채웁니다. 저장소에 없는 폴더입니다.
 - Nuitka 캐시를 `actions/cache`로 보존합니다. 없으면 매번 모든 모듈을 다시 컴파일합니다.
-- 자동 검사를 `QT_QPA_PLATFORM=offscreen`으로 실행합니다.
+- 자동 검사에 `--no-display`를 사용해 화면·재생 장치가 필요한 검사를 제외합니다.
 
 릴리스는 **초안**으로 만들어집니다. 공개 전에 해당 버전의 앱 소스와 포함된 GPL/LGPL 구성 요소의 대응 소스 접근 방법을 확인하고 릴리스 본문에 추가하세요. FFmpeg 본체 태그 링크만으로는 외부 코덱, 적용 패치, 필요한 빌드 스크립트까지 제공되지 않습니다. 라이선스 수집과 고지문 복사는 대응 소스 제공을 대신하지 않습니다.
 

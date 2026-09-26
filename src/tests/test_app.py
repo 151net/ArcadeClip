@@ -1120,7 +1120,7 @@ print('setup cycles passed')
         with tempfile.TemporaryDirectory() as name:
             window = MainWindow(Path(name))
             window.show()
-            source = r"\\192.168.88.247\stream\data\video.mp4"
+            source = r"\\192.0.2.1\share\example\video.mp4"
             with patch.object(window.preview, "load"), patch("pathlib.Path.resolve", side_effect=AssertionError("UI path resolution")), patch("pathlib.Path.is_file", side_effect=AssertionError("UI network stat")):
                 window.add_paths([source])
                 window.ranges = [{"source": source, "start": 0, "end": 1, "image_url": None},

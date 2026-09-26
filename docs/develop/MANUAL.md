@@ -43,6 +43,14 @@
 
 기준의 근거: [W3C 쉬운 단어 쓰기](https://www.w3.org/WAI/WCAG2/supplemental/patterns/o3p01-clear-words/), [W3C 단계 분리하기](https://www.w3.org/WAI/WCAG2/supplemental/patterns/o3p09-separated-instructions/), [GOV.UK 간결하고 능동적인 문장](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/writing-guidelines/clear-language/). 확인일 2026-09-16. W3C 문서는 WCAG 보충 지침입니다. 이 기준을 따랐다는 사실이 WCAG 준수나 특정 사용자 집단의 사용성을 뜻하지는 않습니다.
 
+## 스크린샷 교체
+
+1. 현재 소스를 영어로 실행하고 별도의 예시 영상·데이터 폴더를 사용하세요. 사용자 작업과 설정을 덮어쓰지 마세요.
+2. 창의 실제 내용을 캡처해 `docs/manual/images/`에 저장하세요. 문구나 컨트롤을 이미지 위에 그려서 바꾸지 마세요.
+3. `content.json`의 각 설명에 있는 `[x, y, 너비, 높이]`를 새 화면에 맞추세요. 단위는 이미지 크기에 대한 백분율입니다. 번호 위치는 `run/build_manual.py`의 `centers`에서 조정합니다.
+4. 소개 페이지 `index.html`에서 같은 이미지를 쓰면 `width`와 `height`도 갱신하세요.
+5. 두 언어로 빌드한 뒤 큰 화면과 360px 폭에서 사진·번호·설명을 확인하세요. 새 항목은 두 언어와 탐색 목록에 함께 추가합니다.
+
 ## 고친 뒤 확인
 
 - 제목만 훑어도 필요한 작업을 찾을 수 있는가?

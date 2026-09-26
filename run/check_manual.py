@@ -3,6 +3,7 @@ from html.parser import HTMLParser
 from itertools import combinations
 from pathlib import Path
 import math
+import json
 import re
 import struct
 
@@ -30,11 +31,16 @@ class Guide(HTMLParser):
             self.topics[self.article[:2]].append(attrs["data-topic"])
         if tag in ("img", "script", "link"):
             path = attrs.get("src", attrs.get("href"))
+            if tag == 'script' and path is None:
+                return
             assert path and ":" not in path and not path.startswith("/"), path
             assert (ROOT / path).is_file(), path
             self.assets.append(path)
         if tag == "img":
-            assert attrs.get("alt"), self.article
+            assert 'alt' in attrs, self.article
+            if not attrs['src'].startswith('images/'):
+                return  # Decorative app icons may have empty alt text and a smaller display size.
+            assert attrs['alt'], self.article
             width, height = struct.unpack(">II", (ROOT / attrs["src"]).read_bytes()[16:24])
             assert (width, height) == (int(attrs["width"]), int(attrs["height"]))
             self.images[self.article] = (attrs["src"], width, height)
@@ -62,7 +68,12 @@ if __name__ == "__main__":
     html = (ROOT / "manual.html").read_text(encoding="utf-8")
     guide = Guide()
     guide.feed(html)
-    assert guide.topics["ko"] == guide.topics["en"] and len(guide.topics["ko"]) == 13
+    # The landing page shares screenshots; keep its dimensions and local assets valid too.
+    landing = Guide()
+    landing.feed((ROOT / 'index.html').read_text(encoding='utf-8'))
+    chapters = json.loads((ROOT / 'content.json').read_text(encoding='utf-8'))
+    expected_topics = ['overview', *(chapter[0] for chapter in chapters), 'help']
+    assert guide.topics["ko"] == guide.topics["en"] == expected_topics
     assert guide.topics['ko'][:2] == ['overview', 'welcome']
     assert 'id="all" checked' in html and '{{' not in html
     assert '사진의 번호를 누르면' not in html
@@ -93,4 +104,4 @@ if __name__ == "__main__":
                 assert distance >= 36, (article, a, b, distance)
     assert not re.search(r"ADHD|주의력결핍", html, re.I)
     assert "fetch(" not in (ROOT / "guide.js").read_text(encoding="utf-8")
-    print(f"OK: 2 languages, 13 topics each, {len(guide.markers)} markers, current UI labels, reproducible build, visible text, local assets, non-overlapping targets.")
+    print(f"OK: 2 languages, {len(expected_topics)} topics each, {len(guide.markers)} markers, current UI labels, reproducible build, visible text, local assets, non-overlapping targets.")

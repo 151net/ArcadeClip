@@ -12,7 +12,7 @@ COPYING.GPLv3에 있습니다.
 
 자체 소스코드의 MIT 권한과 외부 구성 요소의 기존 라이선스 및 고지문은
 유지됩니다. 외부 라이브러리, 실행 도구, 모델의 고지는 앱의
-Settings → 오픈소스 라이선스에서 확인할 수 있습니다. SEGA 및 각 권리자의
+Settings → 정보 → 오픈소스 라이선스 보기에서 확인할 수 있습니다. SEGA 및 각 권리자의
 캐릭터, 곡 자켓 등 제3자 자산에는 이 MIT 또는 GPL 고지로 사용 권한을 부여하지 않습니다.
 
 ArcadeClip 소스와 빌드 스크립트: https://github.com/151net/ArcadeClip
@@ -33,7 +33,7 @@ see COPYING.GPLv3 in the distribution folder for the full terms.
 
 The MIT permissions for the original source code and the existing licenses
 and notices of third-party components remain in effect. Notices for libraries,
-tools and models are available in Settings → Open-source licenses. This notice
+tools and models are available in Settings → About → View open source licenses. This notice
 does not grant MIT or GPL rights to third-party artwork, including characters
 and song jackets owned by SEGA and other rights holders.
 
