@@ -1197,11 +1197,14 @@ class MainWindow(QMainWindow):
             self.status.setText(tr('작업을 중지하고 있습니다.'))
 
     def fail(self, error):
+        from tool_errors import ToolError
         logging.error("%s: %s", type(error).__name__, error)
         self.log.appendPlainText(f"{type(error).__name__}: {error}")
+        if isinstance(error, ToolError):
+            self.log.appendPlainText(f"Exit code: {error.returncode}\n{error.detail}")
         if self.remote:
             self.download_log.appendPlainText(tr('오류 · {error}', error=error))
-        self.status.setText(str(error) if isinstance(error, ValueError) else tr('작업을 완료하지 못했습니다. 고급에서 상세 내용을 확인해 주세요.'))
+        self.status.setText(str(error) if isinstance(error, (ValueError, ToolError)) else tr('작업을 완료하지 못했습니다. 고급에서 상세 내용을 확인해 주세요.'))
 
     def moved_data_directory(self, chosen):
         """Two spellings of one folder, such as a short or linked path, must not look

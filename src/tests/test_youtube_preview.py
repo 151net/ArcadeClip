@@ -25,6 +25,29 @@ class YouTubePreviewTests(unittest.TestCase):
     def setUpClass(cls):
         cls.application = QApplication.instance() or QApplication([])
 
+    def test_tool_failure_shows_guidance_and_emits_redacted_diagnostics(self):
+        from tool_errors import ToolError
+        error = ToolError('Peer certificate failed verification https://media.example/?token=secret', 4294967291)
+        widget = YouTubePreview()
+        diagnostics = []
+        widget.diagnostic.connect(diagnostics.append)
+        try:
+            with patch('youtube_preview.fetch_preview', side_effect=error), self.assertLogs(level='ERROR'):
+                widget.load(dict(duration=60))
+                widget.show()
+                widget.timer.stop()
+                widget.request_preview()
+                deadline = time.monotonic() + 3
+                while widget.task and time.monotonic() < deadline:
+                    QTest.qWait(20)
+                self.assertIsNone(widget.task)
+            self.assertIn(str(error), widget.status.text())
+            self.assertEqual(len(diagnostics), 1)
+            self.assertIn('4294967291', diagnostics[0])
+            self.assertNotIn('token=secret', diagnostics[0])
+        finally:
+            widget.close()
+
     def test_preview_format_is_small_and_does_not_change_download_selection(self):
         formats = [dict(url='https://media.example/large', protocol='https', vcodec='h264', height=1080),
                    dict(url='https://media.example/small', protocol='https', vcodec='h264', height=144),
@@ -162,7 +185,12 @@ class YouTubePreviewTests(unittest.TestCase):
         metadata = dict(duration=60, _preview_format=dict(protocol='https',
                         url='https://media.example/video.mp4', http_headers={'User-Agent': 'test'}))
         cancel = threading.Event()
-        def run(args, *_):
+        def run(args, *_, **kwargs):
+            self.assertTrue(kwargs['windows_ca'])
+            import certifi
+            self.assertEqual(args[args.index('-tls_verify') + 1], '1')
+            self.assertEqual(args[args.index('-ca_file') + 1], certifi.where())
+            self.assertLess(args.index('-ca_file'), args.index('-i'))
             self.assertEqual(args[args.index('-ss') + 1], '12')
             self.assertEqual(args[args.index('-frames:v') + 1], '1')
             self.assertIn('-an', args)

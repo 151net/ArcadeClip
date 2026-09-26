@@ -2779,3 +2779,79 @@ msgstr "Checking the first and last fragments of the selected range."
 
 msgid "STEP 3/4 · 조각 시각 검증 {done} / {total}"
 msgstr "STEP 3/4 · Checking fragment timestamps {done} / {total}"
+
+
+msgid "서버 인증서를 확인하지 못했습니다. Windows 날짜와 시간을 확인하고 Windows Update를 실행하세요. 계속 실패하면 최신 앱을 받아 다시 시도하세요."
+msgstr "Could not verify the server certificate. Check the Windows date and time, then run Windows Update. If it still fails, download the latest app and try again."
+
+
+msgid "서버가 요청을 제한했습니다. 동시 다운로드 수를 줄이고 잠시 후 다시 시도하세요."
+msgstr "The server is limiting requests. Reduce concurrent downloads, wait a while, and try again."
+
+
+msgid "서버가 영상 접근을 거부했습니다. 정보 새로고침 후 다시 시도하세요. 계속 실패하면 브라우저에서 재생 가능한지 확인하세요."
+msgstr "The server denied access to the video. Refresh info and try again. If it still fails, check whether the video plays in your browser."
+
+
+msgid "서버에서 영상 또는 선택한 구간을 찾지 못했습니다. 정보를 새로고침하고 구간을 다시 선택하세요."
+msgstr "The video or selected range was not found on the server. Refresh info and select the range again."
+
+
+msgid "로그인이나 시청 권한이 필요한 영상입니다. 브라우저에서 시청 가능 여부를 확인하고, 내려받을 수 있는 다른 영상을 선택하세요."
+msgstr "This video requires sign-in or viewing permission. Check access in your browser, then choose another video that is available to download."
+
+
+msgid "현재 사용할 수 없는 영상입니다. 브라우저에서 영상 공개 상태와 재생 가능 여부를 확인하세요."
+msgstr "This video is currently unavailable. Check its visibility and whether it plays in your browser."
+
+
+msgid "서버에 연결하지 못했거나 응답이 늦어졌습니다. 인터넷 연결과 VPN·프록시 설정을 확인하고 다시 시도하세요."
+msgstr "Could not connect to the server, or the response took too long. Check your internet connection and VPN or proxy settings, then try again."
+
+
+msgid "저장 공간이 부족합니다. 저장 폴더와 임시 폴더가 있는 드라이브의 공간을 확보한 뒤 다시 시도하세요."
+msgstr "Not enough disk space. Free up space on the drives containing the output and temporary folders, then try again."
+
+
+msgid "작업에 필요한 메모리가 부족합니다. 다른 프로그램을 닫고 동시 작업 수나 영상 해상도를 낮춰 다시 시도하세요."
+msgstr "Not enough memory for this task. Close other programs and reduce concurrent tasks or video resolution, then try again."
+
+
+msgid "파일에 접근하지 못했습니다. 파일을 사용 중인 프로그램을 닫고 읽기·쓰기 권한이 있는 폴더를 선택하세요."
+msgstr "Could not access the file. Close programs using it and choose a folder with read and write permission."
+
+
+msgid "GPU 인코더를 시작하지 못했습니다. 저장 설정에서 GPU 인코딩을 끄고 다시 시도하거나 그래픽 드라이버를 업데이트하세요."
+msgstr "Could not start the GPU encoder. Turn off GPU encoding in Export settings and try again, or update your graphics driver."
+
+
+msgid "영상의 다운로드 형식을 처리하지 못했습니다. 정보를 새로고침하세요. 계속 실패하면 최신 앱을 받아 다시 시도하세요."
+msgstr "Could not process the video download format. Refresh info. If it still fails, download the latest app and try again."
+
+
+msgid "영상 형식을 읽거나 변환하지 못했습니다. 원본이 정상 재생되는지 확인하고, 다시 내려받거나 다른 형식의 영상을 선택하세요."
+msgstr "Could not read or convert the video format. Check that the original plays correctly, then download it again or choose a video in another format."
+
+
+msgid "필요한 파일을 찾지 못했습니다. 원본 영상과 저장 폴더가 이동되거나 삭제되지 않았는지 확인하세요."
+msgstr "A required file was not found. Check whether the source video or output folder has been moved or deleted."
+
+
+msgid "영상 처리 도구를 찾지 못했습니다. 최신 앱의 ZIP 전체를 새 폴더에 풀고 다시 실행하세요."
+msgstr "A video processing tool was not found. Extract the entire ZIP of the latest app into a new folder and run it again."
+
+
+msgid "영상 처리 도구를 실행하지 못했습니다. Windows 10·11 x64용 앱의 ZIP 전체를 새 폴더에 풀고 다시 실행하세요."
+msgstr "Could not start a video processing tool. Extract the entire Windows 10/11 x64 app ZIP into a new folder and run it again."
+
+
+msgid "영상을 읽거나 저장하지 못했습니다. 원본 파일·네트워크 연결과 저장 폴더 상태를 확인하세요. 자세한 내용은 Settings → 진단에서 확인하세요."
+msgstr "Could not read or save the video. Check the source file, network connection, and output folder. See Settings → Diagnostics for details."
+
+
+msgid "영상 처리 도구가 작업을 완료하지 못했습니다. Settings → 진단의 오류 내용을 확인하세요. 계속 실패하면 최신 앱으로 다시 시도하세요."
+msgstr "A video processing tool could not finish the task. Check the error in Settings → Diagnostics. If it keeps failing, try the latest app."
+
+
+msgid "인증서를 다시 확인하고 있습니다. 앱에 포함된 인증서로 한 번 더 연결합니다."
+msgstr "Checking certificates again. Retrying once with the certificates included in the app."

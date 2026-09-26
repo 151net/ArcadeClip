@@ -56,7 +56,7 @@ msgstr ""
 msgid " · 필수"
 msgstr ""
 
-#: src/workspace_ui.py:273
+#: src/workspace_ui.py:274
 msgid " 초"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgstr ""
 msgid " 픽셀"
 msgstr ""
 
-#: src/sources.py:194
+#: src/sources.py:247
 msgid "%Y-%m-%d %H시"
 msgstr ""
 
@@ -76,43 +76,43 @@ msgstr ""
 msgid "0: 원래 음량 · 음수: 작게 · 양수: 크게. 너무 높이면 소리가 찌그러질 수 있습니다."
 msgstr ""
 
-#: src/workspace_ui.py:506
+#: src/workspace_ui.py:507
 msgid "1 데이터"
 msgstr ""
 
-#: src/preview.py:13 src/profiles.py:10 src/workspace_ui.py:297
+#: src/preview.py:13 src/profiles.py:10 src/workspace_ui.py:298
 msgid "1P 달성률"
 msgstr ""
 
-#: src/preview.py:14 src/profiles.py:10 src/workspace_ui.py:296
+#: src/preview.py:14 src/profiles.py:10 src/workspace_ui.py:297
 msgid "1P 이름"
 msgstr ""
 
-#: src/workspace_ui.py:506
+#: src/workspace_ui.py:507
 msgid "2 위치 보정"
 msgstr ""
 
-#: src/preview.py:15 src/profiles.py:10 src/workspace_ui.py:297
+#: src/preview.py:15 src/profiles.py:10 src/workspace_ui.py:298
 msgid "2P 달성률"
 msgstr ""
 
-#: src/preview.py:14 src/profiles.py:10 src/workspace_ui.py:296
+#: src/preview.py:14 src/profiles.py:10 src/workspace_ui.py:297
 msgid "2P 이름"
 msgstr ""
 
-#: src/workspace_ui.py:506
+#: src/workspace_ui.py:507
 msgid "3 곡 판독"
 msgstr ""
 
-#: src/workspace_ui.py:506
+#: src/workspace_ui.py:507
 msgid "4 경계 확인"
 msgstr ""
 
-#: src/workspace_ui.py:506
+#: src/workspace_ui.py:507
 msgid "5 문자·정리"
 msgstr ""
 
-#: src/app.py:1320 src/app.py:1328
+#: src/app.py:1323 src/app.py:1331
 msgid "ArcadeClip 편집 작업 (*.json)"
 msgstr ""
 
@@ -139,6 +139,10 @@ msgstr ""
 
 #: src/export_settings.py:172
 msgid "GPU 압축"
+msgstr ""
+
+#: src/tool_errors.py:51
+msgid "GPU 인코더를 시작하지 못했습니다. 저장 설정에서 GPU 인코딩을 끄고 다시 시도하거나 그래픽 드라이버를 업데이트하세요."
 msgstr ""
 
 #: src/export.py:61
@@ -195,16 +199,16 @@ msgstr ""
 msgid "OCR 준비 실패: {error}"
 msgstr ""
 
-#: src/sources.py:245
+#: src/sources.py:298
 msgid "STEP 1/4 · 영상 정보와 선택 구간 확인"
 msgstr ""
 
-#: src/sources.py:270
+#: src/sources.py:323
 #, python-brace-format
 msgid "STEP 2/4 · 선택 구간 원본 다운로드 · {start:g}–{end:g}초"
 msgstr ""
 
-#: src/sources.py:282
+#: src/sources.py:337
 msgid "STEP 3/4 · 다운로드 파일과 영상 길이 검증"
 msgstr ""
 
@@ -217,7 +221,7 @@ msgstr ""
 msgid "STEP 3/4 · 조각 시각 검증 {done} / {total}"
 msgstr ""
 
-#: src/fragments.py:193 src/sources.py:305
+#: src/fragments.py:193 src/sources.py:360
 #, python-brace-format
 msgid "STEP 4/4 · 완료 · {value1}"
 msgstr ""
@@ -250,7 +254,7 @@ msgstr ""
 msgid "YouTube · 다운로드할 구간을 선택하세요. 완료하면 영상 선택으로 돌아갑니다."
 msgstr ""
 
-#: src/workspace_ui.py:430
+#: src/workspace_ui.py:431
 msgid "YouTube · 선택 구간 다운로드"
 msgstr ""
 
@@ -262,7 +266,7 @@ msgstr ""
 msgid "YouTube 다운로드로 →"
 msgstr ""
 
-#: src/workspace_ui.py:216
+#: src/workspace_ui.py:217
 msgid "YouTube 링크"
 msgstr ""
 
@@ -270,19 +274,19 @@ msgstr ""
 msgid "YouTube 링크의 정보를 먼저 확인해 주세요."
 msgstr ""
 
-#: src/workspace_ui.py:419
+#: src/workspace_ui.py:420
 msgid "YouTube 설명란"
 msgstr ""
 
-#: src/workspace_ui.py:422
+#: src/workspace_ui.py:423
 msgid "YouTube 설명란 챕터"
 msgstr ""
 
-#: src/workspace_ui.py:215
+#: src/workspace_ui.py:216
 msgid "YouTube 영상 가져오기"
 msgstr ""
 
-#: src/sources.py:46
+#: src/sources.py:51
 msgid "YouTube 영상 링크를 입력해 주세요."
 msgstr ""
 
@@ -294,26 +298,26 @@ msgstr ""
 msgid "YouTube에 챕터로 표시됩니다."
 msgstr ""
 
-#: src/app.py:1286
+#: src/app.py:1289
 #, python-brace-format
 msgid "{count:,}개"
 msgid_plural "{count:,}개"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/app.py:1282
+#: src/app.py:1285
 #, python-brace-format
 msgid "{count:,}곡"
 msgid_plural "{count:,}곡"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/workspace_ui.py:457
+#: src/workspace_ui.py:458
 #, python-brace-format
 msgid "{count}개 · 권장 범위 (1–4)"
 msgstr ""
 
-#: src/workspace_ui.py:458
+#: src/workspace_ui.py:459
 #, python-brace-format
 msgid "{count}개 · 주의: 요청 제한 가능성 증가 (5–16)"
 msgstr ""
@@ -333,11 +337,6 @@ msgstr ""
 msgid "{name} · 저장 전"
 msgstr ""
 
-#: src/sources.py:62
-#, python-brace-format
-msgid "{name} 실행 파일을 찾을 수 없습니다."
-msgstr ""
-
 #: src/app.py:1014
 #, python-brace-format
 msgid "{prefix} · 성공 {value2:,}개 · 실패 {value3:,}개"
@@ -353,17 +352,17 @@ msgstr ""
 msgid "{seconds}초보다 짧은 챕터가 있습니다."
 msgstr ""
 
-#: src/youtube_preview.py:244
+#: src/youtube_preview.py:246
 #, python-brace-format
 msgid "{time} · 1초 후 미리보기"
 msgstr ""
 
-#: src/youtube_preview.py:263
+#: src/youtube_preview.py:265
 #, python-brace-format
 msgid "{time} · 미리보기 가져오는 중…"
 msgstr ""
 
-#: src/youtube_preview.py:276
+#: src/youtube_preview.py:282
 #, python-brace-format
 msgid "{time} · 저해상도 미리보기"
 msgstr ""
@@ -399,7 +398,7 @@ msgstr ""
 msgid "같은 영상의 클립을 두 개 이상 선택해 주세요."
 msgstr ""
 
-#: src/sources.py:187
+#: src/sources.py:240
 msgid "개별 영상 링크를 선택해 주세요."
 msgstr ""
 
@@ -411,7 +410,7 @@ msgstr ""
 msgid "검색 조건에 맞는 클립이 없습니다. 검색어와 필터를 확인하세요."
 msgstr ""
 
-#: src/workspace_ui.py:303
+#: src/workspace_ui.py:304
 msgid "검수 완료로 표시"
 msgstr ""
 
@@ -486,7 +485,7 @@ msgstr ""
 msgid "곡 찾기를 시작할 수 없습니다"
 msgstr ""
 
-#: src/workspace_ui.py:356
+#: src/workspace_ui.py:357
 msgid "곡 탐색 영상 디코딩만 GPU 사용. 지원하지 않으면 CPU로 복귀합니다. OCR은 CPU 병렬 처리합니다."
 msgstr ""
 
@@ -520,11 +519,11 @@ msgstr ""
 msgid "곡·자켓 용량"
 msgstr ""
 
-#: src/workspace_ui.py:413
+#: src/workspace_ui.py:414
 msgid "곡과 곡 사이에도 챕터 넣기"
 msgstr ""
 
-#: src/workspace_ui.py:296
+#: src/workspace_ui.py:297
 msgid "곡명"
 msgstr ""
 
@@ -540,7 +539,7 @@ msgstr ""
 msgid "공개된 버전을 찾지 못했습니다."
 msgstr ""
 
-#: src/workspace_ui.py:410 src/workspace_ui.py:411
+#: src/workspace_ui.py:411 src/workspace_ui.py:412
 msgid "공백 챕터 이름"
 msgstr ""
 
@@ -565,7 +564,7 @@ msgstr ""
 msgid "구간 후보 {value1:,}개를 추가했습니다. 미리보기에서 확인해 주세요."
 msgstr ""
 
-#: src/workspace_ui.py:472
+#: src/workspace_ui.py:473
 msgid "권장 범위에서도 요청이 제한될 수 있습니다. 오류가 나면 수를 줄이고 잠시 후 다시 시도하세요."
 msgstr ""
 
@@ -601,11 +600,11 @@ msgstr ""
 msgid "기준 영상 크기를 확인해 주세요."
 msgstr ""
 
-#: src/workspace_ui.py:235 src/workspace_ui.py:297 src/youtube_preview.py:144
+#: src/workspace_ui.py:236 src/workspace_ui.py:298 src/youtube_preview.py:146
 msgid "끝"
 msgstr ""
 
-#: src/workspace_ui.py:311
+#: src/workspace_ui.py:312
 msgid "끝 부분 재생"
 msgstr ""
 
@@ -613,15 +612,15 @@ msgstr ""
 msgid "끝 시각을 시작보다 뒤로 지정해 주세요."
 msgstr ""
 
-#: src/workspace_ui.py:269
+#: src/workspace_ui.py:270
 msgid "끝 오프셋"
 msgstr ""
 
-#: src/app.py:1128 src/app.py:1080 src/app.py:549 src/sources.py:197
+#: src/app.py:1128 src/app.py:1080 src/app.py:549 src/sources.py:250
 msgid "날짜 미제공"
 msgstr ""
 
-#: src/workspace_ui.py:377
+#: src/workspace_ui.py:378
 msgid "날짜와 시간으로 새 폴더 만들기"
 msgstr ""
 
@@ -633,15 +632,15 @@ msgstr ""
 msgid "높을수록 느슨하게 판독합니다. 비슷한 자켓이 잘못 인식될 수 있습니다."
 msgstr ""
 
-#: src/app.py:1257
+#: src/app.py:1260
 msgid "다시 받을 자켓 데이터가 있습니다."
 msgstr ""
 
-#: src/sources.py:291
+#: src/sources.py:346
 msgid "다운로드 결과 파일을 확인할 수 없습니다."
 msgstr ""
 
-#: src/app.py:1072 src/workspace_ui.py:487
+#: src/app.py:1072 src/workspace_ui.py:488
 msgid "다운로드 대기"
 msgstr ""
 
@@ -693,19 +692,19 @@ msgstr ""
 msgid "다운로드를 취소했습니다. 구간을 다시 선택할 수 있습니다."
 msgstr ""
 
-#: src/sources.py:285
+#: src/sources.py:340
 msgid "다운로드한 구간 정보를 확인할 수 없습니다."
 msgstr ""
 
-#: src/sources.py:288
+#: src/sources.py:343
 msgid "다운로드한 구간이 선택한 시각과 일치하지 않습니다."
 msgstr ""
 
-#: src/fragments.py:181 src/sources.py:295
+#: src/fragments.py:181 src/sources.py:350
 msgid "다운로드한 영상 길이가 선택한 구간과 다릅니다."
 msgstr ""
 
-#: src/sources.py:232
+#: src/sources.py:285
 msgid "다운로드한 영상의 길이를 확인할 수 없습니다."
 msgstr ""
 
@@ -713,7 +712,7 @@ msgstr ""
 msgid "다운로드할 구간의 시작·끝 조각을 확인하고 있습니다."
 msgstr ""
 
-#: src/app.py:1105 src/youtube_preview.py:186
+#: src/app.py:1105 src/youtube_preview.py:188
 msgid "다운로드할 시작·끝을 영상 길이 안에서 지정해 주세요."
 msgstr ""
 
@@ -765,19 +764,19 @@ msgstr ""
 msgid "도움말"
 msgstr ""
 
-#: src/workspace_ui.py:440 src/workspace_ui.py:437
+#: src/workspace_ui.py:441 src/workspace_ui.py:438
 msgid "동시 다운로드 수"
 msgstr ""
 
-#: src/fragments.py:19 src/sources.py:239
+#: src/fragments.py:19 src/sources.py:292
 msgid "동시 다운로드 수는 1–16개로 지정해 주세요."
 msgstr ""
 
-#: src/workspace_ui.py:386
+#: src/workspace_ui.py:387
 msgid "동일한 파일명에는 번호를 붙입니다."
 msgstr ""
 
-#: src/workspace_ui.py:307
+#: src/workspace_ui.py:308
 msgid "되돌리기"
 msgstr ""
 
@@ -802,7 +801,7 @@ msgstr ""
 msgid "라이브 · 조회 구간 시작: {origin} · 접근 가능 {value2}"
 msgstr ""
 
-#: src/youtube_preview.py:178
+#: src/youtube_preview.py:180
 msgid "라이브 시각은 -MM:SS 또는 -HH:MM:SS 형식으로 입력해 주세요."
 msgstr ""
 
@@ -810,7 +809,7 @@ msgstr ""
 msgid "라이브 시각의 시간대를 확인할 수 없습니다."
 msgstr ""
 
-#: src/youtube_preview.py:205
+#: src/youtube_preview.py:207
 msgid "라이브 음수 시각은 조회한 최신 지점 기준입니다. 최신 구간은 정보 새로고침을 누르세요."
 msgstr ""
 
@@ -851,6 +850,10 @@ msgstr ""
 msgid "라이선스: {name}"
 msgstr ""
 
+#: src/tool_errors.py:39
+msgid "로그인이나 시청 권한이 필요한 영상입니다. 브라우저에서 시청 가능 여부를 확인하고, 내려받을 수 있는 다른 영상을 선택하세요."
+msgstr ""
+
 #: src/app.py:423
 msgid "먼저 대상 폴더를 선택해 주세요."
 msgstr ""
@@ -867,7 +870,7 @@ msgstr ""
 msgid "모든 데이터"
 msgstr ""
 
-#: src/workspace_ui.py:278
+#: src/workspace_ui.py:279
 msgid "모든 클립에 일괄 적용"
 msgstr ""
 
@@ -899,7 +902,7 @@ msgstr ""
 msgid "미리보기"
 msgstr ""
 
-#: src/youtube_preview.py:273
+#: src/youtube_preview.py:276
 #, python-brace-format
 msgid "미리보기 실패: {error}"
 msgstr ""
@@ -925,7 +928,7 @@ msgstr ""
 msgid "방송 단절 경계를 포함한 구간입니다. 경계 앞뒤로 나눠 선택해 주세요."
 msgstr ""
 
-#: src/sources.py:253
+#: src/sources.py:306
 msgid "방송 종료 후 처리된 영상 또는 로컬 녹화를 선택해 주세요."
 msgstr ""
 
@@ -1020,7 +1023,7 @@ msgstr ""
 msgid "빠르게 처리"
 msgstr ""
 
-#: src/workspace_ui.py:336
+#: src/workspace_ui.py:337
 msgid "빠른 저장 · 경계 차이 가능"
 msgstr ""
 
@@ -1083,15 +1086,35 @@ msgstr ""
 msgid "새로 받기"
 msgstr ""
 
+#: src/tool_errors.py:31
+msgid "서버 인증서를 확인하지 못했습니다. Windows 날짜와 시간을 확인하고 Windows Update를 실행하세요. 계속 실패하면 최신 앱을 받아 다시 시도하세요."
+msgstr ""
+
+#: src/tool_errors.py:35
+msgid "서버가 영상 접근을 거부했습니다. 정보 새로고침 후 다시 시도하세요. 계속 실패하면 브라우저에서 재생 가능한지 확인하세요."
+msgstr ""
+
+#: src/tool_errors.py:33
+msgid "서버가 요청을 제한했습니다. 동시 다운로드 수를 줄이고 잠시 후 다시 시도하세요."
+msgstr ""
+
+#: src/tool_errors.py:43
+msgid "서버에 연결하지 못했거나 응답이 늦어졌습니다. 인터넷 연결과 VPN·프록시 설정을 확인하고 다시 시도하세요."
+msgstr ""
+
+#: src/tool_errors.py:37
+msgid "서버에서 영상 또는 선택한 구간을 찾지 못했습니다. 정보를 새로고침하고 구간을 다시 선택하세요."
+msgstr ""
+
 #: src/export_settings.py:30
 msgid "선명하게 · 용량 큼"
 msgstr ""
 
-#: src/workspace_ui.py:476
+#: src/workspace_ui.py:477
 msgid "선택 구간 다운로드"
 msgstr ""
 
-#: src/workspace_ui.py:246
+#: src/workspace_ui.py:247
 msgid "선택 구간 재생"
 msgstr ""
 
@@ -1099,7 +1122,7 @@ msgstr ""
 msgid "선택 구간으로 클립 추가"
 msgstr ""
 
-#: src/youtube_preview.py:203
+#: src/youtube_preview.py:205
 #, python-brace-format
 msgid "선택 길이: {time}"
 msgstr ""
@@ -1108,7 +1131,7 @@ msgstr ""
 msgid "선택 저장 (0)"
 msgstr ""
 
-#: src/workspace_ui.py:185
+#: src/workspace_ui.py:186
 msgid "선택 주변 확대"
 msgstr ""
 
@@ -1116,7 +1139,7 @@ msgstr ""
 msgid "선택한 구간에서 영상 프레임을 찾을 수 없습니다."
 msgstr ""
 
-#: src/export.py:109 src/sources.py:258
+#: src/export.py:109 src/sources.py:311
 msgid "선택한 끝 시각이 영상 길이를 넘습니다."
 msgstr ""
 
@@ -1140,7 +1163,7 @@ msgstr ""
 msgid "선택한 클립이 없습니다."
 msgstr ""
 
-#: src/workspace_ui.py:383
+#: src/workspace_ui.py:384
 msgid "선택한 폴더 열기"
 msgstr ""
 
@@ -1148,7 +1171,7 @@ msgstr ""
 msgid "선택한 프로필 덮어쓰기"
 msgstr ""
 
-#: src/workspace_ui.py:425
+#: src/workspace_ui.py:426
 msgid "설명란 내용 복사"
 msgstr ""
 
@@ -1189,7 +1212,7 @@ msgstr ""
 msgid "수동으로 시작·끝을 조정한 클립이 있습니다."
 msgstr ""
 
-#: src/workspace_ui.py:306
+#: src/workspace_ui.py:307
 msgid "수정 적용"
 msgstr ""
 
@@ -1217,11 +1240,11 @@ msgstr ""
 msgid "시간 범위: 양 끝 핸들을 드래그해 조절"
 msgstr ""
 
-#: src/app.py:142 src/workspace_ui.py:230 src/workspace_ui.py:59
+#: src/app.py:142 src/workspace_ui.py:231 src/workspace_ui.py:59
 msgid "시간 선택"
 msgstr ""
 
-#: src/app.py:141 src/workspace_ui.py:228
+#: src/app.py:141 src/workspace_ui.py:229
 msgid "시간 선택으로 →"
 msgstr ""
 
@@ -1237,19 +1260,19 @@ msgstr ""
 msgid "시간을 확인해 주세요."
 msgstr ""
 
-#: src/chapters.py:23 src/workspace_ui.py:235 src/workspace_ui.py:297 src/youtube_preview.py:144
+#: src/chapters.py:23 src/workspace_ui.py:236 src/workspace_ui.py:298 src/youtube_preview.py:146
 msgid "시작"
 msgstr ""
 
-#: src/workspace_ui.py:310
+#: src/workspace_ui.py:311
 msgid "시작 부분 재생"
 msgstr ""
 
-#: src/workspace_ui.py:269
+#: src/workspace_ui.py:270
 msgid "시작 오프셋"
 msgstr ""
 
-#: src/sources.py:243
+#: src/sources.py:296
 msgid "시작과 끝 시각을 확인해 주세요."
 msgstr ""
 
@@ -1257,11 +1280,11 @@ msgstr ""
 msgid "시작하기 →"
 msgstr ""
 
-#: src/workspace_ui.py:355
+#: src/workspace_ui.py:356
 msgid "실험용 GPU 영상 디코딩 (D3D11VA)"
 msgstr ""
 
-#: src/workspace_ui.py:418
+#: src/workspace_ui.py:419
 msgid "쓸 수 있는 항목: "
 msgstr ""
 
@@ -1310,7 +1333,7 @@ msgstr ""
 msgid "앱 버전"
 msgstr ""
 
-#: src/youtube_preview.py:138
+#: src/youtube_preview.py:140
 msgid "양끝 핸들: 시작·끝 조절 | 클릭: 미리보기 위치 | Ctrl+휠: 확대"
 msgstr ""
 
@@ -1351,7 +1374,7 @@ msgstr ""
 msgid "영상 길이를 확인할 수 없습니다."
 msgstr ""
 
-#: src/sources.py:256
+#: src/sources.py:309
 msgid "영상 길이를 확인할 수 없습니다. 영상 정보를 다시 확인해 주세요."
 msgstr ""
 
@@ -1359,7 +1382,7 @@ msgstr ""
 msgid "영상 디코더 스레드"
 msgstr ""
 
-#: src/app.py:1356
+#: src/app.py:1359
 msgid "영상 메타데이터를 확인해 주세요."
 msgstr ""
 
@@ -1387,11 +1410,11 @@ msgstr ""
 msgid "영상 재생 위치"
 msgstr ""
 
-#: src/workspace_ui.py:428
+#: src/workspace_ui.py:429
 msgid "영상 저장은 다시 인코딩하지 않고 챕터만 넣어 복사합니다."
 msgstr ""
 
-#: src/workspace_ui.py:226
+#: src/workspace_ui.py:227
 msgid "영상 정보 확인 →"
 msgstr ""
 
@@ -1399,17 +1422,25 @@ msgstr ""
 msgid "영상 정보를 다시 확인해 주세요."
 msgstr ""
 
-#: src/sources.py:183
+#: src/sources.py:236
 msgid "영상 정보를 확인하고 있습니다."
 msgstr ""
 
-#: src/sources.py:168
+#: src/sources.py:221
 #, python-brace-format
 msgid "영상 처리 {percent}% · {elapsed:.1f} / {seconds:.1f}초"
 msgstr ""
 
-#: src/sources.py:125
-msgid "영상 처리 작업이 실패했습니다."
+#: src/tool_errors.py:64
+msgid "영상 처리 도구가 작업을 완료하지 못했습니다. Settings → 진단의 오류 내용을 확인하세요. 계속 실패하면 최신 앱으로 다시 시도하세요."
+msgstr ""
+
+#: src/tool_errors.py:61
+msgid "영상 처리 도구를 실행하지 못했습니다. Windows 10·11 x64용 앱의 ZIP 전체를 새 폴더에 풀고 다시 실행하세요."
+msgstr ""
+
+#: src/tool_errors.py:59
+msgid "영상 처리 도구를 찾지 못했습니다. 최신 앱의 ZIP 전체를 새 폴더에 풀고 다시 실행하세요."
 msgstr ""
 
 #: src/app.py:529
@@ -1418,6 +1449,10 @@ msgstr ""
 
 #: src/app.py:533
 msgid "영상 폴더"
+msgstr ""
+
+#: src/tool_errors.py:55
+msgid "영상 형식을 읽거나 변환하지 못했습니다. 원본이 정상 재생되는지 확인하고, 다시 내려받거나 다른 형식의 영상을 선택하세요."
 msgstr ""
 
 #: src/live.py:138
@@ -1444,8 +1479,16 @@ msgstr ""
 msgid "영상을 열 수 없습니다. 파일을 다시 선택해 주세요."
 msgstr ""
 
-#: src/workspace_ui.py:522
+#: src/tool_errors.py:63
+msgid "영상을 읽거나 저장하지 못했습니다. 원본 파일·네트워크 연결과 저장 폴더 상태를 확인하세요. 자세한 내용은 Settings → 진단에서 확인하세요."
+msgstr ""
+
+#: src/workspace_ui.py:523
 msgid "영상을 추가해 주세요."
+msgstr ""
+
+#: src/tool_errors.py:53
+msgid "영상의 다운로드 형식을 처리하지 못했습니다. 정보를 새로고침하세요. 계속 실패하면 최신 앱을 받아 다시 시도하세요."
 msgstr ""
 
 #: src/profile_panel.py:56
@@ -1488,7 +1531,7 @@ msgstr ""
 msgid "오락실 프로필 선택"
 msgstr ""
 
-#: src/app.py:1203
+#: src/app.py:1206
 #, python-brace-format
 msgid "오류 · {error}"
 msgstr ""
@@ -1537,7 +1580,7 @@ msgstr ""
 msgid "원본 빠른 복사"
 msgstr ""
 
-#: src/workspace_ui.py:341
+#: src/workspace_ui.py:342
 msgid "원본 빠른 복사 · 소리 포함"
 msgstr ""
 
@@ -1575,7 +1618,7 @@ msgstr ""
 msgid "위 목록에서\n지정할 영역을 선택하세요."
 msgstr ""
 
-#: src/workspace_ui.py:190
+#: src/workspace_ui.py:191
 msgid "위: 자동 인식 클립    아래: 직접 추가한 클립"
 msgstr ""
 
@@ -1584,7 +1627,7 @@ msgstr ""
 msgid "위치 확정 · 거리 {distance} / 후보 차이 {margin} · 나머지 보정 생략"
 msgstr ""
 
-#: src/youtube_preview.py:132
+#: src/youtube_preview.py:134
 msgid "위치를 옮긴 뒤 1초 기다리면 미리보기를 가져옵니다."
 msgstr ""
 
@@ -1601,11 +1644,11 @@ msgstr ""
 msgid "음량 조절"
 msgstr ""
 
-#: src/workspace_ui.py:313
+#: src/workspace_ui.py:314
 msgid "이 구간 반복"
 msgstr ""
 
-#: src/workspace_ui.py:264
+#: src/workspace_ui.py:265
 msgid "이 구간에서 곡 찾기 →"
 msgstr ""
 
@@ -1685,7 +1728,7 @@ msgstr ""
 msgid "인식 영역 형식이 올바르지 않습니다."
 msgstr ""
 
-#: src/workspace_ui.py:248
+#: src/workspace_ui.py:249
 msgid "인식 영역으로 →"
 msgstr ""
 
@@ -1701,11 +1744,15 @@ msgstr ""
 msgid "인증서 검사"
 msgstr ""
 
+#: src/sources.py:120
+msgid "인증서를 다시 확인하고 있습니다. 앱에 포함된 인증서로 한 번 더 연결합니다."
+msgstr ""
+
 #: src/advanced_settings.py:30
 msgid "일반"
 msgstr ""
 
-#: src/app.py:239 src/sources.py:264
+#: src/app.py:239 src/sources.py:317
 msgid "일반 다운로드 · 이 영상은 조각 병렬 다운로드를 지원하지 않습니다."
 msgstr ""
 
@@ -1725,27 +1772,27 @@ msgstr ""
 msgid "일시정지"
 msgstr ""
 
-#: src/workspace_ui.py:353
+#: src/workspace_ui.py:354
 msgid "자동 · CPU 수에 맞춤"
 msgstr ""
 
-#: src/workspace_ui.py:349
+#: src/workspace_ui.py:350
 msgid "자동 · CPU와 분석량에 맞춤"
 msgstr ""
 
-#: src/workspace_ui.py:345
+#: src/workspace_ui.py:346
 msgid "자동 · 최대 32스레드"
 msgstr ""
 
-#: src/app.py:806 src/workspace_ui.py:284
+#: src/app.py:806 src/workspace_ui.py:285
 msgid "자동 인식 결과로 복원"
 msgstr ""
 
-#: src/app.py:1346
+#: src/app.py:1349
 msgid "자동 인식 원본 식별자를 확인해 주세요."
 msgstr ""
 
-#: src/app.py:1343
+#: src/app.py:1346
 msgid "자동 인식 원본 형식을 확인해 주세요."
 msgstr ""
 
@@ -1797,7 +1844,7 @@ msgstr ""
 msgid "자켓 데이터 업데이트"
 msgstr ""
 
-#: src/app.py:1257
+#: src/app.py:1260
 msgid "자켓 데이터 업데이트 완료"
 msgstr ""
 
@@ -1884,7 +1931,7 @@ msgstr ""
 msgid "자켓 확인 {index:,} / {value2:,}"
 msgstr ""
 
-#: src/workspace_ui.py:250
+#: src/workspace_ui.py:251
 msgid "자켓과 글자 위치"
 msgstr ""
 
@@ -1892,7 +1939,7 @@ msgstr ""
 msgid "작게 · 화질보다 용량 우선"
 msgstr ""
 
-#: src/app.py:1403
+#: src/app.py:1406
 #, python-brace-format
 msgid "작업 구간 {value1:,}개를 불러왔습니다."
 msgstr ""
@@ -1905,19 +1952,23 @@ msgstr ""
 msgid "작업 저장"
 msgstr ""
 
-#: src/app.py:1336 src/app.py:1340
+#: src/app.py:1339 src/app.py:1343
 msgid "작업 파일 형식을 확인해 주세요."
 msgstr ""
 
-#: src/app.py:1362
+#: src/app.py:1365
 msgid "작업 파일의 선택된 영상을 확인해 주세요."
 msgstr ""
 
-#: src/app.py:1358
+#: src/app.py:1361
 msgid "작업 파일의 영상 경로를 확인해 주세요."
 msgstr ""
 
-#: src/app.py:1204
+#: src/tool_errors.py:47
+msgid "작업에 필요한 메모리가 부족합니다. 다른 프로그램을 닫고 동시 작업 수나 영상 해상도를 낮춰 다시 시도하세요."
+msgstr ""
+
+#: src/app.py:1207
 msgid "작업을 완료하지 못했습니다. 고급에서 상세 내용을 확인해 주세요."
 msgstr ""
 
@@ -1925,7 +1976,7 @@ msgstr ""
 msgid "작업을 중지하고 있습니다."
 msgstr ""
 
-#: src/app.py:1172 src/sources.py:83 src/sources.py:297 src/sources.py:105
+#: src/app.py:1172 src/sources.py:94 src/sources.py:136 src/sources.py:352 src/sources.py:158 src/sources.py:119
 msgid "작업을 취소했습니다."
 msgstr ""
 
@@ -1937,15 +1988,19 @@ msgstr ""
 msgid "재생 배속"
 msgstr ""
 
-#: src/app.py:1237
+#: src/app.py:1240
 msgid "재시작 실패"
 msgstr ""
 
-#: src/workspace_ui.py:332
+#: src/tool_errors.py:45
+msgid "저장 공간이 부족합니다. 저장 폴더와 임시 폴더가 있는 드라이브의 공간을 확보한 뒤 다시 시도하세요."
+msgstr ""
+
+#: src/workspace_ui.py:333
 msgid "저장 대상 확인"
 msgstr ""
 
-#: src/export_settings.py:8 src/workspace_ui.py:391
+#: src/export_settings.py:8 src/workspace_ui.py:392
 msgid "저장 설정"
 msgstr ""
 
@@ -1953,7 +2008,7 @@ msgstr ""
 msgid "저장 설정을 확인해 주세요."
 msgstr ""
 
-#: src/workspace_ui.py:379
+#: src/workspace_ui.py:380
 msgid "저장 시작 시 대상 폴더 아래에 YYYY-MM-DD_HH-MM-SS 형식의 폴더를 만듭니다."
 msgstr ""
 
@@ -1979,7 +2034,7 @@ msgstr ""
 msgid "저장 중지"
 msgstr ""
 
-#: src/workspace_ui.py:374
+#: src/workspace_ui.py:375
 msgid "저장 폴더"
 msgstr ""
 
@@ -2007,7 +2062,7 @@ msgstr ""
 msgid "저장할 영상을 먼저 열어 주세요."
 msgstr ""
 
-#: src/app.py:478 src/workspace_ui.py:371
+#: src/app.py:478 src/workspace_ui.py:372
 msgid "저장할 클립을 선택하세요."
 msgstr ""
 
@@ -2015,7 +2070,7 @@ msgstr ""
 msgid "저장할 파일 이름과 폴더, 설정을 확인하세요."
 msgstr ""
 
-#: src/workspace_ui.py:385
+#: src/workspace_ui.py:386
 msgid "저장할 파일명"
 msgstr ""
 
@@ -2031,7 +2086,7 @@ msgstr ""
 msgid "적용"
 msgstr ""
 
-#: src/app.py:1225
+#: src/app.py:1228
 msgid "적용 후 재시작"
 msgstr ""
 
@@ -2044,11 +2099,11 @@ msgstr ""
 msgid "적용할 설정: 사용자 지정"
 msgstr ""
 
-#: src/workspace_ui.py:245 src/youtube_preview.py:153
+#: src/workspace_ui.py:246 src/youtube_preview.py:155
 msgid "전체 구간"
 msgstr ""
 
-#: src/workspace_ui.py:188 src/youtube_preview.py:154
+#: src/workspace_ui.py:189 src/youtube_preview.py:156
 msgid "전체 시간 보기"
 msgstr ""
 
@@ -2060,7 +2115,7 @@ msgstr ""
 msgid "전체 시간축 · 점선 테두리: 확대해서 보는 범위"
 msgstr ""
 
-#: src/workspace_ui.py:175
+#: src/workspace_ui.py:176
 msgid "전체 시간축 가로 이동"
 msgstr ""
 
@@ -2068,7 +2123,7 @@ msgstr ""
 msgid "전체 저장 (0)"
 msgstr ""
 
-#: src/sources.py:209
+#: src/sources.py:262
 msgid "접근 가능한 라이브 구간을 확인하고 있습니다."
 msgstr ""
 
@@ -2076,7 +2131,7 @@ msgstr ""
 msgid "정보"
 msgstr ""
 
-#: src/workspace_ui.py:436
+#: src/workspace_ui.py:437
 msgid "정보 새로고침"
 msgstr ""
 
@@ -2088,7 +2143,7 @@ msgstr ""
 msgid "정확한 구간 자르기"
 msgstr ""
 
-#: src/workspace_ui.py:335
+#: src/workspace_ui.py:336
 msgid "정확한 저장"
 msgstr ""
 
@@ -2104,7 +2159,7 @@ msgstr ""
 msgid "조회한 라이브 구간 안에서 시작과 끝을 선택해 주세요."
 msgstr ""
 
-#: src/live_dvr.py:31 src/sources.py:247
+#: src/live_dvr.py:31 src/sources.py:300
 msgid "조회한 영상과 다운로드 대상이 다릅니다."
 msgstr ""
 
@@ -2132,7 +2187,7 @@ msgstr ""
 msgid "진단 로그"
 msgstr ""
 
-#: src/workspace_ui.py:399
+#: src/workspace_ui.py:400
 msgid "찾은 곡을 이 영상 전체의 챕터로 만듭니다. 클립 파일은 만들지 않습니다."
 msgstr ""
 
@@ -2140,11 +2195,11 @@ msgstr ""
 msgid "채널"
 msgstr ""
 
-#: src/workspace_ui.py:398
+#: src/workspace_ui.py:399
 msgid "챕터"
 msgstr ""
 
-#: src/workspace_ui.py:406 src/workspace_ui.py:408
+#: src/workspace_ui.py:407 src/workspace_ui.py:409
 msgid "챕터 형식"
 msgstr ""
 
@@ -2167,7 +2222,7 @@ msgstr ""
 msgid "챕터를 넣어 저장했습니다: {name}"
 msgstr ""
 
-#: src/app.py:501 src/workspace_ui.py:426
+#: src/app.py:501 src/workspace_ui.py:427
 msgid "챕터를 넣은 영상 저장"
 msgstr ""
 
@@ -2208,7 +2263,7 @@ msgstr ""
 msgid "최신 버전입니다. 현재 버전 {name}"
 msgstr ""
 
-#: src/app.py:762 src/app.py:810 src/app.py:878 src/export_settings.py:147 src/profile_panel.py:227 src/profile_panel.py:378 src/setup_dialog.py:88 src/setup_dialog.py:111 src/setup_dialog.py:43 src/workspace_ui.py:530
+#: src/app.py:762 src/app.py:810 src/app.py:878 src/export_settings.py:147 src/profile_panel.py:227 src/profile_panel.py:378 src/setup_dialog.py:88 src/setup_dialog.py:111 src/setup_dialog.py:43 src/workspace_ui.py:531
 msgid "취소"
 msgstr ""
 
@@ -2220,7 +2275,7 @@ msgstr ""
 msgid "클릭·드래그: 탐색 | 양끝: 트리밍 | Ctrl+드래그: 구간 이동\n휠: 시간축 이동 | Ctrl+휠: 확대 | 중간 버튼 드래그: 이동 | Alt: 스냅 해제"
 msgstr ""
 
-#: src/workspace_ui.py:370
+#: src/workspace_ui.py:371
 msgid "클립"
 msgstr ""
 
@@ -2245,15 +2300,15 @@ msgstr ""
 msgid "클립 목록 · 체크하여 저장 선택"
 msgstr ""
 
-#: src/workspace_ui.py:289
+#: src/workspace_ui.py:290
 msgid "클립 선택·재생 위치를 따라 확대 시간축 이동"
 msgstr ""
 
-#: src/workspace_ui.py:333
+#: src/workspace_ui.py:334
 msgid "클립 선택으로 돌아가기"
 msgstr ""
 
-#: src/workspace_ui.py:266
+#: src/workspace_ui.py:267
 msgid "클립 시작·끝 일괄 조정"
 msgstr ""
 
@@ -2315,7 +2370,7 @@ msgstr[1] ""
 msgid "파일 저장"
 msgstr ""
 
-#: src/workspace_ui.py:392
+#: src/workspace_ui.py:393
 msgid "파일 저장 시작"
 msgstr ""
 
@@ -2331,6 +2386,10 @@ msgstr ""
 msgid "파일 형식·해상도·프레임·채널 설정을 확인해 주세요."
 msgstr ""
 
+#: src/tool_errors.py:49
+msgid "파일에 접근하지 못했습니다. 파일을 사용 중인 프로그램을 닫고 읽기·쓰기 권한이 있는 폴더를 선택하세요."
+msgstr ""
+
 #: src/workspace_ui.py:84
 msgid "파일이나 폴더를 추가하거나 영상을 여기에 놓으세요."
 msgstr ""
@@ -2339,11 +2398,11 @@ msgstr ""
 msgid "패키지에 라이선스 정보가 없습니다."
 msgstr ""
 
-#: src/app.py:1328
+#: src/app.py:1331
 msgid "편집 작업 열기"
 msgstr ""
 
-#: src/app.py:1320
+#: src/app.py:1323
 msgid "편집 작업 저장"
 msgstr ""
 
@@ -2355,7 +2414,7 @@ msgstr ""
 msgid "편집할 영상을 선택하세요."
 msgstr ""
 
-#: src/setup_dialog.py:29 src/workspace_ui.py:382
+#: src/setup_dialog.py:29 src/workspace_ui.py:383
 msgid "폴더 선택"
 msgstr ""
 
@@ -2383,7 +2442,7 @@ msgstr ""
 msgid "프레임을 찾을 수 없습니다."
 msgstr ""
 
-#: src/app.py:1237
+#: src/app.py:1240
 msgid "프로그램을 다시 시작하지 못했습니다. 기존 데이터 폴더를 유지합니다."
 msgstr ""
 
@@ -2436,7 +2495,7 @@ msgstr ""
 msgid "프로필 저장"
 msgstr ""
 
-#: src/app.py:1351
+#: src/app.py:1354
 msgid "프로필 파일 이름을 확인해 주세요."
 msgstr ""
 
@@ -2472,6 +2531,10 @@ msgstr ""
 msgid "필수 영역을 지정해 주세요: "
 msgstr ""
 
+#: src/tool_errors.py:57
+msgid "필요한 파일을 찾지 못했습니다. 원본 영상과 저장 폴더가 이동되거나 삭제되지 않았는지 확인하세요."
+msgstr ""
+
 #: src/clips.py:77
 msgid "합친 클립의 식별자를 확인해 주세요."
 msgstr ""
@@ -2498,6 +2561,10 @@ msgstr ""
 msgid "현재 버전 {name}"
 msgstr ""
 
+#: src/tool_errors.py:41
+msgid "현재 사용할 수 없는 영상입니다. 브라우저에서 영상 공개 상태와 재생 가능 여부를 확인하세요."
+msgstr ""
+
 #: src/export_settings.py:127
 msgid "현재 설정: 사용자 지정"
 msgstr ""
@@ -2518,11 +2585,11 @@ msgstr ""
 msgid "현재 영상에서 저장할 클립을 선택하세요."
 msgstr ""
 
-#: src/workspace_ui.py:285
+#: src/workspace_ui.py:286
 msgid "현재 영상의 삭제·편집한 자동 클립을 원본으로 복원합니다. 직접 추가한 클립은 유지합니다."
 msgstr ""
 
-#: src/workspace_ui.py:275
+#: src/workspace_ui.py:276
 msgid "현재 영상의 자동 인식 결과 기준\n−: 앞당김 / +: 늦춤"
 msgstr ""
 
@@ -2530,15 +2597,15 @@ msgstr ""
 msgid "현재 영상의 자동 인식 클립을 복원할까요?"
 msgstr ""
 
-#: src/workspace_ui.py:243 src/youtube_preview.py:152
+#: src/workspace_ui.py:244 src/youtube_preview.py:154
 msgid "현재 위치를 끝으로"
 msgstr ""
 
-#: src/workspace_ui.py:242 src/youtube_preview.py:151
+#: src/workspace_ui.py:243 src/youtube_preview.py:153
 msgid "현재 위치를 시작으로"
 msgstr ""
 
-#: src/app.py:1226
+#: src/app.py:1229
 msgid "현재 작업은 기존 폴더에 보관됩니다. 새 폴더 준비가 끝나면 프로그램을 다시 시작합니다."
 msgstr ""
 
@@ -2550,7 +2617,7 @@ msgstr ""
 msgid "현재 지정 영역"
 msgstr ""
 
-#: src/workspace_ui.py:265
+#: src/workspace_ui.py:266
 msgid "현재 클립"
 msgstr ""
 
@@ -2558,7 +2625,7 @@ msgstr ""
 msgid "현재 필터로 보이는 클립의 저장 설정을 엽니다."
 msgstr ""
 
-#: src/workspace_ui.py:263
+#: src/workspace_ui.py:264
 msgid "현재 화면 인식 확인"
 msgstr ""
 
@@ -2578,11 +2645,11 @@ msgstr ""
 msgid "화질과 용량"
 msgstr ""
 
-#: src/workspace_ui.py:194
+#: src/workspace_ui.py:195
 msgid "확대 시간축 가로 이동"
 msgstr ""
 
-#: src/app.py:1277
+#: src/app.py:1280
 msgid "확인 실패"
 msgstr ""
 

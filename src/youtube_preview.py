@@ -7,7 +7,7 @@ import tempfile
 from PIL import Image
 from PIL.ImageQt import ImageQt
 import av
-from PySide6.QtCore import Qt, QTimer, QEvent
+from PySide6.QtCore import Qt, QTimer, QEvent, Signal
 from PySide6.QtGui import QImage
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton
 
@@ -21,7 +21,7 @@ from timeline import RangeTimeline
 def fetch_preview(metadata, seconds, cancel, report):
     """Keep only the last fragment in memory; never fetch a separate audio track."""
     from live import _https, _segment, parse_window
-    from sources import find_tool, run_command
+    from sources import find_tool, run_command, ffmpeg_https_args
     from fragments import selected_tracks
     from analysis_common import check_cancel
     check_cancel(cancel)
@@ -104,11 +104,11 @@ def fetch_preview(metadata, seconds, cancel, report):
             url = _https('', fmt['url'])
             if any('\r' in str(value) or '\n' in str(value) for pair in headers.items() for value in pair):
                 raise ValueError(tr('영상 정보를 다시 확인해 주세요.'))
-            args = [find_tool('ffmpeg'), '-v', 'error', '-nostdin', '-n', '-rw_timeout', '10000000']
+            args = [find_tool('ffmpeg'), '-v', 'error', '-nostdin', '-n', '-rw_timeout', '10000000'] + ffmpeg_https_args()
             if headers:
                 args += ['-headers', ''.join(f'{key}: {value}\r\n' for key, value in headers.items())]
             run_command(args + ['-ss', str(seconds), '-i', url, '-map', '0:v:0', '-frames:v', '1',
-                                '-an', '-vf', 'scale=-2:180', str(path)], cancel, report)
+                                '-an', '-vf', 'scale=-2:180', str(path)], cancel, report, windows_ca=True)
             with Image.open(path) as frame:
                 image = frame.copy()
         check_cancel(cancel)
@@ -117,6 +117,8 @@ def fetch_preview(metadata, seconds, cancel, report):
 
 
 class YouTubePreview(QWidget):
+    diagnostic = Signal(str)
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.metadata = None
@@ -262,6 +264,7 @@ class YouTubePreview(QWidget):
         revision, metadata, seconds = self.revision, self.metadata, self.position
         self.status.setText(tr('{time} · 미리보기 가져오는 중…', time=self.label(seconds)))
         self.task = Task(lambda cancel, report: fetch_preview(metadata, seconds, cancel, report), self)
+        self.task.progress.connect(lambda message: self.status.setText(message) if revision == self.revision else None)
         self.task.finished.connect(lambda: self.finished(revision, seconds))
         self.task.start()
 
@@ -271,6 +274,9 @@ class YouTubePreview(QWidget):
         if revision == self.revision and not task.cancel.is_set():
             if task.error:
                 self.status.setText(tr('미리보기 실패: {error}', error=str(task.error)))
+                from tool_errors import ToolError
+                if isinstance(task.error, ToolError):
+                    self.diagnostic.emit(f'{task.error}\nExit code: {task.error.returncode}\n{task.error.detail}')
             else:
                 self.canvas.set_image(ImageQt(task.result).copy())
                 self.status.setText(tr('{time} · 저해상도 미리보기', time=self.label(seconds)))

@@ -99,17 +99,22 @@ class SourceTests(unittest.TestCase):
         metadata = dict(url="https://www.youtube.com/watch?v=abcdefghijk", id="abcdefghijk",
                         title="song", duration=200, live_status="not_live", is_live=False)
         def download(args, *_, **kwargs):
+            self.assertTrue(kwargs['windows_ca'])
             self.assertEqual(args[args.index("--download-sections") + 1], "*10-20")
             self.assertIn("--no-force-keyframes-at-cuts", args)
             self.assertNotIn("--force-keyframes-at-cuts", args)
             self.assertIn('-c copy', args[args.index('--downloader-args') + 1])
-            self.assertIn('ffmpeg_i:-request_size 8388608 -initial_request_size 8388608 -short_seek_size 8388608 -multiple_requests 1', args)
+            from yt_dlp import parse_options
+            tls_args = parse_options(args[1:]).ydl_opts['external_downloader_args']['ffmpeg_i']
+            self.assertEqual(tls_args, sources.ffmpeg_https_args() + [
+                '-request_size', '8388608', '-initial_request_size', '8388608',
+                '-short_seek_size', '8388608', '-multiple_requests', '1'])
             path = Path(args[args.index("--output") + 1].replace("%(ext)s", "mkv"))
             path.write_bytes(b"synthetic media")
             return json.dumps(dict(filepath=str(path), section_start=10, section_end=20))
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            with patch.object(sources, "_media_duration", return_value=10) as duration, patch.object(sources, "inspect_source", return_value=metadata), patch.object(sources, "find_tool", return_value="/tools/ffmpeg"), patch.object(sources, "_command", return_value=["yt-dlp"]), patch.object(sources, "run_command", side_effect=download) as run:
+            with patch('certifi.where', return_value=r'C:\Example App\certifi\cacert.pem'), patch.object(sources, "_media_duration", return_value=10) as duration, patch.object(sources, "inspect_source", return_value=metadata), patch.object(sources, "find_tool", return_value="/tools/ffmpeg"), patch.object(sources, "_command", return_value=["yt-dlp"]), patch.object(sources, "run_command", side_effect=download) as run:
                 first = sources.download_section(metadata["url"], 10, 20, root, threading.Event(), lambda _: None)
                 duration.return_value = 14  # Original keyframe boundaries extend the requested range.
                 second = sources.download_section(metadata["url"], 10, 20, root, threading.Event(), lambda _: None)

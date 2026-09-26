@@ -1,13 +1,17 @@
 """YouTube metadata and explicitly bounded downloads, independent of the UI."""
 from i18n import tr
 import json
+import logging
+import errno
 from datetime import datetime
 import math
 import os
 from pathlib import Path
 import re
 import shutil
+import shlex
 import signal
+import ssl
 import subprocess
 import sys
 import tempfile
@@ -15,6 +19,7 @@ import threading
 from typing import Callable
 from urllib.parse import parse_qs, urlsplit
 import uuid
+from tool_errors import ToolError
 
 
 def source_key(path):
@@ -59,8 +64,14 @@ def find_tool(name: str) -> str:
         return str(candidate)
     found = shutil.which(name)
     if not found:
-        raise RuntimeError(tr('{name} 실행 파일을 찾을 수 없습니다.', name=name))
+        raise ToolError(f'Missing executable: {name}', kind='tool_missing')
     return found
+
+
+def ffmpeg_https_args():
+    # FFmpeg's TLS backend may have no usable system roots on a fresh Windows VM.
+    import certifi
+    return ['-tls_verify', '1', '-ca_file', certifi.where()]
 
 
 def _stop(process: subprocess.Popen) -> None:
@@ -77,7 +88,49 @@ def _stop(process: subprocess.Popen) -> None:
 
 
 def run_command(args: list[str], cancel: threading.Event,
-                report: Callable[[str], None], *, cwd=None, on_line=None) -> str:
+                report: Callable[[str], None], *, cwd=None, on_line=None, windows_ca=False) -> str:
+    """Use current Windows trust first for remote FFmpeg inputs, then bundled roots."""
+    if cancel.is_set():
+        raise InterruptedError(tr('작업을 취소했습니다.'))
+    try:
+        if windows_ca and sys.platform == 'win32':
+            with tempfile.TemporaryDirectory(prefix='arcade-tls-') as directory:
+                try:
+                    certificates = ssl.create_default_context().get_ca_certs(binary_form=True)
+                except OSError:
+                    certificates = []
+                if certificates:
+                    ca = Path(directory) / 'windows-ca.pem'
+                    ca.write_text(''.join(ssl.DER_cert_to_PEM_cert(cert) for cert in certificates), encoding='ascii')
+                    system_args = list(args)
+                    if '-ca_file' in system_args:
+                        system_args[system_args.index('-ca_file') + 1] = str(ca)
+                    else:
+                        index = next(i for i, value in enumerate(system_args) if value.startswith('ffmpeg_i:'))
+                        options = shlex.split(system_args[index].partition(':')[2])
+                        options[options.index('-ca_file') + 1] = str(ca)
+                        system_args[index] = 'ffmpeg_i:' + shlex.join(options)
+                    try:
+                        return _run_command(system_args, cancel, report, cwd=cwd, on_line=on_line)
+                    except ToolError as error:
+                        if error.kind != 'certificate':
+                            raise
+                        if cancel.is_set():
+                            raise InterruptedError(tr('작업을 취소했습니다.')) from None
+                        report(tr('인증서를 다시 확인하고 있습니다. 앱에 포함된 인증서로 한 번 더 연결합니다.'))
+        return _run_command(args, cancel, report, cwd=cwd, on_line=on_line)
+    except InterruptedError:
+        raise
+    except OSError as error:
+        kind = ('disk_full' if error.errno == errno.ENOSPC else
+                'memory' if error.errno == errno.ENOMEM else
+                'tool_missing' if isinstance(error, FileNotFoundError) else
+                'permission' if isinstance(error, PermissionError) else 'launch')
+        raise ToolError(str(error), kind=kind) from None
+
+
+def _run_command(args: list[str], cancel: threading.Event,
+                 report: Callable[[str], None], *, cwd=None, on_line=None) -> str:
     """Run in an isolated process tree so cancellation includes FFmpeg/EJS."""
     if cancel.is_set():
         raise InterruptedError(tr('작업을 취소했습니다.'))
@@ -120,9 +173,9 @@ def run_command(args: list[str], cancel: threading.Event,
                 reader.join()
             raise
         if process.returncode:
-            # URLs may contain signed tokens; keep them out of UI logs.
-            detail = re.sub(r"https?://\S+", "[URL]", error.strip())[-1200:]
-            raise RuntimeError(detail or tr('영상 처리 작업이 실패했습니다.'))
+            failure = ToolError(error, process.returncode)
+            logging.debug('External tool exited (%s): %s', process.returncode, failure.detail)
+            raise failure
     return output
 
 
@@ -273,12 +326,14 @@ def download_section(url: str, start: float, end: float, directory: Path,
             "--download-sections", f"*{start}-{end}",
             "--no-force-keyframes-at-cuts", "--no-simulate", "--no-progress",
             "--downloader-args", "ffmpeg:-c copy -progress pipe:2 -nostats",
-            "--downloader-args", "ffmpeg_i:-request_size 8388608 -initial_request_size 8388608 -short_seek_size 8388608 -multiple_requests 1",
+            "--downloader-args", "ffmpeg_i:" + shlex.join(ffmpeg_https_args() + [
+                '-request_size', '8388608', '-initial_request_size', '8388608',
+                '-short_seek_size', '8388608', '-multiple_requests', '1']),
             "--no-overwrites", "--format", "bv*+ba/b", "--merge-output-format", "mkv",
             "--output", str(work / "video.%(ext)s"),
             "--print", "after_move:%()j", "--", metadata["url"],
         ]
-        output = run_command(args, cancel, report, on_line=download_progress(end - start, report))
+        output = run_command(args, cancel, report, on_line=download_progress(end - start, report), windows_ca=True)
         report({"kind": "download", "step": 3, "message": tr('STEP 3/4 · 다운로드 파일과 영상 길이 검증')})
         rows = [json.loads(line) for line in output.splitlines() if line.startswith("{")]
         if len(rows) != 1:

@@ -160,6 +160,7 @@ def build_window(w):
     center_layout.addWidget(w.current_clip_label)
     center_layout.addWidget(w.preview, 1)
     w.youtube_preview = YouTubePreview()
+    w.youtube_preview.diagnostic.connect(w.log.appendPlainText)
     w.youtube_preview.hide()
     center_layout.addWidget(w.youtube_preview, 1)
     w.busy_controls.append(w.youtube_preview)

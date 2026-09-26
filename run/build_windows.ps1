@@ -45,7 +45,7 @@ $deploySpec = Join-Path $PSScriptRoot 'pysidedeploy.spec'
 $deploySpecContent = [System.IO.File]::ReadAllBytes($deploySpec)
 try {
     $env:PYTHONPATH = Join-Path $projectRoot 'src'
-    uv run --locked --group build pyside6-deploy -c run/pysidedeploy.spec --force --keep-deployment-files
+    uv run --locked --group build pyside6-deploy -c run/pysidedeploy.spec --force --keep-deployment-files --extra-ignore-dirs=tmp,ai_docs
     $buildExitCode = $LASTEXITCODE
 } finally {
     $env:PYTHONPATH = $previousPythonPath
