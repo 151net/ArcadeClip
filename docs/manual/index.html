@@ -22,6 +22,9 @@
 .gallery { display: grid; gap: 1.5rem; padding: 0; list-style: none; }
 .gallery img { display: block; width: 100%; height: auto; border: 1px solid #aaa; }
 .gallery figcaption { margin-top: .4rem; }
+.youtube-preview { position: relative; }
+.youtube-preview a { position: absolute; left: 75%; top: 21.5%; width: 24%; height: 3%; }
+.youtube-preview a:focus-visible { outline: 2px solid #075aa6; outline-offset: 2px; }
 @media (min-width: 720px) {
   .does { grid-template-columns: 1fr 1fr; gap: 1.25rem 2rem; }
   .gallery { grid-template-columns: 1fr 1fr; }
@@ -209,23 +212,26 @@ html[lang="ko"] [data-lang="en"], html[lang="en"] [data-lang="ko"] { display: no
   <ul class="gallery">
     <li>
       <figure>
+        <div class="youtube-preview">
+          <img src="images/youtube-download.png" alt="라이브의 마지막 30분을 고르는 화면 / Selecting the last 30 minutes of a live stream" width="1440" height="920">
+          <a href="http://youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer" aria-label="YouTube 영상 열기 (새 창) / Open YouTube video (new window)"></a>
+        </div>
+        <figcaption data-lang="ko"><a href="manual.html#ko/youtube/1">미리보기를 보며 YouTube 구간을 정합니다.</a></figcaption>
+        <figcaption data-lang="en"><a href="manual.html#en/youtube/1">Preview and select a YouTube range.</a></figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure>
         <img src="images/regions.png" alt="영상 위에 인식 영역을 지정하는 화면 / Marking recognition regions on the video" width="1440" height="920">
-        <figcaption data-lang="ko">자켓과 글자를 읽을 인식 영역을 영상 위에 지정합니다.</figcaption>
-        <figcaption data-lang="en">Mark the regions where the jacket and the text appear.</figcaption>
+        <figcaption data-lang="ko"><a href="manual.html#ko/regions/1">자켓과 글자를 읽을 인식 영역을 영상 위에 지정합니다.</a></figcaption>
+        <figcaption data-lang="en"><a href="manual.html#en/regions/1">Mark the regions where the jacket and the text appear.</a></figcaption>
       </figure>
     </li>
     <li>
       <figure>
         <img src="images/review.png" alt="클립을 확인하는 화면 / Reviewing clips" width="1440" height="920">
-        <figcaption data-lang="ko">클립을 확인하고 저장할 클립에 체크합니다.</figcaption>
-        <figcaption data-lang="en">Review clips and check the ones to save.</figcaption>
-      </figure>
-    </li>
-    <li>
-      <figure>
-        <img src="images/youtube-download.png" alt="라이브의 마지막 30분을 고르는 화면 / Selecting the last 30 minutes of a live stream" width="1440" height="920">
-        <figcaption data-lang="ko"><a href="manual.html#ko/youtube/1">미리보기를 보며 YouTube 구간을 정합니다.</a></figcaption>
-        <figcaption data-lang="en"><a href="manual.html#en/youtube/1">Preview and select a YouTube range.</a></figcaption>
+        <figcaption data-lang="ko"><a href="manual.html#ko/review/1">클립을 확인하고 저장할 클립에 체크합니다.</a></figcaption>
+        <figcaption data-lang="en"><a href="manual.html#en/review/1">Review clips and check the ones to save.</a></figcaption>
       </figure>
     </li>
     <li>
